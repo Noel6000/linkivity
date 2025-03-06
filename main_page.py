@@ -8,7 +8,7 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-st.title(':blue-background[:green[Welcome to...] :sunglasses:])')
+st.title(':blue-background[:green[Welcome to...] :sunglasses:]')
 st.header('LINKIVITY!')
 st.subheader(':blue-background[:red[Hello John! Today is your] :birthday:.]')
 st.image("linkivity.png", caption="linkivity", width=None)
