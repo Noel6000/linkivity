@@ -4,7 +4,7 @@ import random
 import time
 from openai import OpenAI
 
-st.heder("About us")
+st.header("About us")
 
 isClicked = st.button("mainpage", use_container_width=True)
 
