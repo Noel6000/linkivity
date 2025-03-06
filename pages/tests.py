@@ -30,5 +30,3 @@ while var:
 
   if vvar == 2:
     var = False
-
-st.write(f"You have had {correct}/{questions} questions right.")
