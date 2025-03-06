@@ -22,7 +22,7 @@ with button_container:
         st.switch_page("pages/artificial_intelligence.py")
         col1, col2, col3 = st.columns([1, 1, 1])
     with col2:
-        ModelIsClicked=st.button("Curriculum generator",use_container_width=True)
+        ModelIsClicked=st.button("Resume generator",use_container_width=True)
     if ModelIsClicked:
         st.switch_page("pages/curriculum_generator.py")
     with col3:
