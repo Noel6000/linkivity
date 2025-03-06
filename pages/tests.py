@@ -5,7 +5,7 @@ import time
 from openai import OpenAI
 
 isClicked = st.button("mainpage", use_container_width=True)
-if isClicked :
+if isClicked:
     st.switch_page("main_page.py")
 st.header("Test your knowledge.")
 st.header(":warning:")
