@@ -27,4 +27,4 @@ with button_container:
     with col3:
         ModelIsClicked=st.button("Look for companies!",use_container_width=True)
     if ModelIsClicked:
-        st.switch_page("pages/bussineses.py")
+        st.switch_page("pages/businesses.py")
