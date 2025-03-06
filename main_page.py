@@ -10,7 +10,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.title(':blue-background[:green[Welcome to...] :sunglasses:]')
 st.header('LINKIVITY!')
-st.subheader()
+st.subheader("This website is for web developers to find a job and for companies to find a web developer.")
 headers = st.context.headers
 button_container = st.container()
 with button_container:
