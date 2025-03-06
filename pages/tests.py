@@ -11,6 +11,7 @@ if stb.true_or_false(f"To print 'Hello world', you would write \"print(\"Hello W
   questions += 1
 else:
   questions += 1
+  questions -= 1
 
   
 if stb.single_choice("How do you insert COMMENTS in Python code?", ["\#This is a comment", "//This is a comment", "/*This is a comment*/"], 0):
@@ -18,5 +19,6 @@ if stb.single_choice("How do you insert COMMENTS in Python code?", ["\#This is a
   questions += 1
 else:
   questions += 1
+  questions -= 1
 
 st.write(f"You have had {correct}/{questions} questions right.")
