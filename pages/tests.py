@@ -11,7 +11,7 @@ question_dict1 = {
  "correct_answer": "print('hello world')",
  "explanation": ""
  }
-
+"""
 question_dict2
 question_dict3
 question_dict4
@@ -21,10 +21,10 @@ question_dict7
 question_dict8
 question_dict9
 question_dict10
-question_dict11
+question_dict11"""
 
 
-questions = [question_dict1, question_dict2, question_dict3, question_dict4, question_dict5, question_dict6, question_7, question_8, question_9, question_10, question_11]
+questions = [question_dict1, """question_dict2, question_dict3, question_dict4, question_dict5, question_dict6, question_7, question_8, question_9, question_10, question_11"""]
 
 isClicked = st.button("mainpage", use_container_width=True)
 if isClicked:
