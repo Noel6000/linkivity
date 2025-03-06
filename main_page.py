@@ -23,7 +23,7 @@ with button_container:
     with col2:
         ModelIsClicked=st.button("Resume generator",use_container_width=True)
     if ModelIsClicked:
-        st.switch_page("pages/curriculum_generator.py")
+        st.switch_page("pages/resume_generator.py")
     with col3:
         ModelIsClicked=st.button("Look for companies!",use_container_width=True)
     if ModelIsClicked:
