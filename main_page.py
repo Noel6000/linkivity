@@ -10,7 +10,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.title(':blue-background[:green[Welcome to...] :sunglasses:]')
 st.header('LINKIVITY!')
-st.image("linkivity.png", caption="linkivity", width=None)
+st.subheader()
 headers = st.context.headers
 button_container = st.container()
 with button_container:
