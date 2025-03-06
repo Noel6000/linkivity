@@ -8,7 +8,7 @@ correct = 0
 if stb.true_or_false(f"To print 'Hello world', you would write \"print(\"Hello World\")\"", True):
   correct += 1
 
-if stb.single_choice("How do you insert COMMENTS in Python code?", ["\#This is a comment", "//This is a comment", "/*This is a comment*/"], 1):
+if stb.single_choice("How do you insert COMMENTS in Python code?", ["\#This is a comment", "//This is a comment", "/*This is a comment*/"], 0):
   correct += 1
                     
 """
