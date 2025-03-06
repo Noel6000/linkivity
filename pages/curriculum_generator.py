@@ -17,7 +17,7 @@ def response_generator(AllMessages):
         messages= AllMessages
     )
     pureResponse = str(GPTresponse.choices[0].message.content)
-    response = "Curriculum Bot: " + str(GPTresponse.choices[0].message.content)
+    response = "Resume Bot: " + str(GPTresponse.choices[0].message.content)
     for word in response.split():
         yield word + " "
         time.sleep(0.05)
@@ -45,7 +45,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 with st.chat_message("assistant"):
-    st.markdown(f"Curriculum Bot: Please input your experience and diplomas:")
+    st.markdown(f"Resume Bot: Please input your experience and diplomas:")
 
 # Accept user input
 if prompt := st.chat_input("Type a question"):
