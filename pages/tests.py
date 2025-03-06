@@ -28,7 +28,7 @@ while var:
     questions -= 1
     vvar +=1
 
-  if vvar = 2:
+  if vvar == 2:
     var = False
 
 st.write(f"You have had {correct}/{questions} questions right.")
