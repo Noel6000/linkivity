@@ -5,5 +5,7 @@ import time
 from openai import OpenAI
 
 st.header("Test your knowledge.")
-st.subheader(":red[:green-background[This test will be used to classify your knowledge by companies]]:warning:")
+st.header(":warning:")
+st.subheader(":red[:green-background[This test will be used to classify your knowledge by companies]]")
+st.header(":warning:")
 
