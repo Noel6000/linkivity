@@ -135,30 +135,4 @@ def find_projects():
 
 # Load projects
 projects = load_projects()  # Ensure this function correctly loads `projects.json`
-
-if not projects:
-    st.warning("No projects available.")
-else:
-    for project in projects:
-        projects = load_projects()
-        if not isinstance(projects, list):
-            st.error("Error: Projects data is not a list!")
-        st.subheader(project["title"])
-        st.write(f"**Description:** {project['description']}")
-        st.write(f"**Manager:** {project['manager']}")
-        
-        # Ensure "requests" field exists in the project dictionary
-        if "requests" not in project:
-            project["requests"] = []
-
-        # Check if the current user has already requested to join
-        if st.session_state.current_user in project["requests"]:
-            st.info("✅ Request already sent")
-        else:
-            if st.button(f"Request to Join {project['title']}", key=project["title"]):
-                project["requests"].append(st.session_state.current_user)
-                save_projects(projects)  # Save the updated project data
-                st.success(f"Requested to join {project['title']}!")
-                st.rerun()  # Refresh the page to update UI
-
-
+find_projects()
