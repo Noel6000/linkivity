@@ -3,6 +3,9 @@ import json
 
 PROJECTS_FILE = "projects.json"  # Change this if your project data is stored elsewhere
 
+
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
 # Function to load projects from a JSON fil
 def find_project_by_title(title):
     """Search for a project by title."""
@@ -54,9 +57,6 @@ if st.button("Go to Dashboard"):
 
 if st.button("Go home"):
     st.switch_page("pages/dashboard.py")
-
-if "projects" not in st.session_state:
-    st.session_state.projects = load_projects()
 
 # Ensure user is logged in
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
