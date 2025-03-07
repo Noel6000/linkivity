@@ -66,7 +66,8 @@ def create_project():
             projects = load_projects()
             if not isinstance(projects, list):  # If somehow projects is a dict, reset it
                 projects = []
-
+            if 'pending_approvals' not in st.session_state:
+                st.session_state.pending_approvals = []
 
             projects = load_projects()
             projects.append(new_project)
@@ -94,6 +95,7 @@ st.divider()
 # Initialize session state for pending approvals and projects
 if 'pending_approvals' not in st.session_state:
     st.session_state.pending_approvals = []
+    
 if 'projects' not in st.session_state:
     st.session_state.projects = [
         {"title": "Task Management App, GOOGLE", "description": "Develop a mobile application that allows users to create, organize, and track their daily tasks and to-do lists. Features include reminders, priority settings, and integration with calendar apps to help users stay organized and productive.", "skills": "React Native, JavaScript, Redux"},
