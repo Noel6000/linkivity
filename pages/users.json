@@ -27,6 +27,13 @@
             "experience": "Python",
             "details": "I loooove python.",
             "projects": []
+        },
+        "houstonlonghorn": {
+            "password": "$2b$12$zJKKTHHcuqtppfMxTTSu2OJmbHSQnFFawAmc5XTx0QtTCMoYNfnoS",
+            "full_name": "andrew",
+            "experience": "none",
+            "details": "",
+            "projects": []
         }
     }
 }
