@@ -1,5 +1,29 @@
 import streamlit as st
 
+# Button to create a new project
+if st.button("Create New Project"):
+    create_new_project()
+
+def create_new_project():
+    st.header("Create a New Project")
+    with st.form("new_project_form"):
+        title = st.text_input("Project Title")
+        description = st.text_area("Project Description")
+        skills = st.text_input("Required Skills (comma-separated)")
+        submit_button = st.form_submit_button("Create Project")
+
+        if submit_button:
+            if title and description and skills:
+                new_project = {
+                    "title": title,
+                    "description": description,
+                    "skills": skills
+                }
+                st.session_state.projects.append(new_project)
+                st.success("New project created successfully!")
+            else:
+                st.warning("Please fill in all fields.")
+
 # Initialize session state for pending approvals and projects
 if 'pending_approvals' not in st.session_state:
     st.session_state.pending_approvals = []
@@ -28,26 +52,6 @@ def enroll_in_project(project_title):
     st.success(f"Enrolled in {project_title}. Approval is pending.")
 
 # Function to create a new project
-def create_new_project():
-    st.header("Create a New Project")
-    with st.form("new_project_form"):
-        title = st.text_input("Project Title")
-        description = st.text_area("Project Description")
-        skills = st.text_input("Required Skills (comma-separated)")
-        submit_button = st.form_submit_button("Create Project")
-
-        if submit_button:
-            if title and description and skills:
-                new_project = {
-                    "title": title,
-                    "description": description,
-                    "skills": skills
-                }
-                st.session_state.projects.append(new_project)
-                st.success("New project created successfully!")
-            else:
-                st.warning("Please fill in all fields.")
-
 # Main page with project listings
 st.header("Available Projects")
 for project in st.session_state.projects:
@@ -57,10 +61,6 @@ for project in st.session_state.projects:
     if st.button(f"Enroll in {project['title']}"):
         enroll_in_project(project['title'])
     st.write("---")
-
-# Button to create a new project
-if st.button("Create New Project"):
-    create_new_project()
 
 # Button to go to the pending approvals page
 if st.button("View Pending Approvals"):
