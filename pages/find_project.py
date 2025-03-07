@@ -12,7 +12,7 @@ import os
 PROJECTS_FILE = "pages/projects.json"
 GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
 
-def load_users():
+def load_projects():
     """Load users.json from GitHub and ensure the 'users' key exists."""
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
