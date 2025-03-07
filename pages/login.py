@@ -7,15 +7,13 @@ USER_FILE = "pages/users.json"
 import streamlit as st
 import json
 
-USER_FILE = "users.json"
-
 # Load user data
 def load_users():
     try:
         with open(USER_FILE, "r") as file:
             return json.load(file)
     except FileNotFoundError:
-        return {"users": {}}
+        return {"users": {}}  # Ensure "users" key exists
 
 # Save user data
 def save_users(data):
@@ -36,8 +34,14 @@ def sign_up():
 
         if submit_button:
             if username and password and full_name:
-                users_data = load_users()
-                
+                # Load existing users
+                users_data = load_users()  
+
+                # Ensure "users" key exists
+                if "users" not in users_data:
+                    users_data["users"] = {}
+
+                # Check if username already exists
                 if username not in users_data["users"]:
                     users_data["users"][username] = {
                         "password": password,
@@ -46,14 +50,14 @@ def sign_up():
                         "details": details,
                         "projects": []  # Initialize user projects
                     }
-                    save_users(users_data)
+                    save_users(users_data)  # Save updated data
                     st.success("Signed up successfully! Please log in.")
                 else:
                     st.warning("Username already exists.")
             else:
                 st.warning("Please fill in all required fields.")
-                
-# Load users into session state
+
+
 if 'users' not in st.session_state:
     st.session_state.users = load_users()
 
