@@ -14,7 +14,7 @@ def load_projects():
     except (FileNotFoundError, json.JSONDecodeError):
         return []  # Return an empty list if file is missing/corrupt
 
-def save_projects(projects):https://github.com/Noel6000/linkivity/tree/main/pages
+def save_projects(projects):
     if not isinstance(projects, list):  # Ensure it's always saved as a list
         projects = []
     with open(PROJECTS_FILE, "w") as file:
