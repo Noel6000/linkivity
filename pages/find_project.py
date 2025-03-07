@@ -53,10 +53,10 @@ else:
 
                 st.success(f"Requested to join {project['title']}!")
 
+        else:
+            st.error("Project not found!")
     else:
-        st.error("Project not found!")
-else:
-    st.warning("No projects available.")
+        st.warning("No projects available.")
     
     # Allow users to request to join
     if st.session_state.current_user not in project.get("requests", []):
