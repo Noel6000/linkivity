@@ -6,16 +6,17 @@ PROJECTS_FILE = "pages/projects.json"
 if "current_user" not in st.session_state:
     st.session_state.current_user = None  # Or set to a default value
     
-# Load projects from JSON
 def load_projects():
     try:
         with open(PROJECTS_FILE, "r") as file:
-            return json.load(file)
+            data = json.load(file)
+            return data if isinstance(data, list) else []  # Ensure it's a list
     except (FileNotFoundError, json.JSONDecodeError):
-        return []
+        return []  # Return an empty list if file is missing/corrupt
 
-# Save projects to JSON
 def save_projects(projects):
+    if not isinstance(projects, list):  # Ensure it's always saved as a list
+        projects = []
     with open(PROJECTS_FILE, "w") as file:
         json.dump(projects, file, indent=4)
 
