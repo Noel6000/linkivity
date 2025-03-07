@@ -38,6 +38,8 @@ if not "AllMessages" in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+with st.chat_message("assistant"):
+    st.markdown(F"Welcome to the developer bot! What experience do you have in programming?")
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
