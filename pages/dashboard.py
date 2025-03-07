@@ -9,10 +9,7 @@ Clicked = st.button("Find a Project", use_container_width=True)
 if isClicked :
     st.switch_page("find_project.py")
 
-import streamlit as st
-import random
-
-# Initialize session state for projects, user management, and enrollments
+# Initialize session state for projects and user management
 if 'projects' not in st.session_state:
     st.session_state.projects = [
         {"title": "Task Management App", "description": "Develop a mobile application that allows users to create, organize, and track their daily tasks and to-do lists. Features include reminders, priority settings, and integration with calendar apps to help users stay organized and productive.", "skills": "React Native, JavaScript, Redux", "manager": "Alice", "participants": 5},
@@ -23,41 +20,27 @@ if 'projects' not in st.session_state:
     ]
 
 if 'user' not in st.session_state:
-    st.session_state.user = {"name": "Alice", "managed_projects": [], "enrolled_projects": []}
+    st.session_state.user = {"name": "Alice"}
 
-# Simulate user management and enrollment data
-for project in st.session_state.projects:
-    if project["manager"] == st.session_state.user["name"]:
-        st.session_state.user["managed_projects"].append(project["title"])
-    if random.choice([True, False]):  # Randomly enroll the user in some projects
-        st.session_state.user["enrolled_projects"].append(project["title"])
+# Dashboard page displaying only the user's managed projects
+st.header("My Projects Dashboard")
 
-# Dashboard page
-st.header("Project Dashboard")
+# Filter projects managed by the user
+managed_projects = [project for project in st.session_state.projects if project["manager"] == st.session_state.user["name"]]
 
 # Display managed projects
-st.subheader("Managed Projects")
-if st.session_state.user["managed_projects"]:
-    for title in st.session_state.user["managed_projects"]:
-        project = next((p for p in st.session_state.projects if p["title"] == title), None)
-        if project:
-            st.write(f"**{project['title']}**")
-            st.write(f"Description: {project['description']}")
-            st.write(f"Participants: {project['participants']}")
-            st.write("---")
+if managed_projects:
+    for project in managed_projects:
+        st.write(f"**{project['title']}**")
+        st.write(f"Description: {project['description']}")
+        st.write(f"Participants: {project['participants']}")
+        st.write("---")
 else:
     st.write("No managed projects.")
 
-# Display enrolled projects
-st.subheader("Enrolled Projects")
-if st.session_state.user["enrolled_projects"]:
-    for title in st.session_state.user["enrolled_projects"]:
-        project = next((p for p in st.session_state.projects if p["title"] == title), None)
-        if project:
-            st.write(f"**{project['title']}**")
-            st.write(f"Description: {project['description']}")
-            st.write(f"Manager: {project['manager']}")
-            st.write(f"Participants: {project['participants']}")
-            st.write("---")
-else:
-    st.write("No enrolled projects.")
+Explanation:
+
+    Filtering: The code filters the list of projects to include only those managed by the current user (Alice in this case).
+    Display: The dashboard displays the managed projects, showing the project title, description, and the number of participants.
+
+This setup provides a dashboard for the user to view only the projects they manage. You can further customize the layout and functionality as needed.
