@@ -5,5 +5,12 @@
         "manager": "bob",
         "participants": [],
         "requests": []
+    },
+    {
+        "title": "IA barata",
+        "description": "Una ia barata",
+        "manager": null,
+        "participants": [],
+        "requests": []
     }
 ]
