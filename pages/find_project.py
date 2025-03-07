@@ -59,9 +59,7 @@ def create_project():
 # Run the function
 create_project()
 
-# Ensure 'projects' exists in session state
-if "projects" not in st.session_state:
-    st.session_state.projects = load_projects()
+
 # Update session state
 st.session_state.projects = projects
 st.divider()
