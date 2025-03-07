@@ -76,9 +76,10 @@ with st.form("new_project_form"):
         st.success(f"Project '{title}' created successfully!")
 
 st.divider()
-def create_new_project():
+def create_project():
+    """Allows users to create new projects."""
     st.header("Create a New Project")
-    with st.form("new_project_form"):
+    with st.form("create_project_form"):
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
         skills = st.text_input("Required Skills (comma-separated)")
@@ -89,10 +90,21 @@ def create_new_project():
                 new_project = {
                     "title": title,
                     "description": description,
-                    "skills": skills
+                    "skills": skills,
+                    "manager": st.session_state.current_user,
+                    "participants": []
                 }
-                st.session_state.projects.append(new_project)
-                st.success("New project created successfully!")
+
+                # Load current projects and add new one
+                projects = load_projects()
+                projects.append(new_project)
+                save_projects(projects)
+
+                # Update session state
+                st.session_state.projects = projects
+
+                st.success("Project created successfully! Other users can now see it.")
+                st.rerun()  # Refresh the page
             else:
                 st.warning("Please fill in all fields.")
 
