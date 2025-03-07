@@ -10,9 +10,9 @@
         "title": "IA barata",
         "description": "Una ia barata",
         "manager": "alice",
-        "participants": [],
-        "requests": [
+        "participants": [
             null
-        ]
+        ],
+        "requests": []
     }
 ]
