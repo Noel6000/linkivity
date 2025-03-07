@@ -122,20 +122,21 @@ def login():
         submit_button = st.form_submit_button("Login")
 
         if submit_button:
-            users = load_users()  # Load latest users from GitHub
+            users_data = load_users()
+            
+            print("🔍 Checking username:", username)  # Debugging step
+            print("🔍 All users:", users_data["users"].keys())  # Debugging step
 
-            if username in users:
-                stored_hashed_password = users[username]["password"]
-                
-                if stored_hashed_password == hash_password(password):  # 🔹 Compare hashes
+            if username in users_data["users"]:
+                if verify_password(password, users_data["users"][username]["password"]):
                     st.session_state.authenticated = True
                     st.session_state.current_user = username
-                    st.success(f"Logged in successfully! Welcome, {users[username]['full_name']}")
+                    st.success(f"Logged in successfully! Welcome, {users_data['users'][username]['full_name']}")
                     st.rerun()
                 else:
                     st.error("Invalid password.")
             else:
-                st.error("Username not found.")
+                st.error("Username not found.")  # 🔹 This will confirm if it's missing
 
 # Function to handle user logout
 def logout():
