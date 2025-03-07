@@ -12,13 +12,30 @@ import os
 PROJECTS_FILE = "pages/projects.json"
 GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
 
-def load_projects():
-    try:
-        with open("projects.json", "r") as file:
-            data = json.load(file)
-            return data.get("projects", [])  # ✅ Get the list, not the dictionary
-    except FileNotFoundError:
-        return []  # ✅ Return an empty list if file is missing
+def load_users():
+    """Load users.json from GitHub and ensure the 'users' key exists."""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        file_info = response.json()
+        content = base64.b64decode(file_info["content"]).decode()
+        
+        try:
+            data = json.loads(content)
+        except json.JSONDecodeError:
+            data = {}  # 🔹 Fix: If the file is corrupt, reset it
+        
+        # 🔹 Ensure "users" key exists
+        if "users" not in data:
+            data["users"] = {}
+
+        return data  
+    else:
+        return {"users": {}}  # 🔹 Fix: Return a proper structure if file is missing
+        # Ensure users are loaded into session state
 
 def save_projects(projects):
     print("Saving projects...")  # Debugging output
