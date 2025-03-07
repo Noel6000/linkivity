@@ -90,7 +90,7 @@ def create_project():
             if 'pending_approvals' not in st.session_state:
                 st.session_state.pending_approvals = []
 
-            projects = load_projects()  # ✅ projects is now a LIST
+            projects = list(load_projects())  # ✅ projects is now a LIST
             projects.append(new_project)  # ✅ This works because projects is a list
             save_projects(projects)  # ✅ Save back to the JSON file
 
