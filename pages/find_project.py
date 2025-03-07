@@ -30,6 +30,19 @@ def load_projects():
         return []  # Return an empty list if the file doesn't exist or is corrupt
 
 # Initialize projects in session state properly
+
+if not isinstance(st.session_state.projects, list):
+    st.error("Projects data is corrupted. Resetting...")
+    st.session_state.projects = []  # Reset it if something went wrong
+
+for project in st.session_state.projects:
+    if isinstance(project, dict) and "manager" in project:
+        if project["manager"] == st.session_state.current_user:
+            st.write(f"### {project['title']}")
+            st.write(f"**Participants:** {project['participants']}")
+    else:
+        st.warning("Invalid project data format.")
+
 if "projects" not in st.session_state or not isinstance(st.session_state.projects, list):
     st.session_state.projects = load_projects()
 
