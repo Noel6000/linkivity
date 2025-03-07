@@ -73,6 +73,47 @@ for project in st.session_state.projects:
                     project["requests"].remove(user)
                     st.warning(f"Rejected {user} for {project['title']}.")
 # Filter projects managed by the user
+def manage_projects():
+    st.header("Manage Your Projects")
+
+    if "projects" not in st.session_state:
+        st.session_state.projects = load_projects()
+
+    projects = st.session_state.projects
+
+    for project in projects:
+        if project["manager"] == st.session_state.current_user:
+            st.write(f"## {project['title']}")
+
+            # Show pending requests
+            requests = project.get("requests", [])
+            if requests:
+                st.write("### Pending Requests:")
+                for user in requests:
+                    col1, col2 = st.columns(2)
+
+                    with col1:
+                        st.write(user)
+
+                    with col2:
+                        accept = st.button(f"✅ Accept {user}", key=f"accept_{project['title']}_{user}")
+                        deny = st.button(f"❌ Deny {user}", key=f"deny_{project['title']}_{user}")
+
+                    if accept:
+                        project["requests"].remove(user)
+                        project.setdefault("participants", []).append(user)
+                        save_projects(projects)
+                        st.success(f"{user} has been added to {project['title']}!")
+                        st.rerun()
+
+                    if deny:
+                        project["requests"].remove(user)
+                        save_projects(projects)
+                        st.warning(f"{user} was denied from {project['title']}.")
+                        st.rerun()
+
+    save_projects(projects)
+
 managed_projects = [project for project in st.session_state.projects if project["manager"] == st.session_state.user["name"]]
 
 # Display managed projects
