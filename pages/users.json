@@ -23,6 +23,13 @@
             "experience": "a",
             "details": "a",
             "projects": []
+        },
+        "HoustonLonghorn": {
+            "password": "5KT3Z!LPbYxdA-h",
+            "full_name": "Michael Booth",
+            "experience": "I took coding in middle school.",
+            "details": "",
+            "projects": []
         }
     }
 }
