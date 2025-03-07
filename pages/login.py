@@ -8,10 +8,10 @@ def hash_password(password):
     """Hashes a password using bcrypt."""
     salt = bcrypt.gensalt()
     return bcrypt.hashpw(password.encode(), salt).decode()
-
+    
 def verify_password(plain_password, hashed_password):
     """Verifies a password against its hash."""
-    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode('utf-8'))
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode() if isinstance(hashed_password, str) else hashed_password)    
     
 USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
