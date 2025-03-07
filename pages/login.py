@@ -2,7 +2,7 @@ import streamlit as st
 import json
 import os
 
-USER_FILE = "users.json"
+USER_FILE = "pages/users.json"
 
 # Function to load user data from JSON file
 def load_users():
@@ -17,7 +17,7 @@ def load_users():
 
 # Function to save user data to JSON file
 def save_users(users):
-    with open("pages/users.json", "w") as file:
+    with open(USER_FILE, "w") as file:
         json.dump(users, file, indent=4)
 
 # Load users into session state
