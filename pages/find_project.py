@@ -23,6 +23,10 @@ def load_projects():
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()  # Load from JSON
 
+if "current_user" not in st.session_state:
+    st.session_state.current_user = None  # Or set to a default user if needed
+
+
 # Initialize projects in session state properly
 for project in st.session_state.projects:
     if isinstance(project, dict) and "manager" in project:
