@@ -58,11 +58,6 @@ def create_new_project():
 # Dashboard page displaying only the user's managed projects
 st.header("My Projects Dashboard")
 
-import streamlit as st
-
-if "authenticated" not in st.session_state or not st.session_state.authenticated:
-    st.warning("Please log in to access the dashboard.")
-    st.stop()
 
 user_data = st.session_state.users.get(st.session_state.current_user, {})
 
@@ -100,6 +95,15 @@ if managed_projects:
 else:
     st.write("No managed projects.")
 
+# Remove Participants
+st.subheader("Manage Participants")
+for participant in user_data.get("projects", {}).get(project["title"], []):
+    if participant != project["manager"]:  # Managers can't remove themselves
+        if st.button(f"Remove {participant}", key=f"remove_{participant}_{project['title']}"):
+            project["participants"] -= 1
+            user_data["projects"][project["title"]].remove(participant)
+            st.success(f"Removed {participant} from {project['title']}.")
+
 import streamlit as st
 
 # Ensure user is logged in
@@ -117,11 +121,4 @@ st.write(user_data.get("experience", "No experience added yet."))
 
 st.subheader("Your Details")
 st.write(user_data.get("details", "No details added yet."))
-
-st.subheader("Your Projects")
-if user_data.get("projects"):
-    for project in user_data["projects"]:
-        st.write(f"- {project}")
-else:
-    st.write("No projects yet.")
 
