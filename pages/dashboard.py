@@ -9,6 +9,8 @@ Click = st.button("Find a Project", use_container_width=True)
 if Click:
     st.switch_page("pages/find_project.py")
 
+import streamlit as st
+
 # Initialize session state for projects and user management
 if 'projects' not in st.session_state:
     st.session_state.projects = [
@@ -22,8 +24,35 @@ if 'projects' not in st.session_state:
 if 'user' not in st.session_state:
     st.session_state.user = {"name": "Alice"}
 
+# Function to create a new project
+def create_new_project():
+    st.header("Create a New Project")
+    with st.form("new_project_form"):
+        title = st.text_input("Project Title")
+        description = st.text_area("Project Description")
+        skills = st.text_input("Required Skills (comma-separated)")
+        submit_button = st.form_submit_button("Create Project")
+
+        if submit_button:
+            if title and description and skills:
+                new_project = {
+                    "title": title,
+                    "description": description,
+                    "skills": skills,
+                    "manager": st.session_state.user["name"],
+                    "participants": 1  # Assuming the manager is the first participant
+                }
+                st.session_state.projects.append(new_project)
+                st.success("New project created successfully!")
+            else:
+                st.warning("Please fill in all fields.")
+
 # Dashboard page displaying only the user's managed projects
 st.header("My Projects Dashboard")
+
+# Button to create a new project
+if st.button("Create New Project"):
+    create_new_project()
 
 # Filter projects managed by the user
 managed_projects = [project for project in st.session_state.projects if project["manager"] == st.session_state.user["name"]]
