@@ -7,9 +7,11 @@ PROJECTS_FILE = "pages/projects.json"
 def load_projects():
     try:
         with open(PROJECTS_FILE, "r") as file:
-            return json.load(file)  # Load JSON data
+            projects = json.load(file)
+            return projects if isinstance(projects, list) else []  # Ensure it's a list
     except (FileNotFoundError, json.JSONDecodeError):
         return []  # Return an empty list if file doesn't exist or is corrupted
+
 
 # Function to save projects to the JSON file
 def save_projects(projects):
