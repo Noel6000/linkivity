@@ -5,23 +5,57 @@ import os
 USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/users.json"  # Adjust based on your repo structure
-# Save user data
+import streamlit as st
+import json
+import requests
+import base64
 def load_users():
-    if os.path.exists(USER_FILE):
-        with open(USER_FILE, "r") as file:
-            return json.load(file)
-    return {}
-    # Run Git commands to push changes
-    os.system("git add users.json")
-    os.system('git commit -m "Update users.json"')
-    os.system("git push origin main")  # Change 'main' if using a different branch
-
-    print("✅ users.json updated on GitHub!")
+    """Load users.json from GitHub"""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        file_info = response.json()
+        content = base64.b64decode(file_info["content"]).decode()  # Decode from Base64
+        return json.loads(content)
+    else:
+        return {"users": {}}  # Default structure
 
 def save_users(data):
-    with open(USER_FILE, "w") as file:
-        json.dump(data, file, indent=4)
+    """Save users.json and push to GitHub"""
+    json_data = json.dumps(data, indent=4)
 
+    # Get current file SHA from GitHub
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        file_info = response.json()
+        sha = file_info["sha"]  # Required for updates
+    else:
+        sha = None  # If file doesn’t exist, create it
+
+    # Prepare the update request
+    payload = {
+        "message": "Update users.json",
+        "content": base64.b64encode(json_data.encode()).decode(),  # Encode to Base64
+        "branch": "main"  # Adjust branch if needed
+    }
+    
+    if sha:
+        payload["sha"] = sha  # Required when updating an existing file
+
+    # Push update to GitHub
+    response = requests.put(url, headers=headers, json=payload)
+
+    if response.status_code in [200, 201]:
+        st.success("✅ users.json updated on GitHub successfully!")
+    else:
+        st.error(f"❌ Error updating GitHub: {response.json()}")
+        
 # Function to handle user sign-up
 def sign_up():
     st.header("Sign Up")
