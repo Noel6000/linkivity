@@ -17,7 +17,7 @@ def load_users():
 
 # Function to save user data to JSON file
 def save_users(users):
-    with open(users, "w") as file:
+    with open("pages/users.json", "w") as file:
         json.dump(users, file, indent=4)
 
 # Load users into session state
