@@ -43,6 +43,16 @@ st.subheader("Your Projects")
 for project in st.session_state.projects:
     if project["manager"] == st.session_state.current_user:
         st.write(f"### {project['title']}")
+        participants = project.get("participants", [])
+        
+        if not isinstance(participants, list):  # If it's not a list, fix it
+            participants = []
+        
+        for participant in participants:
+            if participant != project.get("manager", ""):  
+                if st.button(f"Remove {participant}", key=f"remove_{participant}"):
+                    project["participants"].remove(participant)  # ✅ Now safe to remove
+
         st.write(f"**Participants:** {project['participants']}")
 
         # Approve or Reject Requests
