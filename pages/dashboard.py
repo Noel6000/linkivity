@@ -7,8 +7,6 @@ if not st.session_state.get('authenticated'):
     st.error("You must be logged in to view this page.")
     st.stop()
 
-
-
 isClicked = st.button("main page", use_container_width=True)
 if isClicked:
     st.switch_page("main_page.py")
@@ -34,10 +32,48 @@ if 'user' not in st.session_state:
 # Dashboard page displaying only the user's managed projects
 st.header("My Projects Dashboard")
 
-
 user_data = st.session_state.users.get(st.session_state.current_user, {})
 
 st.title(f"Welcome, {user_data.get('full_name', 'User')}!")
+def manage_requests():
+    """Allows project managers to accept or deny join requests."""
+    st.header("Manage Join Requests")
+
+    projects = load_projects()
+
+    if "current_user" not in st.session_state:
+        st.error("You must be logged in to manage requests.")
+        return
+
+    current_user = st.session_state.current_user
+
+    for project in projects:
+        if project["manager"] == current_user:  # Only show projects managed by the current user
+            st.subheader(f"Project: {project['title']}")
+            requests = project.get("requests", [])
+
+            if not requests:
+                st.write("No pending requests.")
+                continue
+
+            for request_user in requests:
+                col1, col2 = st.columns(2)
+                col1.write(f"Request from: **{request_user}**")
+
+                # Accept Button
+                if col2.button(f"✅ Accept {request_user}", key=f"accept_{project['title']}_{request_user}"):
+                    project.setdefault("participants", []).append(request_user)
+                    project["requests"].remove(request_user)
+                    save_projects(projects)
+                    st.rerun()
+
+                # Deny Button
+                if col2.button(f"❌ Deny {request_user}", key=f"deny_{project['title']}_{request_user}"):
+                    project["requests"].remove(request_user)
+                    save_projects(projects)
+                    st.rerun()
+
+manage_requests()
 
 st.subheader("Your Projects")
 for project in st.session_state.projects:
