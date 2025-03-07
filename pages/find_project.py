@@ -106,9 +106,6 @@ def create_project():
             else:
                 st.warning("Please fill in all fields.")
 
-# Button to create a new project
-if st.button("Create New Project"):
-    create_new_project()
 
 st.divider()
 
