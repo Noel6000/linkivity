@@ -70,28 +70,34 @@ if "projects" not in st.session_state:
 # Function to create a new project
 def create_project():
     st.header("Create a New Project")
-
+    
     with st.form("create_project_form"):
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
         submit_button = st.form_submit_button("Create Project")
 
-        if submit_button and title and description:
-            new_project = {
-                "title": title,
-                "description": description,
-                "manager": st.session_state.current_user,
-                "participants": [],
-                "requests": []
-            }
+    if submit_button and title and description:
+        if "current_user" not in st.session_state or not st.session_state.current_user:
+            st.error("You must be logged in to create a project.")
+            return
 
-            # Load existing projects, add new one, and save
-            projects = load_projects()
-            projects.append(new_project)
-            save_projects(projects)
+        new_project = {
+            "title": title,
+            "description": description,
+            "manager": st.session_state.current_user,  # ✅ Set current user as manager
+            "participants": [st.session_state.current_user],  # ✅ Add manager as participant
+            "requests": [],
+        }
 
-            st.success(f"Project '{title}' created successfully!")
-            st.rerun()  # Reload the page to update the project list
+        # Load existing projects
+        projects = load_projects()
+        projects.append(new_project)
+        save_projects(projects)
+
+        # Update session state
+        st.session_state.projects = projects
+        st.success(f"Project '{title}' created successfully!")
+        st.rerun()
 
 create_project()
 st.divider()
