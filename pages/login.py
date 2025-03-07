@@ -86,6 +86,7 @@ def sign_up():
     st.header("Sign Up")
     with st.form("sign_up_form"):
         username = st.text_input("Username")
+        username = username.lower()  # Convert to lowercase 
         password = st.text_input("Password", type="password")
         full_name = st.text_input("Full Name")
         experience = st.text_area("Experience")
@@ -134,6 +135,7 @@ def login():
     st.header("Login")
     with st.form("login_form"):
         username = st.text_input("Username")
+        username = username.lower()  # Convert to lowercase 
         password = st.text_input("Password", type="password")
         submit_button = st.form_submit_button("Login")
 
