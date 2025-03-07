@@ -3,6 +3,10 @@ import streamlit as st
 import requests
 import base64
 
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
+
+
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/projects.json"  # Adjust based on your repo structure
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
