@@ -31,39 +31,32 @@ def create_project():
     with st.form("create_project_form"):
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
-        skills = st.text_input("Required Skills (comma-separated)")
+        skills = st.text_input("Required Skills (optional)")  # Now optional
         submit_button = st.form_submit_button("Create Project")
 
     if submit_button:
-        st.write("Button clicked!")  # Debugging
-
-        if title and description and skills:
+        if title and description:  # Only require title & description
             new_project = {
                 "title": title,
                 "description": description,
-                "skills": skills,
+                "skills": skills if skills else "Not specified",  # Default value
                 "manager": st.session_state.current_user,
-                "participants": 1,  # Start with the creator
+                "participants": 1,
                 "requests": []
             }
 
-            st.write("New project:", new_project)  # Debugging
-
             # Load existing projects
             projects = st.session_state.get("projects", [])
-            st.write("Current projects before update:", projects)  # Debugging
-
-            # Add the new project
             projects.append(new_project)
 
             # Save updated projects
-            st.session_state.projects = projects  # Update session
+            st.session_state.projects = projects
             save_projects(projects)  # Save to JSON file
 
             st.success(f"Project '{title}' created successfully!")
-            st.rerun()  # Refresh the page to update changes
+            st.rerun()
         else:
-            st.error("Please fill in all fields!")
+            st.error("Please fill in all required fields!")
 
 # Run the function
 create_project()
