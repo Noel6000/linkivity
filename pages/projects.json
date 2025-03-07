@@ -1,1 +1,11 @@
-{}
+[
+    "users",
+    {
+        "title": "teststst",
+        "description": "tesewrgew",
+        "skills": "Not specified",
+        "manager": "alice",
+        "participants": [],
+        "requests": []
+    }
+]
