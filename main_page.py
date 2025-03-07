@@ -18,14 +18,13 @@ with button_container:
     with col1:
         ModelIsClicked=st.button("Find a job!",use_container_width=True)
     if ModelIsClicked:
-        st.switch_page("pages/artificial_intelligence.py")
-        col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+        pass
     with col2:
         ModelIsClicked=st.button("Test your knowledge",use_container_width=True)
     if ModelIsClicked:
-        st.switch_page("pages/tests.py")
+        pass
     with col3:
-        ModelIsClicked=st.button("Look for companies!",use_container_width=True)
+        ModelIsClicked=st.button("Look for projects!",use_container_width=True)
     if ModelIsClicked:
         st.switch_page("pages/find_project.py")
     with col4:
