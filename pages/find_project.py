@@ -90,34 +90,30 @@ st.divider()
 def create_project():
     """Allows users to create new projects."""
     st.header("Create a New Project")
+
     with st.form("create_project_form"):
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
         skills = st.text_input("Required Skills (comma-separated)")
+
         submit_button = st.form_submit_button("Create Project")
 
-        if submit_button:
-            if title and description and skills:
-                new_project = {
-                    "title": title,
-                    "description": description,
-                    "skills": skills,
-                    "manager": st.session_state.current_user,
-                    "participants": []
-                }
+        if submit_button and title and description and skills:
+            # ✅ Define `new_project`
+            new_project = {
+                "title": title,
+                "description": description,
+                "skills": skills.split(","),
+                "manager": st.session_state.current_user,  # Assign the creator as the manager
+                "participants": [],
+                "requests": []
+            }
 
-                # Load current projects and add new one
-                projects = load_projects()
-                projects.append(new_project)
-                save_projects(projects)
+            # ✅ Add the new project to session state and save to JSON
+            st.session_state.projects.append(new_project)
+            save_projects(st.session_state.projects)
 
-                # Update session state
-                st.session_state.projects = projects
-
-                st.success("Project created successfully! Other users can now see it.")
-                st.rerun()  # Refresh the page
-            else:
-                st.warning("Please fill in all fields.")
+            st.success(f"Project '{title}' created successfully!")
 
 # Ensure 'projects' exists in session state
 if "projects" not in st.session_state:
