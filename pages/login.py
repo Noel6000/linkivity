@@ -6,6 +6,12 @@ USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/users.json"  # Adjust based on your repo structure
 # Save user data
+def load_users():
+    if os.path.exists(USER_FILE):
+        with open(USER_FILE, "r") as file:
+            return json.load(file)
+    return {}
+
 def save_users(data):
     with open(USER_FILE, "w") as file:
         json.dump(data, file, indent=4)
