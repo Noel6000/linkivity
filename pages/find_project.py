@@ -1,7 +1,7 @@
 import streamlit as st
 import json
 
-PROJECTS_FILE = "projects.json"  # Change this if your project data is stored elsewhere
+PROJECTS_FILE = "pages/projects.json"  # Change this if your project data is stored elsewhere
 
 
 if "projects" not in st.session_state:
