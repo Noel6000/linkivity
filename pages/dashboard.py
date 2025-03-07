@@ -9,6 +9,9 @@ Clicked = st.button("Find a Project", use_container_width=True)
 if isClicked :
     st.switch_page("find_project.py")
 
+import streamlit as st
+import random
+
 # Initialize session state for projects, user management, and enrollments
 if 'projects' not in st.session_state:
     st.session_state.projects = [
