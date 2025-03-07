@@ -1,36 +1,52 @@
-import streamlit as st
 import json
+import streamlit as st
 
-PROJECTS_FILE = "pages/projects.json"  # Change this if your project data is stored elsewhere
+PROJECTS_FILE = "projects.json"
 
+# Load projects from JSON
 def load_projects():
     try:
         with open(PROJECTS_FILE, "r") as file:
             return json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
-        return []  # Return an empty list if the file doesn't exist or has an error
-    
+        return []
+
+# Save projects to JSON
 def save_projects(projects):
-    """Saves projects to JSON file."""
     with open(PROJECTS_FILE, "w") as file:
         json.dump(projects, file, indent=4)
 
-
+# Initialize projects
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()
-# Function to load projects from a JSON fil
-def find_project_by_title(title):
-    """Search for a project by title."""
-    for project in st.session_state.projects:
-        if project["title"] == title:
-            return project
-    return None  # Return None if not found
 
-selected_project_title = st.selectbox(
-    "Select a project",
-    [p["title"] for p in st.session_state.projects],
-    key="project_selectbox"  # ✅ Unique key to avoid duplicate IDs
-)
+st.header("Create a New Project")
+
+# ✅ Create Project Form
+with st.form("new_project_form"):
+    title = st.text_input("Project Title")
+    description = st.text_area("Project Description")
+    skills = st.text_input("Required Skills (comma-separated)")
+    submit_button = st.form_submit_button("Create Project")
+
+    if submit_button and title and description and skills:
+        # ✅ Define new project dictionary before using it
+        new_project = {
+            "title": title,
+            "description": description,
+            "skills": skills.split(","),
+            "manager": st.session_state.current_user,  # Assuming the creator is the manager
+            "participants": [],
+            "requests": [],
+        }
+
+        # ✅ Add the new project to session state and save
+        st.session_state.projects.append(new_project)
+        save_projects(st.session_state.projects)
+
+        st.success(f"Project '{title}' created successfully!")
+        st.rerun()  # Refresh the app to update the project list
+
 
 if selected_project_title:
     project = find_project_by_title(selected_project_title)  # ✅ Define project
