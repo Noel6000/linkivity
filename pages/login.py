@@ -14,15 +14,18 @@ def load_users():
     """Load users.json from GitHub"""
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-    
+
     response = requests.get(url, headers=headers)
-    
     if response.status_code == 200:
         file_info = response.json()
-        content = base64.b64decode(file_info["content"]).decode()  # Decode from Base64
-        return json.loads(content)
+        content = base64.b64decode(file_info["content"]).decode()
+        return json.loads(content)["users"]  # Return only the users dictionary
     else:
-        return {"users": {}}  # Default structure
+        return {}  # Default empty dict if file is missing
+
+# Ensure users are loaded into session state
+if "users" not in st.session_state:
+    st.session_state.users = load_users()
 
 def save_users(data):
     """Save users.json and push to GitHub"""
@@ -115,14 +118,21 @@ def login():
         submit_button = st.form_submit_button("Login")
 
         if submit_button:
-            users = st.session_state.users
-            if username in users and users[username]["password"] == password:
-                st.session_state.authenticated = True
-                st.session_state.current_user = username
-                st.success(f"Logged in successfully! Welcome, {users[username]['full_name']}")
-                st.rerun()
+            users = load_users()  # Always load latest users
+
+            if username in users:
+                stored_password = users[username]["password"]
+                
+                # 🔹 If passwords are stored in plaintext:
+                if stored_password == password:
+                    st.session_state.authenticated = True
+                    st.session_state.current_user = username
+                    st.success(f"Logged in successfully! Welcome, {users[username]['full_name']}")
+                    st.rerun()
+                else:
+                    st.error("Invalid password.")
             else:
-                st.error("Invalid username or password.")
+                st.error("Username not found.")
 
 # Function to handle user logout
 def logout():
