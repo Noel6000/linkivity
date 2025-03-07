@@ -16,9 +16,6 @@ Clixed = st.button("Find a Project", use_container_width=True)
 if Clixed:
     st.switch_page("pages/find_project.py")
 
-if st.button(f"Open Chat for {project['title']}", key=f"chat_{project['title']}"):
-    st.switch_page("pages/chat.py")
-
 st.divider()
 # Initialize session state for projects and user management
 if 'projects' not in st.session_state:
