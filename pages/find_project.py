@@ -24,6 +24,15 @@ def create_new_project():
             else:
                 st.warning("Please fill in all fields.")
 
+# Button to go to the pending approvals page
+if st.button("View Pending Approvals"):
+    st.header("Pending Approvals")
+    if st.session_state.pending_approvals:
+        for approval in st.session_state.pending_approvals:
+            st.write(f"- {approval}")
+    else:
+        st.write("No pending approvals.")
+
 # Initialize session state for pending approvals and projects
 if 'pending_approvals' not in st.session_state:
     st.session_state.pending_approvals = []
@@ -61,12 +70,3 @@ for project in st.session_state.projects:
     if st.button(f"Enroll in {project['title']}"):
         enroll_in_project(project['title'])
     st.write("---")
-
-# Button to go to the pending approvals page
-if st.button("View Pending Approvals"):
-    st.header("Pending Approvals")
-    if st.session_state.pending_approvals:
-        for approval in st.session_state.pending_approvals:
-            st.write(f"- {approval}")
-    else:
-        st.write("No pending approvals.")
