@@ -58,10 +58,35 @@ def create_new_project():
 # Dashboard page displaying only the user's managed projects
 st.header("My Projects Dashboard")
 
-# Button to create a new project
-if st.button("Create New Project"):
-    create_new_project()
+import streamlit as st
 
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("Please log in to access the dashboard.")
+    st.stop()
+
+user_data = st.session_state.users.get(st.session_state.current_user, {})
+
+st.title(f"Welcome, {user_data.get('full_name', 'User')}!")
+
+st.subheader("Your Projects")
+for project in st.session_state.projects:
+    if project["manager"] == st.session_state.current_user:
+        st.write(f"### {project['title']}")
+        st.write(f"**Participants:** {project['participants']}")
+
+        # Approve or Reject Requests
+        if project["requests"]:
+            st.subheader("Join Requests")
+            for user in project["requests"]:
+                col1, col2 = st.columns(2)
+                col1.write(f"- {user}")
+                if col2.button(f"Approve {user}", key=f"approve_{user}_{project['title']}"):
+                    project["participants"] += 1
+                    project["requests"].remove(user)
+                    st.success(f"Approved {user} for {project['title']}.")
+                elif col2.button(f"Reject {user}", key=f"reject_{user}_{project['title']}"):
+                    project["requests"].remove(user)
+                    st.warning(f"Rejected {user} for {project['title']}.")
 # Filter projects managed by the user
 managed_projects = [project for project in st.session_state.projects if project["manager"] == st.session_state.user["name"]]
 
