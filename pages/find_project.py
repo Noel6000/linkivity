@@ -26,8 +26,6 @@ if st.button("Go to Dashboard"):
 if st.button("Go home"):
     st.switch_page("pages/dashboard.py")
 
-import streamlit as st
-
 # Ensure user is logged in
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     st.warning("Please log in to access projects.")
@@ -35,17 +33,17 @@ if "authenticated" not in st.session_state or not st.session_state.authenticated
 
 user_data = st.session_state.users.get(st.session_state.current_user, {})
 
-st.title("Projects")
+st.header("Available Projects")
 
-# Show existing projects
-st.subheader("Available Projects")
-
-for project in st.session_state.projects:
-    st.write(f"### {project['title']}")
-    st.write(f"**Description:** {project['description']}")
-    st.write(f"**Skills Required:** {project['skills']}")
-    st.write(f"**Manager:** {project['manager']}")
-    st.write(f"**Participants:** {project['participants']}")
+if "projects" in st.session_state and st.session_state.projects:
+    for project in st.session_state.projects:
+        st.subheader(project["title"])
+        st.write(f"📖 {project['description']}")
+        st.write(f"🔧 Skills: {project['skills']}")
+        st.write(f"👤 Managed by: {project['manager']}")
+        st.write("---")
+else:
+    st.warning("No projects available.")
     
     # Allow users to request to join
     if st.session_state.current_user not in project.get("requests", []):
