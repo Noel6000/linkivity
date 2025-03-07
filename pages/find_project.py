@@ -24,6 +24,9 @@ def load_projects():
     st.write("🔍 DEBUG: Loaded Projects:", projects)  # Debugging line
     return projects
 
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()  # Load from JSON
+
 # Initialize projects in session state properly
 for project in st.session_state.projects:
     if isinstance(project, dict) and "manager" in project:
@@ -32,9 +35,6 @@ for project in st.session_state.projects:
             st.write(f"**Participants:** {project['participants']}")
     else:
         st.warning("Invalid project data format.")
-
-if "projects" not in st.session_state or not isinstance(st.session_state.projects, list):
-    st.session_state.projects = list(load_projects())
 
 def save_projects(users_data):
     """Save users.json back to GitHub"""
