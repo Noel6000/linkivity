@@ -46,20 +46,9 @@ with st.form("new_project_form"):
 
         st.success(f"Project '{title}' created successfully!")
         st.rerun()  # Refresh the app to update the project list
-
-
-if selected_project_title:
-    project = find_project_by_title(selected_project_title)  # ✅ Define project
-
-    if project:
-        if st.session_state.current_user not in project.get("requests", []):
-            st.write("User has not requested to join this project yet.")
-        else:
-            st.write("User is already in the request list.")
-    else:
-        st.error("Project not found!")
-
+        
 selected_project_title = st.selectbox("Select a project", [p["title"] for p in st.session_state.projects])
+
 
 if selected_project_title:
     project = find_project_by_title(selected_project_title)  # ✅ Define project
