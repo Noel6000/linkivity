@@ -1,5 +1,5 @@
-import json
 import streamlit as st
+import json
 
 PROJECTS_FILE = "projects.json"
 
@@ -16,67 +16,17 @@ def save_projects(projects):
     with open(PROJECTS_FILE, "w") as file:
         json.dump(projects, file, indent=4)
 
-# Initialize projects
+# Initialize projects in session state
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()
 
-st.header("Create a New Project")
+st.header("Find a Project")
 
-# ✅ Create Project Form
-with st.form("new_project_form"):
-    title = st.text_input("Project Title")
-    description = st.text_area("Project Description")
-    skills = st.text_input("Required Skills (comma-separated)")
-    submit_button = st.form_submit_button("Create Project")
-
-    if submit_button and title and description and skills:
-        # ✅ Define new project dictionary before using it
-        new_project = {
-            "title": title,
-            "description": description,
-            "skills": skills.split(","),
-            "manager": st.session_state.current_user,  # Assuming the creator is the manager
-            "participants": [],
-            "requests": [],
-        }
-
-        # ✅ Add the new project to session state and save
-        st.session_state.projects.append(new_project)
-        save_projects(st.session_state.projects)
-
-        st.success(f"Project '{title}' created successfully!")
-        st.rerun()  # Refresh the app to update the project list
-        
-selected_project_title = st.selectbox("Select a project", [p["title"] for p in st.session_state.projects])
-
-
-if selected_project_title:
-    project = find_project_by_title(selected_project_title)  # ✅ Define project
-
-    if project:
-        if st.session_state.current_user not in project.get("requests", []):
-            st.write("User has not requested to join this project yet.")
-        else:
-            st.write("User is already in the request list.")
-    else:
-        st.error("Project not found!")
-
-if st.button("Go to Dashboard"):
-    st.switch_page("pages/dashboard.py")
-
-if st.button("Go home"):
-    st.switch_page("pages/dashboard.py")
-
-# Ensure user is logged in
-if "authenticated" not in st.session_state or not st.session_state.authenticated:
-    st.warning("Please log in to access projects.")
-    st.stop()
-
-user_data = st.session_state.users.get(st.session_state.current_user, {})
-
-st.header("Available Projects")
-
-if "projects" in st.session_state and st.session_state.projects:
+# ✅ Make sure projects exist
+if not st.session_state.projects:
+    st.warning("No projects available.")
+else:
+    # ✅ Select a project first
     selected_project_title = st.selectbox(
         "Select a project",
         [p["title"] for p in st.session_state.projects],
@@ -87,10 +37,20 @@ if "projects" in st.session_state and st.session_state.projects:
     project = next((p for p in st.session_state.projects if p["title"] == selected_project_title), None)
 
     if project:
-        # ✅ Now we can safely access project
+        st.subheader(f"Project: {project['title']}")
+        st.write(f"**Description:** {project['description']}")
+        st.write(f"**Skills Required:** {', '.join(project['skills'])}")
+        st.write(f"**Manager:** {project['manager']}")
+        st.write(f"**Participants:** {len(project.get('participants', []))}")
+
+        # ✅ Check if the user has already requested to join
         if st.session_state.current_user not in project.get("requests", []):
             if st.button(f"Request to Join {project['title']}", key=f"join_{project['title']}"):
                 project.setdefault("requests", []).append(st.session_state.current_user)
+                
+                # ✅ Save updated projects to JSON
+                save_projects(st.session_state.projects)
+
                 st.success(f"Requested to join {project['title']}!")
 
     else:
