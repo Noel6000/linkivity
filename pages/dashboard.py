@@ -7,6 +7,10 @@ if not st.session_state.get('authenticated'):
     st.error("You must be logged in to view this page.")
     st.stop()
 
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
+
+
 
 isClicked = st.button("main page", use_container_width=True)
 if isClicked:
