@@ -11,6 +11,12 @@ def load_users():
         with open(USER_FILE, "r") as file:
             return json.load(file)
     return {}
+    # Run Git commands to push changes
+    os.system("git add users.json")
+    os.system('git commit -m "Update users.json"')
+    os.system("git push origin main")  # Change 'main' if using a different branch
+
+    print("✅ users.json updated on GitHub!")
 
 def save_users(data):
     with open(USER_FILE, "w") as file:
