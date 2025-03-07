@@ -12,16 +12,16 @@ PROJECTS_FILE = "pages/projects.json"
 GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
 
 def load_projects():
-    """Load projects from the JSON file."""
-    if os.path.exists(PROJECTS_FILE):
-        with open(PROJECTS_FILE, "r") as file:
-            return json.load(file)
-    return []
+    try:
+        with open("projects.json", "r") as file:
+            data = json.load(file)
+            return data.get("projects", [])  # ✅ Get the list, not the dictionary
+    except FileNotFoundError:
+        return []  # ✅ Return an empty list if file is missing
 
 def save_projects(projects):
-    """Save projects to the JSON file and push changes to GitHub."""
-    with open(PROJECTS_FILE, "w") as file:
-        json.dump(projects, file, indent=4)
+    with open("projects.json", "w") as file:
+        json.dump({"projects": projects}, file, indent=4)  # ✅ Save in correct format
 
     # GitHub commit and push
     try:
