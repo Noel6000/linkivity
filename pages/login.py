@@ -104,7 +104,7 @@ if 'authenticated' not in st.session_state:
 if 'current_user' not in st.session_state:
     st.session_state.current_user = None
 
-print(user_data)
+st.write(users_data)
 # Function to handle user login
 def login():
     st.header("Login")
