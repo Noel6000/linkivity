@@ -124,21 +124,7 @@ if 'projects' not in st.session_state:
 def enroll_in_project(project_title):
     st.session_state.pending_approvals.append(project_title)
     st.success(f"Enrolled in {project_title}. Approval is pending.")
-
-# Function to create a new project
-# Main page with project listings
-st.header("Available Projects")
-for project in st.session_state.projects:
-    st.write(f"**{project['title']}**")
-    st.write(f"Description: {project['description']}")
-    st.write(f"Required Skills: {project['skills']}")
-    if st.button(f"Enroll in {project['title']}"):
-        enroll_in_project(project['title'])
-    st.write("---")
-    st.divider()
-
-import streamlit as st
-
+               
 # Ensure user is logged in
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     st.warning("Please log in to find projects.")
