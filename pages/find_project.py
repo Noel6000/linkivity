@@ -72,12 +72,24 @@ user_data = st.session_state.users.get(st.session_state.current_user, {})
 st.header("Available Projects")
 
 if "projects" in st.session_state and st.session_state.projects:
-    for project in st.session_state.projects:
-        st.subheader(project["title"])
-        st.write(f"📖 {project['description']}")
-        st.write(f"🔧 Skills: {project['skills']}")
-        st.write(f"👤 Managed by: {project['manager']}")
-        st.write("---")
+    selected_project_title = st.selectbox(
+        "Select a project",
+        [p["title"] for p in st.session_state.projects],
+        key="project_selectbox"
+    )
+
+    # ✅ Find the selected project
+    project = next((p for p in st.session_state.projects if p["title"] == selected_project_title), None)
+
+    if project:
+        # ✅ Now we can safely access project
+        if st.session_state.current_user not in project.get("requests", []):
+            if st.button(f"Request to Join {project['title']}", key=f"join_{project['title']}"):
+                project.setdefault("requests", []).append(st.session_state.current_user)
+                st.success(f"Requested to join {project['title']}!")
+
+    else:
+        st.error("Project not found!")
 else:
     st.warning("No projects available.")
     
