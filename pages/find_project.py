@@ -13,16 +13,24 @@ import os
 
 PROJECTS_FILE = "pages/projects.json"
 GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
+import json
+
+PROJECTS_FILE = "projects.json"
 
 def load_projects():
-    """Loads projects from the JSON file."""
+    """Loads projects from the JSON file and ensures it is a list."""
     try:
         with open(PROJECTS_FILE, "r") as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return []  # Return an empty list if the file doesn't exist
+            data = json.load(file)
+            if isinstance(data, list):  # Ensure it's a list
+                return data
+            else:
+                return []  # Reset to empty list if format is wrong
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []  # Return an empty list if the file doesn't exist or is corrupt
 
-if "projects" not in st.session_state:
+# Initialize projects in session state properly
+if "projects" not in st.session_state or not isinstance(st.session_state.projects, list):
     st.session_state.projects = load_projects()
 
 
