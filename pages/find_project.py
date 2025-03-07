@@ -1,7 +1,15 @@
 import streamlit as st
 
+# Check if the user is authenticated
+if not st.session_state.get('authenticated'):
+    st.error("You must be logged in to view this page.")
+    st.stop()
+
 
 if st.button("Go to Dashboard"):
+    st.switch_page("pages/dashboard.py")
+
+if st.button("Go home"):
     st.switch_page("pages/dashboard.py")
 
 st.divider()
