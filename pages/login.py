@@ -30,7 +30,7 @@ def load_users():
         return {}  # Default empty dict if file is missing
         if "users" not in data:
             data["users"] = {}
-        return data 
+            return data 
         else:
             return {"users": {}}  # 🔹 Return default structure if file is missing
 
