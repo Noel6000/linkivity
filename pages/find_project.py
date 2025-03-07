@@ -39,25 +39,34 @@ def load_projects():
         return {"users": {}}  # 🔹 Fix: Return a proper structure if file is missing
         # Ensure users are loaded into session state
 
-def save_projects(projects):
-    print("Saving projects...")  # Debugging output
-    with open("projects.json", "w") as file:
-        json.dump({"projects": projects}, file, indent=4)
-    print("Projects saved successfully!")  # Debugging output
-    # GitHub commit and push
-    try:
-        subprocess.run(["git", "config", "--global", "user.email", "your-email@example.com"], check=True)
-        subprocess.run(["git", "config", "--global", "user.name", "your-username"], check=True)
 
-        subprocess.run(["git", "add", PROJECTS_FILE], check=True)
-        subprocess.run(["git", "commit", "-m", "Updated projects.json"], check=True)
-        subprocess.run(["git", "push", "https://<GITHUB-TOKEN>@github.com/" + GITHUB_REPO + ".git"], check=True)
+def save_projects(users_data):
+    """Save users.json back to GitHub"""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
 
-        print("✅ projects.json updated and pushed to GitHub!")
+    # Convert data to JSON
+    json_content = json.dumps(users_data, indent=4)
+    encoded_content = base64.b64encode(json_content.encode()).decode()
 
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Error pushing to GitHub: {e}")
+    # Get latest file SHA for updating
+    response = requests.get(url, headers=headers)
+    sha = response.json().get("sha", None) if response.status_code == 200 else None
 
+    # Update file on GitHub
+    data = {
+        "message": "Update projects.json",
+        "content": encoded_content,
+        "sha": sha
+    }
+
+    response = requests.put(url, headers=headers, json=data)
+    
+    if response.status_code == 200:
+        st.success("User data updated successfully.")
+    else:
+        st.error("Failed to update projects.json on GitHub.")
+        
 # Initialize session state for projects
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()
