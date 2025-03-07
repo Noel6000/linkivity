@@ -114,13 +114,12 @@ def login():
         submit_button = st.form_submit_button("Login")
 
         if submit_button:
-            users = load_users()  # Always load latest users
+            users = load_users()  # Load latest users from GitHub
 
             if username in users:
-                stored_password = users[username]["password"]
+                stored_hashed_password = users[username]["password"]
                 
-                # 🔹 If passwords are stored in plaintext:
-                if stored_password == password:
+                if stored_hashed_password == hash_password(password):  # 🔹 Compare hashes
                     st.session_state.authenticated = True
                     st.session_state.current_user = username
                     st.success(f"Logged in successfully! Welcome, {users[username]['full_name']}")
