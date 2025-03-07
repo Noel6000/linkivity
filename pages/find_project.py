@@ -1,8 +1,11 @@
 import streamlit as st
 import json
 
-PROJECTS_FILE = "projects.json"
-
+PROJECTS_FILE = "pages/projects.json"
+# Initialize session state variables if not set
+if "current_user" not in st.session_state:
+    st.session_state.current_user = None  # Or set to a default value
+    
 # Load projects from JSON
 def load_projects():
     try:
