@@ -9,7 +9,7 @@
         },
         "da-hacker": {
             "password": "$2b$12$Bjv13whVfb0dgtPYFkMeyeRXReeIBajOSllpPyDTP6cBR2n.5iM9W",
-            "full_name": "Noël Briand",
+            "full_name": "No\u00ebl Briand",
             "experience": "I hacked Lilian's account.",
             "details": "I am good at being haxed.",
             "projects": []
@@ -19,7 +19,9 @@
             "full_name": "Bob Bobson",
             "experience": "Python",
             "details": "Likes bobbing",
-            "projects": ["Python AI"]
+            "projects": [
+                "Python AI"
+            ]
         },
         "python": {
             "password": "$2b$12$Vk2rc5/0O0bdsLQ1pH5Y2e.JCVnYi2Ky99yQ7KFveF2gRbDxcTEza",
@@ -33,6 +35,13 @@
             "full_name": "Was_Michael",
             "experience": "none",
             "details": "",
+            "projects": []
+        },
+        "gracchus": {
+            "password": "$2b$12$s85oFPwdVqjbJEpNpe1T9Oaq6pH11NQ5YfpXdVzcCi/lAhtfKTTwi",
+            "full_name": "Gustavo Geronimo Genaro Giovanni Gregorio Gentile Gecko",
+            "experience": "Maverick entrepreneur, I have graduated in Mulbridge University (Texas, Colorado). Recommended by Pier Von Sniggelschrubb (CEO of Bar Pepito) y have gained some renown with my agrarian reforms before being stabbed by a slave when being pursued by an angry mob. ",
+            "details": "(The maverick part is a metaphor, I am actually homo sapiens).",
             "projects": []
         }
     }
