@@ -104,8 +104,9 @@ if 'authenticated' not in st.session_state:
 if 'current_user' not in st.session_state:
     st.session_state.current_user = None
 
+users_data = load_users()
 st.write(users_data)
-# Function to handle user login
+# Debugging: Check if username and password exist# Function to handle user login
 def login():
     st.header("Login")
     with st.form("login_form"):
