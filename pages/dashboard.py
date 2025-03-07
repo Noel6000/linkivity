@@ -74,3 +74,29 @@ if managed_projects:
         st.write("---")
 else:
     st.write("No managed projects.")
+
+import streamlit as st
+
+# Ensure user is logged in
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("Please log in to access the dashboard.")
+    st.stop()
+
+# Get the logged-in user's data
+user_data = st.session_state.users.get(st.session_state.current_user, {})
+
+st.title(f"Welcome, {user_data.get('full_name', 'User')}!")
+
+st.subheader("Your Experience")
+st.write(user_data.get("experience", "No experience added yet."))
+
+st.subheader("Your Details")
+st.write(user_data.get("details", "No details added yet."))
+
+st.subheader("Your Projects")
+if user_data.get("projects"):
+    for project in user_data["projects"]:
+        st.write(f"- {project}")
+else:
+    st.write("No projects yet.")
+
