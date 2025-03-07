@@ -2,14 +2,17 @@ import streamlit as st
 import json
 import os
 
-# File to store user credentials
 USER_FILE = "users.json"
 
 # Function to load user data from JSON file
 def load_users():
     if os.path.exists(USER_FILE):
-        with open(USER_FILE, "r") as file:
-            return json.load(file)
+        try:
+            with open(USER_FILE, "r") as file:
+                data = file.read().strip()
+                return json.loads(data) if data else {}
+        except (json.JSONDecodeError, FileNotFoundError):
+            return {}
     return {}
 
 # Function to save user data to JSON file
@@ -46,7 +49,8 @@ def sign_up():
                         "password": password,
                         "full_name": full_name,
                         "experience": experience,
-                        "details": details
+                        "details": details,
+                        "projects": []  # Each user can have their own projects
                     }
                     save_users(st.session_state.users)
                     st.success("Signed up successfully! Please log in.")
@@ -80,10 +84,27 @@ def logout():
     st.success("Logged out successfully!")
     st.rerun()
 
+# Function to show personalized content
+def show_dashboard():
+    user_data = st.session_state.users[st.session_state.current_user]
+    st.header(f"Welcome, {user_data['full_name']}!")
+
+    st.subheader("Your Experience")
+    st.write(user_data["experience"] if user_data["experience"] else "No experience added yet.")
+
+    st.subheader("Your Details")
+    st.write(user_data["details"] if user_data["details"] else "No details added yet.")
+
+    st.subheader("Your Projects")
+    if user_data["projects"]:
+        for project in user_data["projects"]:
+            st.write(f"- {project}")
+    else:
+        st.write("No projects yet.")
+
 # Main application
 def main():
-    # Top navigation bar with login/logout button
-    col1, col2 = st.columns([1, 30])  # Adjust column ratio to shift button right
+    col1, col2 = st.columns([1, 30])  # Move login/logout to top-right
 
     with col2:
         if st.session_state.authenticated:
@@ -102,11 +123,11 @@ def main():
         st.sidebar.header(f"Welcome, {st.session_state.users[st.session_state.current_user]['full_name']}!")
 
         if page == "Home":
-            st.switch_page("main_page.py")
+            st.write("This is the Home Page.")
         elif page == "Dashboard":
-            st.switch_page("pages/dashboard.py")
+            show_dashboard()  # Show personalized dashboard
         elif page == "Projects":
-            st.switch_page("pages/find_project.py")
+            st.write("This is the Projects Page.")
 
 # Run the main application
 main()
