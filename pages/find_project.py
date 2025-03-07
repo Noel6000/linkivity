@@ -1,5 +1,6 @@
 import streamlit as st
 
+st.divider()
 def create_new_project():
     st.header("Create a New Project")
     with st.form("new_project_form"):
