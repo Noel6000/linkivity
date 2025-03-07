@@ -129,4 +129,3 @@ st.write(user_data.get("experience", "No experience added yet."))
 
 st.subheader("Your Details")
 st.write(user_data.get("details", "No details added yet."))
-
