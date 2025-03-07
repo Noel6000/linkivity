@@ -2,6 +2,17 @@ import streamlit as st
 import json
 import os
 
+import bcrypt
+
+def hash_password(password):
+    """Hashes a password using bcrypt."""
+    salt = bcrypt.gensalt()
+    return bcrypt.hashpw(password.encode(), salt).decode()
+
+def verify_password(plain_password, hashed_password):
+    """Verifies a password against its hash."""
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
+
 USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/users.json"  # Adjust based on your repo structure
