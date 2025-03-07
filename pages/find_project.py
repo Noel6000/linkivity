@@ -20,9 +20,10 @@ def load_projects():
         return []  # ✅ Return an empty list if file is missing
 
 def save_projects(projects):
+    print("Saving projects...")  # Debugging output
     with open("projects.json", "w") as file:
-        json.dump({"projects": projects}, file, indent=4)  # ✅ Save in correct format
-
+        json.dump({"projects": projects}, file, indent=4)
+    print("Projects saved successfully!")  # Debugging output
     # GitHub commit and push
     try:
         subprocess.run(["git", "config", "--global", "user.email", "your-email@example.com"], check=True)
