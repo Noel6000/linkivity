@@ -62,16 +62,6 @@ create_project()
 # Ensure 'projects' exists in session state
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()
-
-# Load existing projects
-projects = load_projects()
-
-# Add new project
-projects.append(new_project)
-
-# Save updated projects
-save_projects(projects)  # ✅ Make sure this is called
-
 # Update session state
 st.session_state.projects = projects
 st.divider()
