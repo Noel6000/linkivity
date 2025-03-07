@@ -32,30 +32,38 @@ def create_project():
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
         skills = st.text_input("Required Skills (comma-separated)")
-        
         submit_button = st.form_submit_button("Create Project")
 
-        if submit_button and title and description and skills:
-            # ✅ Define `new_project` before appending
+    if submit_button:
+        st.write("Button clicked!")  # Debugging
+
+        if title and description and skills:
             new_project = {
                 "title": title,
                 "description": description,
-                "skills": skills.split(","),
-                "manager": st.session_state.current_user,  # Assign the creator as the manager
-                "participants": [],
+                "skills": skills,
+                "manager": st.session_state.current_user,
+                "participants": 1,  # Start with the creator
                 "requests": []
             }
 
-            # ✅ Load existing projects, update, and save
-            projects = load_projects()  # Load projects from JSON
-            projects.append(new_project)  # Append the new project
-            save_projects(projects)  # Save back to JSON
+            st.write("New project:", new_project)  # Debugging
 
-            # ✅ Update session state
-            st.session_state.projects = projects  
+            # Load existing projects
+            projects = st.session_state.get("projects", [])
+            st.write("Current projects before update:", projects)  # Debugging
+
+            # Add the new project
+            projects.append(new_project)
+
+            # Save updated projects
+            st.session_state.projects = projects  # Update session
+            save_projects(projects)  # Save to JSON file
 
             st.success(f"Project '{title}' created successfully!")
-
+            st.rerun()  # Refresh the page to update changes
+        else:
+            st.error("Please fill in all fields!")
 # Run the function
 create_project()
 
