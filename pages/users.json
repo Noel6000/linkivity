@@ -1,1 +1,11 @@
-{}
+{
+    "users": {
+        "Noel": {
+            "password": "43a540908233b2e3eef6c0a2b491df0c61f27ca8b711c8587f268ab423630617",
+            "full_name": "No\u00ebl Santiago Briand",
+            "experience": "jaas",
+            "details": "as",
+            "projects": []
+        }
+    }
+}
