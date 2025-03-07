@@ -105,12 +105,6 @@ else:
         # Get participants for this project
         participants = project.get("participants", [])
 
-        for participant in participants:
-            if participant != project.get("manager", ""):  # ✅ Ensure key exists
-                if st.button(f"Remove {participant}", key=f"remove_{participant}_{project['title']}"):
-                    project["participants"].remove(participant)
-                    st.success(f"Removed {participant} from {project['title']}")
-
 # Sync the updated projects to session state
 st.session_state.projects = projects
 
