@@ -17,18 +17,22 @@ def save_users(data):
     with open(USER_FILE, "w") as file:
         json.dump(data, file, indent=4)
 
+# Ensure session state has projects loaded
+if "projects" not in st.session_state:
+    users_data = load_users()
+    st.session_state.projects = users_data["projects"]
+
 # Ensure user is authenticated
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     st.warning("Please log in to access the chat.")
     st.stop()
 
-users_data = load_users()
 current_user = st.session_state.current_user
 
 st.title("Project Chat")
 
 # Get projects where the user is a participant
-user_projects = [p for p in users_data["projects"] if current_user in p["participants"]]
+user_projects = [p for p in st.session_state.projects if current_user in p["participants"]]
 
 if not user_projects:
     st.info("You're not part of any projects yet.")
@@ -39,7 +43,7 @@ project_title = st.selectbox("Select a project", [p["title"] for p in user_proje
 
 # Ensure project is selected before proceeding
 if project_title:
-    project = next((p for p in users_data["projects"] if p["title"] == project_title), None)
+    project = next((p for p in st.session_state.projects if p["title"] == project_title), None)
     
     if project:
         st.subheader(f"Chat for {project_title}")
@@ -60,5 +64,9 @@ if project_title:
                     "timestamp": datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
                 }
                 project.setdefault("chat", []).append(new_message)
+                
+                # Update session state and save to file
+                users_data = {"projects": st.session_state.projects}
                 save_users(users_data)
+                
                 st.rerun()  # Refresh chat
