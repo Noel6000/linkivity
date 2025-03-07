@@ -10,6 +10,11 @@ def load_projects():
             return json.load(file)
     except (FileNotFoundError, json.JSONDecodeError):
         return []  # Return an empty list if the file doesn't exist or has an error
+    
+def save_projects(projects):
+    """Saves projects to JSON file."""
+    with open(PROJECTS_FILE, "w") as file:
+        json.dump(projects, file, indent=4)
 
 # Ensure 'projects' exists in session state
 if "projects" not in st.session_state:
