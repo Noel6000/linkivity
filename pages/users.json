@@ -19,7 +19,7 @@
             "full_name": "Bob Bobson",
             "experience": "Python",
             "details": "Likes bobbing",
-            "projects": []
+            "projects": ["Python AI"]
         },
         "python": {
             "password": "$2b$12$Vk2rc5/0O0bdsLQ1pH5Y2e.JCVnYi2Ky99yQ7KFveF2gRbDxcTEza",
@@ -28,9 +28,9 @@
             "details": "I loooove python.",
             "projects": []
         },
-        "houstonlonghorn": {
-            "password": "$2b$12$zJKKTHHcuqtppfMxTTSu2OJmbHSQnFFawAmc5XTx0QtTCMoYNfnoS",
-            "full_name": "andrew",
+        "taken_over": {
+            "password": "$2b$12$Bjv13whVfb0dgtPYFkMeyeRXReeIBajOSllpPyDTP6cBR2n.5iM9W",
+            "full_name": "Was_Michael",
             "experience": "none",
             "details": "",
             "projects": []
