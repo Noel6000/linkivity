@@ -88,8 +88,7 @@ def save_users(users_data):
 def sign_up():
     st.header("Sign Up")
     with st.form("sign_up_form"):
-        username = st.text_input("Username")
-        username = username.lower()  # Convert to lowercase 
+        username = st.text_input("Username").lower()
         password = st.text_input("Password", type="password")
         full_name = st.text_input("Full Name")
         experience = st.text_area("Experience")
@@ -98,16 +97,13 @@ def sign_up():
 
         if submit_button:
             users_data = load_users()
-
             if "users" not in users_data:
                 users_data["users"] = {}
 
-            username = username.lower()  # Ensure usernames are case-insensitive
-
             if username and password:
                 if username not in users_data["users"]:
-                    hashed_password = hash_password(password)  # Hash the password
-                    
+                    hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
                     users_data["users"][username] = {
                         "password": hashed_password,
                         "full_name": full_name,
@@ -115,14 +111,14 @@ def sign_up():
                         "details": details,
                         "projects": []
                     }
-                    
-                    save_users(users_data)  # Save updated users.json
-                    
+
+                    save_users(users_data)  # Save users.json
                     st.success("Signed up successfully! Please log in.")
                 else:
                     st.warning("Username already exists.")
             else:
                 st.warning("Please fill in all fields.")
+
 
 if 'users' not in st.session_state:
     st.session_state.users = load_users()
