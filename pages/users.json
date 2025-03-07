@@ -20,6 +20,13 @@
             "experience": "Python",
             "details": "Likes bobbing",
             "projects": []
+        },
+        "python": {
+            "password": "$2b$12$Vk2rc5/0O0bdsLQ1pH5Y2e.JCVnYi2Ky99yQ7KFveF2gRbDxcTEza",
+            "full_name": "Python Bot",
+            "experience": "Python",
+            "details": "I loooove python.",
+            "projects": []
         }
     }
 }
