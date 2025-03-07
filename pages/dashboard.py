@@ -16,8 +16,7 @@ Clixed = st.button("Find a Project", use_container_width=True)
 if Clixed:
     st.switch_page("pages/find_project.py")
 
-import streamlit as st
-
+st.divider()
 # Initialize session state for projects and user management
 if 'projects' not in st.session_state:
     st.session_state.projects = [
