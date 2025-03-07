@@ -44,6 +44,7 @@ def create_new_project():
                 }
                 st.session_state.projects.append(new_project)
                 st.success("New project created successfully!")
+                st.experimental_rerun()  # Rerun the app to reflect changes
             else:
                 st.warning("Please fill in all fields.")
 
