@@ -1,5 +1,9 @@
 import streamlit as st
 
+
+if st.button("Go to Dashboard"):
+    st.switch_page("dashboard")
+
 st.divider()
 def create_new_project():
     st.header("Create a New Project")
