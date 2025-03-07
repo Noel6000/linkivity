@@ -1,7 +1,60 @@
 import streamlit as st
 import random
-from find_project import load_projects
+import json
+import base64
 
+def load_projects():
+    """Load projects from JSON file."""
+    with open(PROJECTS_FILE, "r") as file:
+        projects = json.load(file)
+        return projects
+
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()  # Load from JSON
+
+if "current_user" not in st.session_state:
+    st.session_state.current_user = None  # Or set to a default user if needed
+
+
+# Initialize projects in session state properly
+for project in st.session_state.projects:
+    if isinstance(project, dict) and "manager" in project:
+        if project["manager"] == st.session_state.current_user:
+            st.write(f"### {project['title']}")
+            st.write(f"**Participants:** {project['participants']}")
+    else:
+        st.warning("Invalid project data format.")
+
+def save_projects(users_data):
+    """Save users.json back to GitHub"""
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+
+    # Convert data to JSON
+    json_content = json.dumps(users_data, indent=4)
+    encoded_content = base64.b64encode(json_content.encode()).decode()
+
+    # Get latest file SHA for updating
+    response = requests.get(url, headers=headers)
+    sha = response.json().get("sha", None) if response.status_code == 200 else None
+
+    # Update file on GitHub
+    data = {
+        "message": "Update projects.json",
+        "content": encoded_content,
+        "sha": sha
+    }
+
+    response = requests.put(url, headers=headers, json=data)
+    
+    if response.status_code == 200:
+        st.success("User data updated successfully.")
+    else:
+        st.error("Failed to update projects.json on GitHub.")
+        
+# Initialize session state for projects
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
 
 # Check if the user is authenticated
 if not st.session_state.get('authenticated'):
