@@ -2,11 +2,11 @@ import streamlit as st
 import random
 
 isClicked = st.button("main page", use_container_width=True)
-if isClicked :
+if isClicked:
     st.switch_page("main_page.py")
 
-Clicked = st.button("Find a Project", use_container_width=True)
-if isClicked :
+Click = st.button("Find a Project", use_container_width=True)
+if Click:
     st.switch_page("find_project.py")
 
 # Initialize session state for projects and user management
