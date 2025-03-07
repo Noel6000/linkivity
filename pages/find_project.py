@@ -20,73 +20,6 @@ def save_projects(projects):
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()
 
-st.header("Find a Project")
-
-# ✅ Make sure projects exist
-if not st.session_state.projects:
-    st.warning("No projects available.")
-else:
-    # ✅ Select a project first
-    selected_project_title = st.selectbox(
-        "Select a project",
-        [p["title"] for p in st.session_state.projects],
-        key="project_selectbox"
-    )
-
-    # ✅ Find the selected project
-    project = next((p for p in st.session_state.projects if p["title"] == selected_project_title), None)
-
-    if project:
-        st.subheader(f"Project: {project['title']}")
-        st.write(f"**Description:** {project['description']}")
-        st.write(f"**Skills Required:** {', '.join(project['skills'])}")
-        st.write(f"**Manager:** {project['manager']}")
-        st.write(f"**Participants:** {len(project.get('participants', []))}")
-
-        # ✅ Check if the user has already requested to join
-        if st.session_state.current_user not in project.get("requests", []):
-            if st.button(f"Request to Join {project['title']}", key=f"join_{project['title']}"):
-                project.setdefault("requests", []).append(st.session_state.current_user)
-                
-                # ✅ Save updated projects to JSON
-                save_projects(st.session_state.projects)
-
-                st.success(f"Requested to join {project['title']}!")
-
-        else:
-            st.error("Project not found!")
-    else:
-        st.warning("No projects available.")
-    
-    # Allow users to request to join
-    if st.session_state.current_user not in project.get("requests", []):
-        if st.button(f"Request to Join {project['title']}", key=project['title']):
-            project.setdefault("requests", []).append(st.session_state.current_user)
-            st.success(f"Requested to join {project['title']}!")
-    
-    st.write("---")
-
-# Form to add new projects
-st.subheader("Create a New Project")
-with st.form("new_project_form"):
-    title = st.text_input("Project Title")
-    description = st.text_area("Project Description")
-    skills = st.text_input("Required Skills (comma-separated)")
-    submit_button = st.form_submit_button("Create Project")
-
-    if submit_button and title and description and skills:
-        new_project = {
-            "title": title,
-            "description": description,
-            "skills": skills,
-            "manager": st.session_state.current_user,
-            "participants": 1,  # Manager is the first participant
-            "requests": []
-        }
-        st.session_state.projects.append(new_project)
-        st.success(f"Project '{title}' created successfully!")
-
-st.divider()
 def create_project():
     """Allows users to create new projects."""
     st.header("Create a New Project")
@@ -95,11 +28,11 @@ def create_project():
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
         skills = st.text_input("Required Skills (comma-separated)")
-
+        
         submit_button = st.form_submit_button("Create Project")
 
         if submit_button and title and description and skills:
-            # ✅ Define `new_project`
+            # ✅ Define `new_project` before appending
             new_project = {
                 "title": title,
                 "description": description,
@@ -109,11 +42,18 @@ def create_project():
                 "requests": []
             }
 
-            # ✅ Add the new project to session state and save to JSON
-            st.session_state.projects.append(new_project)
-            save_projects(st.session_state.projects)
+            # ✅ Load existing projects, update, and save
+            projects = load_projects()  # Load projects from JSON
+            projects.append(new_project)  # Append the new project
+            save_projects(projects)  # Save back to JSON
+
+            # ✅ Update session state
+            st.session_state.projects = projects  
 
             st.success(f"Project '{title}' created successfully!")
+
+# Run the function
+create_project()
 
 # Ensure 'projects' exists in session state
 if "projects" not in st.session_state:
