@@ -1,7 +1,9 @@
 import streamlit as st
 import json
 import os
-
+import requests
+import base64
+import hashlib
 import bcrypt
 
 def hash_password(password):
@@ -23,11 +25,6 @@ USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/users.json"  # Adjust based on your repo structure
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
-import streamlit as st
-import json
-import requests
-import base64
-import hashlib
 
 def hash_password(password):
     """Hash a password using SHA-256."""
