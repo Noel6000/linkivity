@@ -39,12 +39,15 @@ def create_project():
                 "description": description,
                 "skills": skills if skills else "Not specified",
                 "manager": st.session_state.current_user,
-                "participants": 1,
+                "participants": [],
                 "requests": []
             }
 
-            # Load existing projects
+            # Ensure projects is a list before adding a new project
             projects = load_projects()
+            if not isinstance(projects, list):  # If somehow projects is a dict, reset it
+                projects = []
+
             projects.append(new_project)
 
             # Save updated projects to file
@@ -58,7 +61,6 @@ def create_project():
         else:
             st.error("Please fill in all required fields!")
 
-# Call the function to allow project creation
 create_project()
 st.divider()
 
