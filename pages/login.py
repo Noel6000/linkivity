@@ -10,6 +10,12 @@ import streamlit as st
 import json
 import requests
 import base64
+import hashlib
+
+def hash_password(password):
+    """Hash a password using SHA-256."""
+    return hashlib.sha256(password.encode()).hexdigest()
+
 def load_users():
     """Load users.json from GitHub"""
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
@@ -63,40 +69,32 @@ def save_users(data):
 # Function to handle user sign-up
 def sign_up():
     st.header("Sign Up")
-    
     with st.form("sign_up_form"):
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
         full_name = st.text_input("Full Name")
         experience = st.text_area("Experience")
-        details = st.text_area("Additional Details")
+        details = st.text_area("Details")
         submit_button = st.form_submit_button("Sign Up")
 
         if submit_button:
-            if username and password and full_name:
-                # Load existing users
-                users_data = load_users()  
-
-                # Ensure "users" key exists
-                if "users" not in users_data:
-                    users_data["users"] = {}
-
-                # Check if username already exists
+            users_data = load_users()  # Load current users from GitHub
+            
+            if username and password:
                 if username not in users_data["users"]:
                     users_data["users"][username] = {
-                        "password": password,
+                        "password": hash_password(password),  # 🔹 Store hashed password
                         "full_name": full_name,
                         "experience": experience,
                         "details": details,
-                        "projects": []  # Initialize user projects
+                        "projects": []
                     }
-                    save_users(users_data)  # Save updated data
+                    save_users(users_data)  # Save updated users.json
                     st.success("Signed up successfully! Please log in.")
                 else:
                     st.warning("Username already exists.")
             else:
-                st.warning("Please fill in all required fields.")
-
+                st.warning("Please fill in all fields.")
 
 if 'users' not in st.session_state:
     st.session_state.users = load_users()
