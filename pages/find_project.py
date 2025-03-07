@@ -12,6 +12,55 @@ if st.button("Go to Dashboard"):
 if st.button("Go home"):
     st.switch_page("pages/dashboard.py")
 
+import streamlit as st
+
+# Ensure user is logged in
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("Please log in to access projects.")
+    st.stop()
+
+user_data = st.session_state.users.get(st.session_state.current_user, {})
+
+st.title("Projects")
+
+# Show existing projects
+st.subheader("Available Projects")
+
+for project in st.session_state.projects:
+    st.write(f"### {project['title']}")
+    st.write(f"**Description:** {project['description']}")
+    st.write(f"**Skills Required:** {project['skills']}")
+    st.write(f"**Manager:** {project['manager']}")
+    st.write(f"**Participants:** {project['participants']}")
+    
+    # Allow users to request to join
+    if st.session_state.current_user not in project.get("requests", []):
+        if st.button(f"Request to Join {project['title']}", key=project['title']):
+            project.setdefault("requests", []).append(st.session_state.current_user)
+            st.success(f"Requested to join {project['title']}!")
+    
+    st.write("---")
+
+# Form to add new projects
+st.subheader("Create a New Project")
+with st.form("new_project_form"):
+    title = st.text_input("Project Title")
+    description = st.text_area("Project Description")
+    skills = st.text_input("Required Skills (comma-separated)")
+    submit_button = st.form_submit_button("Create Project")
+
+    if submit_button and title and description and skills:
+        new_project = {
+            "title": title,
+            "description": description,
+            "skills": skills,
+            "manager": st.session_state.current_user,
+            "participants": 1,  # Manager is the first participant
+            "requests": []
+        }
+        st.session_state.projects.append(new_project)
+        st.success(f"Project '{title}' created successfully!")
+
 st.divider()
 def create_new_project():
     st.header("Create a New Project")
