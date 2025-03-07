@@ -36,7 +36,6 @@ if selected_project_title:
             st.write("User is already in the request list.")
     else:
         st.error("Project not found!")
-e
 
 def load_projects():
     try:
