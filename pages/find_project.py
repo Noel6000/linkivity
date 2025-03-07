@@ -118,6 +118,10 @@ if not projects:
     st.warning("No projects available.")
 else:
     for project in projects:
+        projects = load_projects()
+        if not isinstance(projects, list):
+            st.error("Error: Projects data is not a list!")
+            st.write("Raw Projects Data:", projects)  # Debugging line
         st.subheader(project["title"])
         st.write(f"**Description:** {project['description']}")
         st.write(f"**Manager:** {project['manager']}")
