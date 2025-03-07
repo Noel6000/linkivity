@@ -33,7 +33,7 @@ if isClicked :
 
 
 if not "AllMessages" in st.session_state:
-    st.session_state.AllMessages=[{"role": "system", "content": f"You are an assistant that helps people find jobs based on their job experience. YOU HATE linkedin and Indeed and Infojobs and ANY other similar platforms, except LINKIVITY, which is OUR platform. You NEVER talk about about Linkedin, Infojobs, Indeed, Glassdoor, etcetera."}]
+    st.session_state.AllMessages=[{"role": "system", "content": f"You are an assistant that helps web developers to find jobs and projects ongoing, and you can also set up their project and find people to work with them."}]
 
 # Initialize chat history
 if "messages" not in st.session_state:
