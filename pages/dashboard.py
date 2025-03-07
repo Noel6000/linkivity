@@ -41,6 +41,10 @@ st.title(f"Welcome, {user_data.get('full_name', 'User')}!")
 
 st.subheader("Your Projects")
 for project in st.session_state.projects:
+    # Ensure project is a dictionary and has a manager
+    if isinstance(project, dict) and project.get("manager") == st.session_state.current_user:
+        st.write(f"### {project['title']}")
+        st.write(f"**Participants:** {project['participants']}")
     if project["manager"] == st.session_state.current_user:
         st.write(f"### {project['title']}")
         participants = project.get("participants", [])
