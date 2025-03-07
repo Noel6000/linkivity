@@ -11,6 +11,8 @@
         "description": "Una ia barata",
         "manager": "alice",
         "participants": [],
-        "requests": []
+        "requests": [
+            null
+        ]
     }
 ]
