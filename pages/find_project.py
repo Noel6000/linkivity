@@ -66,37 +66,24 @@ def create_project():
     with st.form("create_project_form"):
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
-        skills = st.text_input("Required Skills (optional)")
         submit_button = st.form_submit_button("Create Project")
 
-    if submit_button:
-        if title and description:  # Ensure required fields are filled
+        if submit_button and title and description:
             new_project = {
                 "title": title,
                 "description": description,
-                "skills": skills if skills else "Not specified",
                 "manager": st.session_state.current_user,
                 "participants": [],
                 "requests": []
             }
 
-            # Ensure projects is a list before adding a new project
+            # Load existing projects, add new one, and save
             projects = load_projects()
-            if not isinstance(projects, list):  # If somehow projects is a dict, reset it
-                projects = []
-            if 'pending_approvals' not in st.session_state:
-                st.session_state.pending_approvals = []
-
-            projects = list(load_projects())  # ✅ projects is now a LIST
-            projects.append(new_project)  # ✅ This works because projects is a list
-            save_projects(projects)  # ✅ Save back to the JSON file
-
+            projects.append(new_project)
+            save_projects(projects)
 
             st.success(f"Project '{title}' created successfully!")
-            st.rerun()
-
-        else:
-            st.error("Please fill in all required fields!")
+            st.rerun()  # Reload the page to update the project list
 
 create_project()
 st.divider()
