@@ -4,7 +4,9 @@
         "description": "Use python to pythonate a lot.",
         "manager": "bob",
         "participants": [],
-        "requests": []
+        "requests": [
+            "da-hacker"
+        ]
     },
     {
         "title": "IA barata",
