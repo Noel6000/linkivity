@@ -18,16 +18,12 @@ import json
 PROJECTS_FILE = "projects.json"
 
 def load_projects():
-    """Loads projects from the JSON file and ensures it is a list."""
-    try:
-        with open(PROJECTS_FILE, "r") as file:
-            data = json.load(file)
-            if isinstance(data, list):  # Ensure it's a list
-                return data
-            else:
-                return []  # Reset to empty list if format is wrong
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []  # Return an empty list if the file doesn't exist or is corrupt
+    """Load projects from JSON file."""
+    with open(PROJECT_FILE, "r") as file:
+        projects = json.load(file)
+    
+    st.write("🔍 DEBUG: Loaded Projects:", projects)  # Debugging line
+    return projects
 
 # Initialize projects in session state properly
 for project in st.session_state.projects:
