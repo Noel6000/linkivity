@@ -5,6 +5,7 @@ import os
 USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/users.json"  # Adjust based on your repo structure
+GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 import streamlit as st
 import json
 import requests
