@@ -4,6 +4,7 @@ import json
 PROJECTS_FILE = "projects.json"  # Change this if your project data is stored elsewhere
 
 # Function to load projects from a JSON file
+
 def load_projects():
     try:
         with open(PROJECTS_FILE, "r") as file:
@@ -15,23 +16,6 @@ def save_projects(projects):
     """Saves projects to JSON file."""
     with open(PROJECTS_FILE, "w") as file:
         json.dump(projects, file, indent=4)
-
-# Ensure 'projects' exists in session state
-if "projects" not in st.session_state:
-    st.session_state.projects = load_projects()
-
-# Load existing projects
-projects = load_projects()
-
-# Add new project
-projects.append(new_project)
-
-# Save updated projects
-save_projects(projects)  # ✅ Make sure this is called
-
-# Update session state
-st.session_state.projects = projects
-
 
 if st.button("Go to Dashboard"):
     st.switch_page("pages/dashboard.py")
@@ -119,7 +103,21 @@ def create_project():
             else:
                 st.warning("Please fill in all fields.")
 
+# Ensure 'projects' exists in session state
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
 
+# Load existing projects
+projects = load_projects()
+
+# Add new project
+projects.append(new_project)
+
+# Save updated projects
+save_projects(projects)  # ✅ Make sure this is called
+
+# Update session state
+st.session_state.projects = projects
 st.divider()
 
 # Button to go to the pending approvals page
