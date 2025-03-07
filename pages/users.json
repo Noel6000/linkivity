@@ -6,6 +6,13 @@
             "experience": "a",
             "details": "a",
             "projects": []
+        },
+        "da-creator": {
+            "password": "$2b$12$KB3dZrCJk/E0ziMolM7u4.fXAMpFmEoggwGuXW1D6ZrLsifTaEeOC",
+            "full_name": "Lilian Tillie Ronzon",
+            "experience": "I work as a student in San Francisco de Paula, Seville.",
+            "details": "I am good at sciences, coding, maths and language classes.",
+            "projects": []
         }
     }
 }
