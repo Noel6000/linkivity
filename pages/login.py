@@ -11,7 +11,7 @@ def hash_password(password):
 
 def verify_password(plain_password, hashed_password):
     """Verifies a password against its hash."""
-    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())  # Fix encoding issue
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode('utf-8'))
     
 USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
