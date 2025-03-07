@@ -67,16 +67,14 @@ def create_project():
             if not isinstance(projects, list):  # If somehow projects is a dict, reset it
                 projects = []
 
-            projects.append(new_project)
 
-            # Save updated projects to file
+            projects = load_projects()
+            projects.append(new_project)
             save_projects(projects)
 
-            # Update session state
-            st.session_state.projects = projects
-
             st.success(f"Project '{title}' created successfully!")
-            st.rerun()  # Refresh Streamlit to reflect changes
+            st.rerun()
+
         else:
             st.error("Please fill in all required fields!")
 
