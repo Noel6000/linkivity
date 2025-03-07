@@ -30,30 +30,6 @@ if 'projects' not in st.session_state:
 if 'user' not in st.session_state:
     st.session_state.user = {"name": "Alice"}
 
-# Function to create a new project
-def create_new_project():
-    st.header("Create a New Project")
-    with st.form("new_project_form"):
-        title = st.text_input("Project Title")
-        description = st.text_area("Project Description")
-        skills = st.text_input("Required Skills (comma-separated)")
-        submit_button = st.form_submit_button("Create Project")
-
-        if submit_button:
-            if title and description and skills:
-                new_project = {
-                    "title": title,
-                    "description": description,
-                    "skills": skills,
-                    "manager": st.session_state.user["name"],
-                    "participants": 1  # Assuming the manager is the first participant
-                }
-                st.session_state.projects.append(new_project)
-                st.success("New project created successfully!")
-                st.experimental_rerun()  # Rerun the app to reflect changes
-            else:
-                st.warning("Please fill in all fields.")
-
 # Dashboard page displaying only the user's managed projects
 st.header("My Projects Dashboard")
 
@@ -96,14 +72,28 @@ else:
 
 # Remove Participants
 st.subheader("Manage Participants")
-for participant in user_data.get("projects", {}).get(project["title"], []):
-    if participant != project["manager"]:  # Managers can't remove themselves
-        if st.button(f"Remove {participant}", key=f"remove_{participant}_{project['title']}"):
-            project["participants"] -= 1
-            user_data["projects"][project["title"]].remove(participant)
-            st.success(f"Removed {participant} from {project['title']}.")
 
-import streamlit as st
+# Load projects first
+projects = st.session_state.get("projects", [])
+
+# Ensure the user has projects
+if not projects:
+    st.warning("No projects available.")
+else:
+    for project in projects:  # ✅ Define `project`
+        st.write(f"Managing: {project['title']}")
+
+        # Get participants for this project
+        participants = project.get("participants", [])
+
+        for participant in participants:
+            if participant != project.get("manager", ""):  # ✅ Ensure key exists
+                if st.button(f"Remove {participant}", key=f"remove_{participant}_{project['title']}"):
+                    project["participants"].remove(participant)
+                    st.success(f"Removed {participant} from {project['title']}")
+
+# Sync the updated projects to session state
+st.session_state.projects = projects
 
 # Ensure user is logged in
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
