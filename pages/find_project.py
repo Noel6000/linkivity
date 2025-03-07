@@ -1,9 +1,5 @@
 import streamlit as st
 
-# Button to create a new project
-if st.button("Create New Project"):
-    create_new_project()
-
 def create_new_project():
     st.header("Create a New Project")
     with st.form("new_project_form"):
@@ -24,6 +20,12 @@ def create_new_project():
             else:
                 st.warning("Please fill in all fields.")
 
+# Button to create a new project
+if st.button("Create New Project"):
+    create_new_project()
+
+st.divider()
+
 # Button to go to the pending approvals page
 if st.button("View Pending Approvals"):
     st.header("Pending Approvals")
@@ -32,6 +34,7 @@ if st.button("View Pending Approvals"):
             st.write(f"- {approval}")
     else:
         st.write("No pending approvals.")
+st.divider()
 
 # Initialize session state for pending approvals and projects
 if 'pending_approvals' not in st.session_state:
@@ -70,3 +73,5 @@ for project in st.session_state.projects:
     if st.button(f"Enroll in {project['title']}"):
         enroll_in_project(project['title'])
     st.write("---")
+    st.divider()
+
