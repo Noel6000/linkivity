@@ -59,9 +59,6 @@ def create_project():
 # Run the function
 create_project()
 
-
-# Update session state
-st.session_state.projects = projects
 st.divider()
 
 # Button to go to the pending approvals page
