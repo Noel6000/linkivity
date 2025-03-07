@@ -3,10 +3,6 @@ import streamlit as st
 import requests
 import base64
 
-if "projects" not in st.session_state:
-    st.session_state.projects = load_projects()
-
-
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/projects.json"  # Adjust based on your repo structure
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
@@ -25,7 +21,12 @@ def load_projects():
             return json.load(file)
     except FileNotFoundError:
         return []  # Return an empty list if the file doesn't exist
-        
+
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
+
+
+
 
 def save_projects(users_data):
     """Save users.json back to GitHub"""
