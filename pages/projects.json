@@ -1,41 +1,7 @@
 [
-    "users",
     {
-        "title": "teststst",
-        "description": "tesewrgew",
-        "skills": "Not specified",
-        "manager": "alice",
-        "participants": [],
-        "requests": []
-    },
-    {
-        "title": "tets",
-        "description": "test",
-        "skills": "Not specified",
-        "manager": "alice",
-        "participants": [],
-        "requests": []
-    },
-    {
-        "title": "Modelling life on Mars - NASA",
-        "description": "A python project to simulate life on Mars. It is the preparation to the 2087 ptoject to send life on Mars.",
-        "skills": "Python",
-        "manager": "bob",
-        "participants": [],
-        "requests": []
-    },
-    {
-        "title": "Modelling life on Mars - NASA",
-        "description": "A python project to simulate life on Mars. It is the preparation to the 2087 ptoject to send life on Mars.",
-        "skills": "Python",
-        "manager": "bob",
-        "participants": [],
-        "requests": []
-    },
-    {
-        "title": "Modelling life on Mars - NASA",
-        "description": "A python project to simulate life on Mars. It is the preparation to the 2087 ptoject to send life on Mars.",
-        "skills": "Python",
+        "title": "Python",
+        "description": "Use python to pythonate a lot.",
         "manager": "bob",
         "participants": [],
         "requests": []
