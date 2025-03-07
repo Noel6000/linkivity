@@ -3,18 +3,8 @@ import json
 import os
 
 USER_FILE = "pages/users.json"
-
-import streamlit as st
-import json
-
-# Load user data
-def load_users():
-    try:
-        with open(USER_FILE, "r") as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return {"users": {}}  # Ensure "users" key exists
-
+GITHUB_REPO = "Noel6000/linkivity"
+GITHUB_FILE_PATH = "pages/users.json"  # Adjust based on your repo structure
 # Save user data
 def save_users(data):
     with open(USER_FILE, "w") as file:
