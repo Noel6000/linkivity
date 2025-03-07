@@ -1,8 +1,9 @@
 import json
 import streamlit as st
 
-PROJECTS_FILE = "pages/projects.json"
-
+GITHUB_REPO = "Noel6000/linkivity"
+GITHUB_FILE_PATH = "pages/projects.json"  # Adjust based on your repo structure
+GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 # Function to load projects from the JSON file
 import json
 import subprocess
