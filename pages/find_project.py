@@ -88,3 +88,29 @@ for project in st.session_state.projects:
     st.write("---")
     st.divider()
 
+import streamlit as st
+
+# Ensure user is logged in
+if "authenticated" not in st.session_state or not st.session_state.authenticated:
+    st.warning("Please log in to find projects.")
+    st.stop()
+
+user_data = st.session_state.users.get(st.session_state.current_user, {})
+
+st.title("Available Projects")
+
+# Example: Filter projects based on skills (assuming a project list exists)
+matching_projects = [
+    p for p in st.session_state.projects if user_data.get("details", "").lower() in p["skills"].lower()
+]
+
+if matching_projects:
+    for project in matching_projects:
+        st.write(f"### {project['title']}")
+        st.write(f"**Description:** {project['description']}")
+        st.write(f"**Skills:** {project['skills']}")
+        st.write("---")
+else:
+    st.write("No projects match your skills.")
+
+
