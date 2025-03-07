@@ -7,7 +7,7 @@ if isClicked:
 
 Click = st.button("Find a Project", use_container_width=True)
 if Click:
-    st.switch_page("find_project.py")
+    st.switch_page("pages/find_project.py")
 
 # Initialize session state for projects and user management
 if 'projects' not in st.session_state:
