@@ -13,6 +13,13 @@
             "experience": "I work as a student at the San Francisco de Paula School in Seville.",
             "details": "Good in sciences, coding, maths, and language classes.",
             "projects": []
+        },
+        "alice": {
+            "password": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+            "full_name": "a",
+            "experience": "a",
+            "details": "a",
+            "projects": []
         }
     }
 }
