@@ -37,10 +37,3 @@ if managed_projects:
         st.write("---")
 else:
     st.write("No managed projects.")
-
-Explanation:
-
-    Filtering: The code filters the list of projects to include only those managed by the current user (Alice in this case).
-    Display: The dashboard displays the managed projects, showing the project title, description, and the number of participants.
-
-This setup provides a dashboard for the user to view only the projects they manage. You can further customize the layout and functionality as needed.
