@@ -75,32 +75,13 @@ def main():
         st.sidebar.button("Logout", on_click=logout)
 
         if page == "Home":
-            st.header("Home Page")
-            st.write("Welcome to the home page!")
+            st.switch_page("main_page.py")
 
         elif page == "Dashboard":
-            st.header("My Projects Dashboard")
-            # Display managed projects
-            managed_projects = [project for project in st.session_state.projects if project["manager"] == st.session_state.current_user]
-            if managed_projects:
-                for project in managed_projects:
-                    st.write(f"**{project['title']}**")
-                    st.write(f"Description: {project['description']}")
-                    st.write(f"Participants: {project['participants']}")
-                    st.write("---")
-            else:
-                st.write("No managed projects.")
-
+            st.switch_page("pages/dashboard.py")
+            
         elif page == "Projects":
-            st.header("Available Projects")
-            # Display all projects
-            for project in st.session_state.projects:
-                st.write(f"**{project['title']}**")
-                st.write(f"Description: {project['description']}")
-                st.write(f"Manager: {project['manager']}")
-                st.write(f"Participants: {project['participants']}")
-                st.write("---")
-
+            st.switch_page("pages/find_project.py")
 # Run the main application
 main()
 
