@@ -64,6 +64,7 @@ def create_project():
             st.rerun()  # Refresh the page to update changes
         else:
             st.error("Please fill in all fields!")
+
 # Run the function
 create_project()
 
