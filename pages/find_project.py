@@ -1,5 +1,19 @@
 import streamlit as st
 
+# Initialize session state for signed-in status and pending approvals
+if 'signed_in' not in st.session_state:
+    st.session_state.signed_in = False
+if 'pending_approvals' not in st.session_state:
+    st.session_state.pending_approvals = []
+
+# Function to handle sign-up for a project
+def sign_up_for_project(project_title):
+    if st.session_state.signed_in:
+        st.session_state.pending_approvals.append(project_title)
+        st.success(f"Signed up for {project_title}. Approval is pending.")
+    else:
+        st.warning("Please sign in to register for projects.")
+
 # List of projects with detailed descriptions
 projects = [
     {"title": "Task Management App", "description": "Develop a mobile application that allows users to create, organize, and track their daily tasks and to-do lists. Features include reminders, priority settings, and integration with calendar apps to help users stay organized and productive.", "skills": "React Native, JavaScript, Redux"},
@@ -19,10 +33,31 @@ projects = [
     {"title": "Fitness Tracking App", "description": "Create an app that allows users to track their workout sessions, set fitness goals, and monitor their progress. Features include exercise logs, progress charts, and motivational notifications to support fitness journeys.", "skills": "React Native, JavaScript, Firebase"}
 ]
 
-# Display the projects
-st.header("Available Projects")
-for project in projects:
-    st.write(f"**{project['title']}**")
-    st.write(f"Description: {project['description']}")
-    st.write(f"Required Skills: {project['skills']}")
-    st.write("---")
+# Home page
+if not st.session_state.signed_in:
+    st.header("Welcome to the Project Collaboration Platform")
+    st.write("Please sign in to register for projects.")
+    if st.button("Sign In"):
+        st.session_state.signed_in = True
+        st.success("Signed in successfully!")
+else:
+    st.header("Available Projects")
+    for project in projects:
+        st.write(f"**{project['title']}**")
+        st.write(f"Description: {project['description']}")
+        st.write(f"Required Skills: {project['skills']}")
+        if st.button(f"Sign Up for {project['title']}"):
+            sign_up_for_project(project['title'])
+        st.write("---")
+
+    # Button to go back to the home page
+    if st.button("Go to Home Page"):
+        st.session_state.signed_in = False
+
+    # Display pending approvals
+    st.header("Pending Approvals")
+    if st.session_state.pending_approvals:
+        for approval in st.session_state.pending_approvals:
+            st.write(f"- {approval}")
+    else:
+        st.write("No pending approvals.")
