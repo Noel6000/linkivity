@@ -2,7 +2,7 @@ import streamlit as st
 
 
 if st.button("Go to Dashboard"):
-    st.switch_page("dashboard")
+    st.switch_page("pages/dashboard.py")
 
 st.divider()
 def create_new_project():
