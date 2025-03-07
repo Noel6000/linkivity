@@ -17,24 +17,29 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 def load_users():
-    """Load users.json from GitHub"""
+    """Load users.json from GitHub and ensure the 'users' key exists."""
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
 
     response = requests.get(url, headers=headers)
+
     if response.status_code == 200:
         file_info = response.json()
         content = base64.b64decode(file_info["content"]).decode()
-        return json.loads(content)["users"]  # Return only the users dictionary
-    else:
-        return {}  # Default empty dict if file is missing
+        
+        try:
+            data = json.loads(content)
+        except json.JSONDecodeError:
+            data = {}  # 🔹 Fix: If the file is corrupt, reset it
+        
+        # 🔹 Ensure "users" key exists
         if "users" not in data:
             data["users"] = {}
-            return data 
-        else:
-            return {"users": {}}  # 🔹 Return default structure if file is missing
 
-# Ensure users are loaded into session state
+        return data  
+    else:
+        return {"users": {}}  # 🔹 Fix: Return a proper structure if file is missing
+        # Ensure users are loaded into session state
 if "users" not in st.session_state:
     st.session_state.users = load_users()
 
@@ -49,7 +54,7 @@ def save_users(users_data):
 
     # Get latest file SHA for updating
     response = requests.get(url, headers=headers)
-    sha = response.json()["sha"] if response.status_code == 200 else None
+    sha = response.json().get("sha", None) if response.status_code == 200 else None
 
     # Update file on GitHub
     data = {
@@ -64,17 +69,6 @@ def save_users(users_data):
         st.success("User data updated successfully.")
     else:
         st.error("Failed to update users.json on GitHub.")
-    
-    if sha:
-        payload["sha"] = sha  # Required when updating an existing file
-
-    # Push update to GitHub
-    response = requests.put(url, headers=headers, json=payload)
-
-    if response.status_code in [200, 201]:
-        st.success("✅ users.json updated on GitHub successfully!")
-    else:
-        st.error(f"❌ Error updating GitHub: {response.json()}")
         
 # Function to handle user sign-up
 def sign_up():
@@ -90,9 +84,8 @@ def sign_up():
         if submit_button:
             users_data = load_users()  # 🔹 Load user data safely
             
-            # 🔹 Ensure "users" exists before adding new users
             if "users" not in users_data:
-                users_data["users"] = {}
+                users_data["users"] = {}  # 🔹 Ensure "users" exists
 
             if username and password:
                 if username not in users_data["users"]:
@@ -109,6 +102,8 @@ def sign_up():
                     st.warning("Username already exists.")
             else:
                 st.warning("Please fill in all fields.")
+
+
 if 'users' not in st.session_state:
     st.session_state.users = load_users()
 
