@@ -13,6 +13,13 @@
             "experience": "I work as a student in San Francisco de Paula, Seville.",
             "details": "I am good at sciences, coding, maths and language classes.",
             "projects": []
+        },
+        "bob": {
+            "password": "$2b$12$ggYyHl/18znPU7mfbLSZc.oRX8l8WplwLsdzOy38jX3vFsTFkIaVm",
+            "full_name": "Bob Bobson",
+            "experience": "Python",
+            "details": "Likes bobbing",
+            "projects": []
         }
     }
 }
