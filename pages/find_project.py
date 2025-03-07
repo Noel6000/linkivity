@@ -56,6 +56,9 @@ if st.button("Go to Dashboard"):
 if st.button("Go home"):
     st.switch_page("pages/dashboard.py")
 
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
+
 # Ensure user is logged in
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     st.warning("Please log in to access projects.")
