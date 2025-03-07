@@ -17,7 +17,7 @@ def response_generator(AllMessages):
         messages= AllMessages
     )
     pureResponse = str(GPTresponse.choices[0].message.content)
-    response = "Job Bot: " + str(GPTresponse.choices[0].message.content)
+    response = "Developer Bot: " + str(GPTresponse.choices[0].message.content)
     for word in response.split():
         yield word + " "
         time.sleep(0.05)
@@ -31,7 +31,6 @@ if isClicked :
     st.switch_page("main_page.py")
 
 
-
 if not "AllMessages" in st.session_state:
     st.session_state.AllMessages=[{"role": "system", "content": f"You are an assistant that helps web developers to find jobs and projects ongoing, and you can also set up their project and find people to work with them."}]
 
@@ -43,9 +42,6 @@ if "messages" not in st.session_state:
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-
-with st.chat_message("assistant"):
-    st.markdown(f"Job Bot: Please input your experience and diplomas:")
 
 # Accept user input
 if prompt := st.chat_input("Type a question"):
