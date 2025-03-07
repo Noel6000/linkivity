@@ -14,20 +14,12 @@ st.subheader(":red-background[This website is for web developers to find a job a
 headers = st.context.headers
 button_container = st.container()
 with button_container:
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+    col1, col2 = st.columns([1, 1])
     with col1:
-        ModelIsClicked=st.button("Find a job!",use_container_width=True)
-    if ModelIsClicked:
-        pass
-    with col2:
-        ModelIsClicked=st.button("Test your knowledge",use_container_width=True)
-    if ModelIsClicked:
-        pass
-    with col3:
         ModelIsClicked=st.button("Look for projects!",use_container_width=True)
     if ModelIsClicked:
         st.switch_page("pages/find_project.py")
-    with col4:
+    with col2:
         ModelIsClicked=st.button("About us",use_container_width=True)
     if ModelIsClicked:
         st.switch_page("pages/about_us.py")
