@@ -17,8 +17,6 @@ if "authenticated" not in st.session_state or not st.session_state.authenticated
     st.warning("Please log in to access this page.")
     st.stop()
 
-st.title(f"Hello, {st.session_state.users[st.session_state.current_user]['full_name']}!")
-st.write("This is your personalized homepage.")
 headers = st.context.headers
 button_container = st.container()
 with button_container:
