@@ -1,10 +1,19 @@
 import streamlit as st
+import json
 
-# Check if the user is authenticated
-if not st.session_state.get('authenticated'):
-    st.error("You must be logged in to view this page.")
-    st.stop()
+PROJECTS_FILE = "projects.json"  # Change this if your project data is stored elsewhere
 
+# Function to load projects from a JSON file
+def load_projects():
+    try:
+        with open(PROJECTS_FILE, "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []  # Return an empty list if the file doesn't exist or has an error
+
+# Ensure 'projects' exists in session state
+if "projects" not in st.session_state:
+    st.session_state.projects = load_projects()
 
 if st.button("Go to Dashboard"):
     st.switch_page("pages/dashboard.py")
