@@ -1,6 +1,13 @@
 import streamlit as st
 import random
 
+
+# Check if the user is authenticated
+if not st.session_state.get('authenticated'):
+    st.error("You must be logged in to view this page.")
+    st.stop()
+
+
 isClicked = st.button("main page", use_container_width=True)
 if isClicked:
     st.switch_page("main_page.py")
