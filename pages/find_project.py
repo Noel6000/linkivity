@@ -3,6 +3,18 @@ import json
 
 PROJECTS_FILE = "pages/projects.json"  # Change this if your project data is stored elsewhere
 
+def load_projects():
+    try:
+        with open(PROJECTS_FILE, "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []  # Return an empty list if the file doesn't exist or has an error
+    
+def save_projects(projects):
+    """Saves projects to JSON file."""
+    with open(PROJECTS_FILE, "w") as file:
+        json.dump(projects, file, indent=4)
+
 
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()
@@ -39,18 +51,6 @@ if selected_project_title:
             st.write("User is already in the request list.")
     else:
         st.error("Project not found!")
-
-def load_projects():
-    try:
-        with open(PROJECTS_FILE, "r") as file:
-            return json.load(file)
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []  # Return an empty list if the file doesn't exist or has an error
-    
-def save_projects(projects):
-    """Saves projects to JSON file."""
-    with open(PROJECTS_FILE, "w") as file:
-        json.dump(projects, file, indent=4)
 
 if st.button("Go to Dashboard"):
     st.switch_page("pages/dashboard.py")
