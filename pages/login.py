@@ -83,7 +83,7 @@ def logout():
 # Main application
 def main():
     # Top navigation bar with login/logout button
-    col1, col2 = st.columns([-4, 2])  # Adjust column ratio to shift button right
+    col1, col2 = st.columns([0, 2])  # Adjust column ratio to shift button right
 
     with col2:
         if st.session_state.authenticated:
