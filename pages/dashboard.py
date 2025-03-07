@@ -93,7 +93,15 @@ if not projects:
 else:
     for project in projects:  # ✅ Define `project`
         st.write(f"Managing: {project['title']}")
+        participants = project.get("participants", [])
 
+        if not isinstance(participants, list):  # If it's not a list, fix it
+            participants = []
+        
+        for participant in participants:
+            if participant != project.get("manager", ""):  
+                if st.button(f"Remove {participant}", key=f"remove_{participant}"):
+        project["participants"].remove(participant)  # ✅ Now safe to remove
         # Get participants for this project
         participants = project.get("participants", [])
 
