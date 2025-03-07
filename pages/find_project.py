@@ -4,19 +4,38 @@ import streamlit as st
 PROJECTS_FILE = "pages/projects.json"
 
 # Function to load projects from the JSON file
+import json
+import subprocess
+import os
+
+PROJECTS_FILE = "pages/projects.json"
+GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
+
 def load_projects():
-    try:
+    """Load projects from the JSON file."""
+    if os.path.exists(PROJECTS_FILE):
         with open(PROJECTS_FILE, "r") as file:
-            projects = json.load(file)
-            return projects if isinstance(projects, list) else []  # Ensure it's a list
-    except (FileNotFoundError, json.JSONDecodeError):
-        return []  # Return an empty list if file doesn't exist or is corrupted
+            return json.load(file)
+    return []
 
-
-# Function to save projects to the JSON file
 def save_projects(projects):
+    """Save projects to the JSON file and push changes to GitHub."""
     with open(PROJECTS_FILE, "w") as file:
         json.dump(projects, file, indent=4)
+
+    # GitHub commit and push
+    try:
+        subprocess.run(["git", "config", "--global", "user.email", "your-email@example.com"], check=True)
+        subprocess.run(["git", "config", "--global", "user.name", "your-username"], check=True)
+
+        subprocess.run(["git", "add", PROJECTS_FILE], check=True)
+        subprocess.run(["git", "commit", "-m", "Updated projects.json"], check=True)
+        subprocess.run(["git", "push", "https://<GITHUB-TOKEN>@github.com/" + GITHUB_REPO + ".git"], check=True)
+
+        print("✅ projects.json updated and pushed to GitHub!")
+
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Error pushing to GitHub: {e}")
 
 # Initialize session state for projects
 if "projects" not in st.session_state:
