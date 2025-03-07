@@ -28,6 +28,12 @@ def load_users():
         return json.loads(content)["users"]  # Return only the users dictionary
     else:
         return {}  # Default empty dict if file is missing
+        if "users" not in data:
+            data["users"] = {}
+        return data 
+        
+    else:
+        return {"users": {}}  # 🔹 Return default structure if file is missing
 
 # Ensure users are loaded into session state
 if "users" not in st.session_state:
