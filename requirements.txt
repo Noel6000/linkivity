@@ -4,4 +4,3 @@ numpy
 openai
 streamlit_book 
 bcrypt
-utils
