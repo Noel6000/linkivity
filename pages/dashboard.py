@@ -2,6 +2,15 @@ import streamlit as st
 import random
 import json
 import base64
+GITHUB_REPO = "Noel6000/linkivity"
+GITHUB_FILE_PATH = "pages/projects.json"  # Adjust based on your repo structure
+GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
+# Function to load projects from the JSON file
+import json
+import subprocess
+import os
+PROJECTS_FILE = "pages/projects.json"
+GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
 
 def load_projects():
     """Load projects from JSON file."""
