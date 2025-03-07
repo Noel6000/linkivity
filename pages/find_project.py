@@ -3,7 +3,27 @@ import json
 
 PROJECTS_FILE = "projects.json"  # Change this if your project data is stored elsewhere
 
-# Function to load projects from a JSON file
+# Function to load projects from a JSON fil
+def find_project_by_title(title):
+    """Search for a project by title."""
+    for project in st.session_state.projects:
+        if project["title"] == title:
+            return project
+    return None  # Return None if not found
+
+selected_project_title = st.selectbox("Select a project", [p["title"] for p in st.session_state.projects])
+
+if selected_project_title:
+    project = find_project_by_title(selected_project_title)  # ✅ Define project
+
+    if project:
+        if st.session_state.current_user not in project.get("requests", []):
+            st.write("User has not requested to join this project yet.")
+        else:
+            st.write("User is already in the request list.")
+    else:
+        st.error("Project not found!")
+e
 
 def load_projects():
     try:
