@@ -26,7 +26,11 @@ def find_project_by_title(title):
             return project
     return None  # Return None if not found
 
-selected_project_title = st.selectbox("Select a project", [p["title"] for p in st.session_state.projects])
+selected_project_title = st.selectbox(
+    "Select a project",
+    [p["title"] for p in st.session_state.projects],
+    key="project_selectbox"  # ✅ Unique key to avoid duplicate IDs
+)
 
 if selected_project_title:
     project = find_project_by_title(selected_project_title)  # ✅ Define project
