@@ -2,6 +2,7 @@ import streamlit as st
 import random
 import json
 import base64
+import requests
 GITHUB_REPO = "Noel6000/linkivity"
 GITHUB_FILE_PATH = "pages/projects.json"  # Adjust based on your repo structure
 GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
