@@ -14,11 +14,9 @@ PROJECTS_FILE = "pages/projects.json"
 GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
 import json
 
-PROJECTS_FILE = "projects.json"
-
 def load_projects():
     """Load projects from JSON file."""
-    with open(PROJECT_FILE, "r") as file:
+    with open(PROJECTS_FILE, "r") as file:
         projects = json.load(file)
     
     st.write("🔍 DEBUG: Loaded Projects:", projects)  # Debugging line
