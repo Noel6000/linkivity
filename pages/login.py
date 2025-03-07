@@ -39,27 +39,32 @@ def load_users():
 if "users" not in st.session_state:
     st.session_state.users = load_users()
 
-def save_users(data):
-    """Save users.json and push to GitHub"""
-    json_data = json.dumps(data, indent=4)
-
-    # Get current file SHA from GitHub
+def save_users(users_data):
+    """Save users.json back to GitHub"""
     url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_FILE_PATH}"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-    
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        file_info = response.json()
-        sha = file_info["sha"]  # Required for updates
-    else:
-        sha = None  # If file doesn’t exist, create it
 
-    # Prepare the update request
-    payload = {
+    # Convert data to JSON
+    json_content = json.dumps(users_data, indent=4)
+    encoded_content = base64.b64encode(json_content.encode()).decode()
+
+    # Get latest file SHA for updating
+    response = requests.get(url, headers=headers)
+    sha = response.json()["sha"] if response.status_code == 200 else None
+
+    # Update file on GitHub
+    data = {
         "message": "Update users.json",
-        "content": base64.b64encode(json_data.encode()).decode(),  # Encode to Base64
-        "branch": "main"  # Adjust branch if needed
+        "content": encoded_content,
+        "sha": sha
     }
+
+    response = requests.put(url, headers=headers, json=data)
+    
+    if response.status_code == 200:
+        st.success("User data updated successfully.")
+    else:
+        st.error("Failed to update users.json on GitHub.")
     
     if sha:
         payload["sha"] = sha  # Required when updating an existing file
