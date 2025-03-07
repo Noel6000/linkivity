@@ -101,7 +101,7 @@ else:
         for participant in participants:
             if participant != project.get("manager", ""):  
                 if st.button(f"Remove {participant}", key=f"remove_{participant}"):
-        project["participants"].remove(participant)  # ✅ Now safe to remove
+                    project["participants"].remove(participant)  # ✅ Now safe to remove
         # Get participants for this project
         participants = project.get("participants", [])
 
