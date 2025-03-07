@@ -85,23 +85,6 @@ def logout():
     st.rerun()
 
 # Function to show personalized content
-def show_dashboard():
-    user_data = st.session_state.users[st.session_state.current_user]
-    st.header(f"Welcome, {user_data['full_name']}!")
-
-    st.subheader("Your Experience")
-    st.write(user_data["experience"] if user_data["experience"] else "No experience added yet.")
-
-    st.subheader("Your Details")
-    st.write(user_data["details"] if user_data["details"] else "No details added yet.")
-
-    st.subheader("Your Projects")
-    if user_data["projects"]:
-        for project in user_data["projects"]:
-            st.write(f"- {project}")
-    else:
-        st.write("No projects yet.")
-
 # Main application
 def main():
     col1, col2 = st.columns([1, 30])  # Move login/logout to top-right
@@ -115,19 +98,6 @@ def main():
                 login()
             else:
                 sign_up()
-
-    st.sidebar.header("Navigation")
-    page = st.sidebar.selectbox("Go to", ["Home", "Dashboard", "Projects"])
-
-    if st.session_state.authenticated:
-        st.sidebar.header(f"Welcome, {st.session_state.users[st.session_state.current_user]['full_name']}!")
-
-        if page == "Home":
-            st.write("This is the Home Page.")
-        elif page == "Dashboard":
-            show_dashboard()  # Show personalized dashboard
-        elif page == "Projects":
-            st.write("This is the Projects Page.")
 
 # Run the main application
 main()
