@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+from find_project import load_projects
 
 
 # Check if the user is authenticated
