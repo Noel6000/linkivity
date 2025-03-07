@@ -15,35 +15,6 @@ GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
 import json
 
 import streamlit as st
-from utils import load_projects, save_projects
-
-def find_projects():
-    st.header("Find a Project")
-
-    projects = load_projects()
-
-    if not projects:
-        st.warning("No projects available.")
-        return
-
-    for project in projects:
-        # Skip projects where the user is already a participant
-        if st.session_state.current_user in project.get("participants", []):
-            continue
-
-        st.write(f"## {project['title']}")
-        st.write(f"**Description:** {project['description']}")
-
-        # Check if the user already requested to join
-        if st.session_state.current_user in project.get("requests", []):
-            st.info("Request sent ✅")
-        else:
-            if st.button(f"Request to Join {project['title']}", key=f"request_{project['title']}"):
-                project.setdefault("requests", []).append(st.session_state.current_user)
-                save_projects(projects)
-                st.success(f"Requested to join {project['title']}!")
-                st.rerun()  # Refresh to reflect changes
-
 
 def load_projects():
     """Load projects from JSON file."""
@@ -134,6 +105,33 @@ create_project()
 st.divider()
 
 st.title("Find a Project")
+def find_projects():
+    st.header("Find a Project")
+
+    projects = load_projects()
+
+    if not projects:
+        st.warning("No projects available.")
+        return
+
+    for project in projects:
+        # Skip projects where the user is already a participant
+        if st.session_state.current_user in project.get("participants", []):
+            continue
+
+        st.write(f"## {project['title']}")
+        st.write(f"**Description:** {project['description']}")
+
+        # Check if the user already requested to join
+        if st.session_state.current_user in project.get("requests", []):
+            st.info("Request sent ✅")
+        else:
+            if st.button(f"Request to Join {project['title']}", key=f"request_{project['title']}"):
+                project.setdefault("requests", []).append(st.session_state.current_user)
+                save_projects(projects)
+                st.success(f"Requested to join {project['title']}!")
+                st.rerun()  # Refresh to reflect changes
+
 
 # Load projects
 projects = load_projects()  # Ensure this function correctly loads `projects.json`
