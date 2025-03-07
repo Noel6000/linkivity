@@ -18,9 +18,7 @@ def load_projects():
     """Load projects from JSON file."""
     with open(PROJECTS_FILE, "r") as file:
         projects = json.load(file)
-    
-    st.write("🔍 DEBUG: Loaded Projects:", projects)  # Debugging line
-    return projects
+        return projects
 
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()  # Load from JSON
@@ -106,7 +104,6 @@ else:
         projects = load_projects()
         if not isinstance(projects, list):
             st.error("Error: Projects data is not a list!")
-            st.write("Raw Projects Data:", projects)  # Debugging line
         st.subheader(project["title"])
         st.write(f"**Description:** {project['description']}")
         st.write(f"**Manager:** {project['manager']}")
