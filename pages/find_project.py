@@ -1,66 +1,63 @@
-import streamlit as st
 import json
+import streamlit as st
 
 PROJECTS_FILE = "pages/projects.json"
-# Initialize session state variables if not set
-if "current_user" not in st.session_state:
-    st.session_state.current_user = None  # Or set to a default value
-    
+
+# Function to load projects from the JSON file
 def load_projects():
     try:
         with open(PROJECTS_FILE, "r") as file:
-            data = json.load(file)
-            return data if isinstance(data, list) else []  # Ensure it's a list
+            return json.load(file)  # Load JSON data
     except (FileNotFoundError, json.JSONDecodeError):
-        return []  # Return an empty list if file is missing/corrupt
+        return []  # Return an empty list if file doesn't exist or is corrupted
 
+# Function to save projects to the JSON file
 def save_projects(projects):
-    if not isinstance(projects, list):  # Ensure it's always saved as a list
-        projects = []
     with open(PROJECTS_FILE, "w") as file:
         json.dump(projects, file, indent=4)
 
-# Initialize projects in session state
+# Initialize session state for projects
 if "projects" not in st.session_state:
     st.session_state.projects = load_projects()
 
+# Function to create a new project
 def create_project():
-    """Allows users to create new projects."""
     st.header("Create a New Project")
 
     with st.form("create_project_form"):
         title = st.text_input("Project Title")
         description = st.text_area("Project Description")
-        skills = st.text_input("Required Skills (optional)")  # Now optional
+        skills = st.text_input("Required Skills (optional)")
         submit_button = st.form_submit_button("Create Project")
 
     if submit_button:
-        if title and description:  # Only require title & description
+        if title and description:  # Ensure required fields are filled
             new_project = {
                 "title": title,
                 "description": description,
-                "skills": skills if skills else "Not specified",  # Default value
+                "skills": skills if skills else "Not specified",
                 "manager": st.session_state.current_user,
                 "participants": 1,
                 "requests": []
             }
 
             # Load existing projects
-            projects = st.session_state.get("projects", [])
+            projects = load_projects()
             projects.append(new_project)
 
-            # Save updated projects
+            # Save updated projects to file
+            save_projects(projects)
+
+            # Update session state
             st.session_state.projects = projects
-            save_projects(projects)  # Save to JSON file
 
             st.success(f"Project '{title}' created successfully!")
-            st.rerun()
+            st.rerun()  # Refresh Streamlit to reflect changes
         else:
             st.error("Please fill in all required fields!")
 
-# Run the function
+# Call the function to allow project creation
 create_project()
-
 st.divider()
 
 # Button to go to the pending approvals page
