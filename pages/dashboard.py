@@ -114,6 +114,11 @@ def manage_projects():
 
     save_projects(projects)
 
+def save_projects(projects):
+    with open("projects.json", "w") as file:
+        json.dump(projects, file, indent=4)
+
+
 managed_projects = [project for project in st.session_state.projects if project["manager"] == st.session_state.user["name"]]
 
 # Display managed projects
