@@ -16,10 +16,9 @@
         "manager": "alice",
         "participants": [
             null,
-            "da-hacker"
-        ],
-        "requests": [
+            "da-hacker",
             "gracchus"
-        ]
+        ],
+        "requests": []
     }
 ]
