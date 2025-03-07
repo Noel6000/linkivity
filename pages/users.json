@@ -6,6 +6,13 @@
             "experience": "jaas",
             "details": "as",
             "projects": []
+        },
+        "Da-CREATOR": {
+            "password": "0cd37307a69b4eee60f49cb6b053f14bc1cb720ba66713baa9759178b06ca802",
+            "full_name": "Lilian Tillie Ronzon",
+            "experience": "I work as a student at the San Francisco de Paula School in Seville.",
+            "details": "Good in sciences, coding, maths, and language classes.",
+            "projects": []
         }
     }
 }
