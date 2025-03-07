@@ -5,8 +5,8 @@ isClicked = st.button("main page", use_container_width=True)
 if isClicked:
     st.switch_page("main_page.py")
 
-Click = st.button("Find a Project", use_container_width=True)
-if Click:
+Clixed = st.button("Find a Project", use_container_width=True)
+if Clixed:
     st.switch_page("pages/find_project.py")
 
 import streamlit as st
