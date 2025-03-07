@@ -3,10 +3,10 @@
         "title": "Python",
         "description": "Use python to pythonate a lot.",
         "manager": "bob",
-        "participants": [],
-        "requests": [
+        "participants": [
             "da-hacker"
-        ]
+        ],
+        "requests": []
     },
     {
         "title": "IA barata",
