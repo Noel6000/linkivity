@@ -93,27 +93,32 @@ def sign_up():
         submit_button = st.form_submit_button("Sign Up")
 
         if submit_button:
-            users_data = load_users()  # 🔹 Load user data safely
-            
+            users_data = load_users()
+
             if "users" not in users_data:
-                users_data["users"] = {}  # 🔹 Ensure "users" exists
+                users_data["users"] = {}
+
+            username = username.lower()  # Ensure usernames are case-insensitive
 
             if username and password:
                 if username not in users_data["users"]:
+                    hashed_password = hash_password(password)  # Hash the password
+                    
                     users_data["users"][username] = {
-                        "password": hash_password(password),
+                        "password": hashed_password,
                         "full_name": full_name,
                         "experience": experience,
                         "details": details,
                         "projects": []
                     }
-                    save_users(users_data)  # 🔹 Save updated users.json
+                    
+                    save_users(users_data)  # Save updated users.json
+                    
                     st.success("Signed up successfully! Please log in.")
                 else:
                     st.warning("Username already exists.")
             else:
                 st.warning("Please fill in all fields.")
-
 
 if 'users' not in st.session_state:
     st.session_state.users = load_users()
@@ -134,12 +139,12 @@ def login():
 
         if submit_button:
             users_data = load_users()
-            
-            print("🔍 Checking username:", username)  # Debugging step
-            print("🔍 All users:", users_data["users"].keys())  # Debugging step
+            username = username.lower()  # Ensure case-insensitive login
 
             if username in users_data["users"]:
-                if verify_password(password, users_data["users"][username]["password"]):
+                stored_password = users_data["users"][username]["password"]
+                
+                if verify_password(password, stored_password):  # Compare hashed password
                     st.session_state.authenticated = True
                     st.session_state.current_user = username
                     st.success(f"Logged in successfully! Welcome, {users_data['users'][username]['full_name']}")
@@ -147,7 +152,7 @@ def login():
                 else:
                     st.error("Invalid password.")
             else:
-                st.error("Username not found.")  # 🔹 This will confirm if it's missing
+                st.error("Username not found.")
 
 # Function to handle user logout
 def logout():
