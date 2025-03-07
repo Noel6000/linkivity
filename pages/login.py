@@ -11,7 +11,13 @@ def hash_password(password):
     
 def verify_password(plain_password, hashed_password):
     """Verifies a password against its hash."""
-    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode() if isinstance(hashed_password, str) else hashed_password)    
+    print("🔍 Stored hashed password:", repr(hashed_password))  # Debugging step
+    print("🔍 Type of hashed_password:", type(hashed_password))  # Check if it's str or bytes
+
+    if isinstance(hashed_password, str):
+        hashed_password = hashed_password.encode('utf-8')  # Convert string to bytes
+
+    return bcrypt.checkpw(plain_password.encode(), hashed_password)
     
 USER_FILE = "pages/users.json"
 GITHUB_REPO = "Noel6000/linkivity"
