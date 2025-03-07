@@ -10,7 +10,6 @@ GITHUB_TOKEN = st.secrets["GITHUB_TOKEN"]
 import json
 import subprocess
 import os
-
 PROJECTS_FILE = "pages/projects.json"
 GITHUB_REPO = "Noel6000/linkivity"  # Change to your repo name
 import json
@@ -35,10 +34,7 @@ for project in st.session_state.projects:
         st.warning("Invalid project data format.")
 
 if "projects" not in st.session_state or not isinstance(st.session_state.projects, list):
-    st.session_state.projects = load_projects()
-
-
-
+    st.session_state.projects = list(load_projects())
 
 def save_projects(users_data):
     """Save users.json back to GitHub"""
