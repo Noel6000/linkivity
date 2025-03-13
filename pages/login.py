@@ -8,11 +8,20 @@ import bcrypt
 
 custom_css = """
 <style>
+    /* Hide the sidebar */
+    [data-testid="stSidebar"] {
+        display: none;
+    }
+    /* Optional: Adjust the main content area */
+    .main > div {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
     body {
-        background-color: #6ade70;  
+        background-color: #f5faf5;  
     }
     .stApp {
-        background-color: #6ade70; 
+        background-color: #f5faf5; 
     }
     .stButton>button {
         background-color: #4CAF50;
