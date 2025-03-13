@@ -43,7 +43,7 @@ if "authenticated" not in st.session_state or not st.session_state.authenticated
 headers = st.context.headers
 button_container = st.container()
 with button_container:
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2, col3 = st.columns([1, 2, 3])
     with col1:
         ModelIsClicked=st.button("About us",use_container_width=True)
     if ModelIsClicked:
