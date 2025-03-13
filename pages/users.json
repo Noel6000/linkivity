@@ -43,6 +43,13 @@
             "experience": "Maverick entrepreneur, I have graduated in Mulbridge University (Texas, Colorado). Recommended by Pier Von Sniggelschrubb (CEO of Bar Pepito) y have gained some renown with my agrarian reforms before being stabbed by a slave when being pursued by an angry mob. ",
             "details": "(The maverick part is a metaphor, I am actually homo sapiens).",
             "projects": []
+        },
+        "a": {
+            "password": "$2b$12$IVmfJnQ5wOkPVaqjMAYK6.yDYWcVUI7xJWNtSNZ6N0IvkZsJVakIC",
+            "full_name": "a",
+            "experience": "a",
+            "details": "a",
+            "projects": []
         }
     }
 }
