@@ -8,6 +8,26 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+custom_css = """
+<style>
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .stButton>button:hover {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+    }
+</style>
+"""
 st.title(':blue-background[:green[Welcome to...] :necktie:]')
 st.image("linkivity.png")
 st.subheader(":red-background[Buy sustainable clothes in Seville!]")
