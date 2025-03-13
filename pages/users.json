@@ -68,6 +68,10 @@
         "noel": {
             "password": "$2b$12$BhT33K2snNxfi6kelJAFRuNg0sClqSkFdxvpwfKWdXIXeqjB1tuQq",
             "email": "noelsant"
+        },
+        "elandru": {
+            "password": "$2b$12$WRTv5RC9Exalw5ACnKOhgOVnTK5682f.PfCAhTShXAM9WNstXYWSS",
+            "email": "FVBNJKL\u00d1"
         }
     }
 }
