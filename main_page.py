@@ -36,7 +36,9 @@ with colT2:
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
     st.image("linkivity.png")
-st.subheader(":red-background[Buy sustainable clothes in Seville!]")
+colT1,colT2 = st.columns([1,2])
+with colT2:
+    st.subheader(":red-background[BUY SUSTAINABLE CLOTHES IN SEVILLE!]")
 import streamlit as st
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     st.warning("Please log in to access this page.")
