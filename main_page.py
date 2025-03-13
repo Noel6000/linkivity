@@ -60,7 +60,7 @@ if "authenticated" not in st.session_state or not st.session_state.authenticated
     colT1,colT2 = st.columns([1,30])
     with colT2:
         st.warning("Please log in to access this page.")
-        col1 = st.columns(2)
+        col1, col2 = st.columns([1, 30])
         with col1:
             ModelIsClicked=st.button("login",use_container_width=True)
             if ModelIsClicked:
