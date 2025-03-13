@@ -31,8 +31,7 @@ custom_css = """
 st.markdown(custom_css, unsafe_allow_html=True)
 
 st.title(':blue-background[:green[Welcome to...] :necktie:]')
-title_alignment=
-"""
+title_alignment = """
 <style>
 #the-title {
   text-align: center
