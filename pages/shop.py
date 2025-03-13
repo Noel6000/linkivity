@@ -54,7 +54,6 @@ st.title("Shopping Page")
 st.header("Available Products")
 for product in products:
     st.write(f"**{product['name']}**")
-    st.image(product['image_url'], caption=product['name'], width=150)
     st.write(f"Price: ${product['price']:.2f}")
     st.write(f"Description: {product['description']}")
     if st.button(f"Add {product['name']} to Cart", key=f"add_{product['id']}"):
@@ -66,7 +65,6 @@ st.header("Your Shopping Cart")
 if st.session_state.cart:
     for product in st.session_state.cart:
         st.write(f"**{product['name']}**")
-        st.image(product['image_url'], caption=product['name'], width=150)
         st.write(f"Price: ${product['price']:.2f}")
         if st.button(f"Remove {product['name']} from Cart", key=f"remove_{product['id']}"):
             remove_from_cart(product['id'])
@@ -74,4 +72,3 @@ if st.session_state.cart:
     st.write(f"Total: ${sum(item['price'] for item in st.session_state.cart):.2f}")
 else:
     st.write("Your cart is empty.")
-
