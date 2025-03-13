@@ -8,6 +8,12 @@ import bcrypt
 
 custom_css = """
 <style>
+    body {
+        background-color: #f0f8ff;  /* Light blue background */
+    }
+    .stApp {
+        background-color: #f0f8ff;  /* Ensure the app container matches the body */
+    }
     .stButton>button {
         background-color: #4CAF50;
         color: white;
@@ -26,7 +32,6 @@ custom_css = """
     }
 </style>
 """
-
 st.markdown(custom_css, unsafe_allow_html=True)
 
 def hash_password(password):
