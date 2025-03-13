@@ -44,6 +44,8 @@ custom_css = """
     }
 </style>
 """
+</style>
+"""
 st.markdown(custom_css, unsafe_allow_html=True)
 
 colT1,colT2 = st.columns([1,2])
