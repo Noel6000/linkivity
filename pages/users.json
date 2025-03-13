@@ -57,6 +57,13 @@
             "experience": "-",
             "details": "I am the admin of the company.",
             "projects": []
+        },
+        "apapui": {
+            "password": "$2b$12$HtNVwsv1quikI7GNjQFhGelK6dtazZs4kXMUXuJpPqn5MTA273wHK",
+            "full_name": "APAPUI",
+            "experience": "APAPUI",
+            "details": "APAPUI",
+            "projects": []
         }
     }
 }
