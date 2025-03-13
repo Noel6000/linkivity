@@ -113,9 +113,7 @@ def sign_up():
     with st.form("sign_up_form"):
         username = st.text_input("Username").lower()
         password = st.text_input("Password", type="password")
-        full_name = st.text_input("Full Name")
-        experience = st.text_area("Experience")
-        details = st.text_area("Details")
+        email = st.text_input("email")
         submit_button = st.form_submit_button("Sign Up")
 
         if submit_button:
@@ -129,10 +127,7 @@ def sign_up():
 
                     users_data["users"][username] = {
                         "password": hashed_password,
-                        "full_name": full_name,
-                        "experience": experience,
-                        "details": details,
-                        "projects": []
+                        "email": email
                     }
 
                     save_users(users_data)  # Save users.json
