@@ -4,8 +4,15 @@ import random
 import time
 from openai import OpenAI
 
+
 custom_css = """
 <style>
+    body {
+        background-color: #41f049;  
+    }
+    .stApp {
+        background-color: #41f049; 
+    }
     .stButton>button {
         background-color: #4CAF50;
         color: white;
@@ -23,8 +30,7 @@ custom_css = """
         border: 2px solid #4CAF50;
     }
 </style>
-"""
-st.markdown(custom_css, unsafe_allow_html=True)
+"""st.markdown(custom_css, unsafe_allow_html=True)
 
 st.header("About us")
 st.write("Our clothing brand consists of one product which is a LIFE shirt, it comes in different sizes, colors and editions. ")
