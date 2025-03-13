@@ -13,9 +13,9 @@ st.markdown("""
 custom_css = """
 <style>
     /* Set text color to black for the entire app */
-    body, .stApp, .stMarkdown, .stButton, .stTextInput, .stSelectbox, .stMultiselect, .stSlider, .stNumberInput, .stDateInput, .stTimeInput, .stFileUploader, .stEmpty, .stExpander, .stSidebar {
+    body, .css-1d391kf, .css-1v3fvcr, .css-1offfwp, .css-1lcbmhc, .css-5rimss, .css-174e0u4, .css-1wa3eu0, .css-1w7vvu6, .css-1w7vvu6 a {
         color: black !important;
-    }
+        }
     /* Hide the sidebar */
     [data-testid="stSidebar"] {
         display: none;
