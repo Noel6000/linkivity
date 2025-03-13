@@ -8,7 +8,7 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-st.title(':blue-background[:green[Welcome to...] :sunglasses:]')
+st.title(':blue-background[:green[Welcome to...] :necktie:]')
 st.header('LIFE PRODUCTS!')
 st.subheader(":red-background[This website is for web developers to find a job and for companies to find a web developer.]")
 import streamlit as st
