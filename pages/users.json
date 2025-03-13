@@ -50,6 +50,13 @@
             "experience": "a",
             "details": "a",
             "projects": []
+        },
+        "admin": {
+            "password": "$2b$12$SKCWaGCnVfz26Z2NUH1YBeQZM/XUWcKUnkinGooXmRbp1XylCIoY6",
+            "full_name": "Admin Admin",
+            "experience": "-",
+            "details": "I am the admin of the company.",
+            "projects": []
         }
     }
 }
