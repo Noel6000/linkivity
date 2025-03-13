@@ -12,10 +12,10 @@ st.markdown("""
 custom_css = """
 <style>
     body {
-        background-color: #41f049;  
+        background-color: #6ade70;  
     }
     .stApp {
-        background-color: #41f049; 
+        background-color: #6ade70; 
     }
     .stButton>button {
         background-color: #4CAF50;
