@@ -9,10 +9,10 @@ import bcrypt
 custom_css = """
 <style>
     body {
-        background-color: #abe0ad;  
+        background-color: #6ade70;  
     }
     .stApp {
-        background-color: #abe0ad; 
+        background-color: #6ade70; 
     }
     .stButton>button {
         background-color: #4CAF50;
