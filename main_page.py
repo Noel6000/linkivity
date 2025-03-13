@@ -64,7 +64,7 @@ if "authenticated" not in st.session_state or not st.session_state.authenticated
         with col2:
             ModelIsClicked=st.button("login",use_container_width=True)
             if ModelIsClicked:
-            st.switch_page("pages/login.py")
+                st.switch_page("pages/login.py")
     st.stop()
 
 headers = st.context.headers
