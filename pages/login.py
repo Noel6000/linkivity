@@ -27,6 +27,8 @@ custom_css = """
 </style>
 """
 
+st.markdown(custom_css, unsafe_allow_html=True)
+
 def hash_password(password):
     """Hashes a password using bcrypt."""
     salt = bcrypt.gensalt()
