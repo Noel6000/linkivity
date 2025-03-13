@@ -9,10 +9,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 st.title(':blue-background[:green[Welcome to...] :necktie:]')
-st.header('LIFE PRODUCTS!')
+st.image("linkivity.png")
 st.subheader(":red-background[Buy sustainable clothes in Seville!]")
 import streamlit as st
-
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     st.warning("Please log in to access this page.")
     st.stop()
