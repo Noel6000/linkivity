@@ -41,7 +41,9 @@ with colT2:
     st.subheader(":red-background[BUY SUSTAINABLE CLOTHES IN SEVILLE!]")
 import streamlit as st
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
-    st.warning("Please log in to access this page.")
+    colT1,colT2 = st.columns([1,3])
+    with colT2:
+        st.warning("Please log in to access this page.")
     st.stop()
 
 headers = st.context.headers
