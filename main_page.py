@@ -36,7 +36,7 @@ with colT2:
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
     st.image("linkivity.png")
-colT1,colT2 = st.columns([1,2])
+colT1,colT2 = st.columns([1,3])
 with colT2:
     st.subheader(":red-background[BUY SUSTAINABLE CLOTHES IN SEVILLE!]")
 import streamlit as st
