@@ -69,6 +69,6 @@ if st.session_state.cart:
         if st.button(f"Remove {product['name']} from Cart", key=f"remove_{product['id']}"):
             remove_from_cart(product['id'])
         st.write("---")
-    st.write(f"Total: ${sum(item['price'] for item in st.session_state.cart):.2f}")
+    st.write(f"Total: €{sum(item['price'] for item in st.session_state.cart):.2f}")
 else:
     st.write("Your cart is empty.")
