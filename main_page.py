@@ -50,7 +50,7 @@ import streamlit as st
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     colT1,colT2 = st.columns([1,30])
     with colT2:
-        st.warning("                                         Please log in to access this page.")
+        st.warning("Please log in to access this page.")
     st.stop()
 
 headers = st.context.headers
