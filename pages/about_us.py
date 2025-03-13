@@ -11,7 +11,7 @@ st.subheader("Why are we sustainable?")
 st.write("We will offer some handcrafted and local t-shirts to avoid sub-human conditions for workers, as “Wituka” collaborates with the Eden project which helps give good conditions to the workers, and so we can sell them for more money. Additionally, all our products will be done with 100% recycled materials, from old, discarded t-shirts. All our textile will be locally produced, and our dyes, safe. All of this is a benefit for society and environment because it offers an alternative to the usual products. Then, every 30 € we earn (profits) will result in five euros for Save The Children. ")
 
 
-isClicked = st.button("mainpage", use_container_width=True)
+isClicked = st.button("MAINPAGE", use_container_width=True)
 
 if isClicked :
     st.switch_page("main_page.py")
