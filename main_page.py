@@ -31,6 +31,15 @@ custom_css = """
 st.markdown(custom_css, unsafe_allow_html=True)
 
 st.title(':blue-background[:green[Welcome to...] :necktie:]')
+title_alignment=
+"""
+<style>
+#the-title {
+  text-align: center
+}
+</style>
+"""
+st.markdown(title_alignment, unsafe_allow_html=True)
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
     st.image("linkivity.png")
