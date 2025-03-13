@@ -5,8 +5,9 @@ import time
 from openai import OpenAI
 
 st.header("About us")
-st.write("We are a group of 8th grade students that have developed an alternative to linkedin for the Eureka Starter Days. From right to left, and from back to front: Jiajia (researcher), Michael (researcher), Baltasar (founder, marketing expert), Noël (programmer), Lilian (Technical agent), and Andrés (Communications expert).")
-st.image("group.png")
+st.write("Our clothing brand consist of one product which is a LIFE shirt, it comes in diferent sizes, colours and editions. ")
+st.write("Why are we sustainable?")
+st.write("aqui va el textaco de lilian")
 
 
 isClicked = st.button("mainpage", use_container_width=True)
