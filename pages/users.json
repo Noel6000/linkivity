@@ -64,6 +64,10 @@
             "experience": "APAPUI",
             "details": "APAPUI",
             "projects": []
+        },
+        "noel": {
+            "password": "$2b$12$BhT33K2snNxfi6kelJAFRuNg0sClqSkFdxvpwfKWdXIXeqjB1tuQq",
+            "email": "noelsant"
         }
     }
 }
