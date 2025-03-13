@@ -10,7 +10,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.title(':blue-background[:green[Welcome to...] :necktie:]')
 st.header('LIFE PRODUCTS!')
-st.subheader(":red-background[This website is for web developers to find a job and for companies to find a web developer.]")
+st.subheader(":red-background[Buy sustainable clothes in Seville]")
 import streamlit as st
 
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
