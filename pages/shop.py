@@ -3,7 +3,7 @@ import streamlit as st
 # Sample product data
 products = [
     {"id": 1, "name": "Life shirt", "price": 17.99, "description": "A high-performance laptop with the latest features."},
-    {"id": 2, "name": "Life shirt signed by Mister A, limited edition", "price": 49.99, "description": "A cutting-edge smartphone with a stunning camera."},
+    {"id": 2, "name": "Signed Life shirt. limited edition", "price": 49.99, "description": "A cutting-edge smartphone with a stunning camera."},
 ]
 
 # Initialize session state for the shopping cart
