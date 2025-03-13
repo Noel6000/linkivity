@@ -2,7 +2,7 @@ import streamlit as st
 
 # Sample product data
 products = [
-    {"id": 1, "name": "Life shirt", "price": 17.99, "description": "A high-performance laptop with the latest features."},
+    {"id": 1, "name": "Life shirt", "price": 17.99, "description": "This is the classical life shirt, It looks simple but its backstory is complex. This word "LIFE" means a lot to our community, it means that you have to fight for your dreams even if life gets in your way, it means never stop trying. It means... LIFE."},
     {"id": 2, "name": "Signed Life shirt. limited edition", "price": 49.99, "description": "This LIFE Shirt isn't just a LIFE Shirt... This is the LIMITED EDITION LIFE SHIRT WITH MR A SIGNATURE!!! (Long name). This rare shirt was found in the darkest places of the Autorregulation-verse. It is a gift to the champion, the number 1 Mr A follower. We only found 5 of them... Buy them before its too late!!!"},
 ]
 # Initialize session state for the shopping cart
