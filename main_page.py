@@ -28,6 +28,8 @@ custom_css = """
     }
 </style>
 """
+st.markdown(custom_css, unsafe_allow_html=True)
+
 st.title(':blue-background[:green[Welcome to...] :necktie:]')
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
