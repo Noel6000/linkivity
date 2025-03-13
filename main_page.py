@@ -29,7 +29,9 @@ custom_css = """
 </style>
 """
 st.title(':blue-background[:green[Welcome to...] :necktie:]')
-st.image("linkivity.png")
+left_co, cent_co,last_co = st.columns(3)
+with cent_co:
+    st.image("linkivity.png")
 st.subheader(":red-background[Buy sustainable clothes in Seville!]")
 import streamlit as st
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
