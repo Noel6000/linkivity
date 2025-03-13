@@ -8,10 +8,10 @@ from openai import OpenAI
 custom_css = """
 <style>
     body {
-        background-color: #41f049;  
+        background-color: #abe0ad;  
     }
     .stApp {
-        background-color: #41f049; 
+        background-color: #abe0ad; 
     }
     .stButton>button {
         background-color: #4CAF50;
