@@ -30,7 +30,7 @@ custom_css = """
 """
 st.markdown(custom_css, unsafe_allow_html=True)
 
-colT1,colT2 = st.columns([1,8])
+colT1,colT2 = st.columns([1,10])
 with colT2:
     st.title(':blue-background[:green[Welcome to...] :necktie:]')
     left_co, cent_co,last_co = st.columns(3)
