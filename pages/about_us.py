@@ -4,6 +4,27 @@ import random
 import time
 from openai import OpenAI
 
+custom_css = """
+<style>
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+        transition-duration: 0.4s;
+    }
+    .stButton>button:hover {
+        background-color: white;
+        color: black;
+        border: 2px solid #4CAF50;
+    }
+</style>
+"""
+
 st.header("About us")
 st.write("Our clothing brand consists of one product which is a LIFE shirt, it comes in different sizes, colors and editions. ")
 st.write("There is a special limited edition Mr.A shirt with Mr.A's signature.")
