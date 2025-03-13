@@ -32,8 +32,8 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 colT1,colT2 = st.columns([1,8])
 with colT2:
-st.title(':blue-background[:green[Welcome to...] :necktie:]')
-left_co, cent_co,last_co = st.columns(3)
+    st.title(':blue-background[:green[Welcome to...] :necktie:]')
+    left_co, cent_co,last_co = st.columns(3)
 with cent_co:
     st.image("linkivity.png")
 st.subheader(":red-background[Buy sustainable clothes in Seville!]")
