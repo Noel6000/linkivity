@@ -24,6 +24,7 @@ custom_css = """
     }
 </style>
 """
+st.markdown(custom_css, unsafe_allow_html=True)
 
 st.header("About us")
 st.write("Our clothing brand consists of one product which is a LIFE shirt, it comes in different sizes, colors and editions. ")
