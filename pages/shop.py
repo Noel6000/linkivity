@@ -23,8 +23,15 @@ def remove_from_cart(product_id):
     st.success("Item removed from cart!")
 
 # Custom CSS for styling buttons
+
 custom_css = """
 <style>
+    body {
+        background-color: #41f049;  
+    }
+    .stApp {
+        background-color: #41f049; 
+    }
     .stButton>button {
         background-color: #4CAF50;
         color: white;
