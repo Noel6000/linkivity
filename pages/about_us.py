@@ -7,12 +7,20 @@ from openai import OpenAI
 
 custom_css = """
 <style>
+    [data-testid="stSidebar"] {
+        display: none;
+    }
+    .main > div {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
     body {
-        background-color: #6ade70;  
+        background-color: #f5faf5;  
     }
     .stApp {
-        background-color: #6ade70; 
+        background-color: #f5faf5; 
     }
+
     .stButton>button {
         background-color: #4CAF50;
         color: white;
@@ -29,8 +37,8 @@ custom_css = """
         color: black;
         border: 2px solid #4CAF50;
     }
-</style>
-"""
+</style>"""
+
 st.markdown(custom_css, unsafe_allow_html=True)
 
 st.header("About us")
