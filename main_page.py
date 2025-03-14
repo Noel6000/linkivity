@@ -1,15 +1,61 @@
 import streamlit as st
-import pandas as pd
-st.set_page_config(layout="wide")
-st.markdown("""
-<style>
-.big-font {
-    font-size:300px !important;
-}
-</style>
-""", unsafe_allow_html=True)
 
+# Initialize session state for users and authentication
+if 'users' not in st.session_state:
+    st.session_state.users = {}
+if 'authenticated' not in st.session_state:
+    st.session_state.authenticated = False
+if 'current_user' not in st.session_state:
+    st.session_state.current_user = None
+if 'page' not in st.session_state:
+    st.session_state.page = "main"
 
+# Function to handle user sign-up
+def sign_up():
+    st.header("Sign Up")
+    with st.form("sign_up_form"):
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        submit_button = st.form_submit_button("Sign Up")
+
+        if submit_button:
+            if username and password:
+                if username not in st.session_state.users:
+                    st.session_state.users[username] = password
+                    st.success("Signed up successfully! Please log in.")
+                    st.session_state.page = "login"
+                    st.rerun()
+                else:
+                    st.warning("Username already exists.")
+            else:
+                st.warning("Please fill in all fields.")
+
+# Function to handle user login
+def login():
+    st.header("Login")
+    with st.form("login_form"):
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        submit_button = st.form_submit_button("Login")
+
+        if submit_button:
+            if username in st.session_state.users and st.session_state.users[username] == password:
+                st.session_state.authenticated = True
+                st.session_state.current_user = username
+                st.success("Logged in successfully!")
+                st.session_state.page = "main"
+                st.rerun()  # Refresh the app to reflect login state
+            else:
+                st.error("Invalid username or password.")
+
+# Function to handle user logout
+def logout():
+    st.session_state.authenticated = False
+    st.session_state.current_user = None
+    st.success("Logged out successfully!")
+    st.session_state.page = "main"
+
+# Custom CSS to hide the sidebar and style buttons
 custom_css = """
 <style>
     /* Hide the sidebar */
@@ -40,38 +86,34 @@ custom_css = """
     }
 </style>
 """
+
+# Inject custom CSS
 st.markdown(custom_css, unsafe_allow_html=True)
 
-colT1,colT2 = st.columns([1,2])
-with colT2:
-    st.title(':blue-background[:green[WELCOME TO...]]')
-left_co, cent_co,last_co = st.columns(3)
-with cent_co:
-    st.image("linkivity.png")
-colT1,colT2 = st.columns([1,3])
-with colT2:
-    st.subheader("BUY SUSTAINABLE CLOTHES IN SEVILLE!")
-if "authenticated" not in st.session_state or not st.session_state.authenticated:
-    colT1,colT2 = st.columns([1,30])
-    with colT2:
-        st.warning("Please log in to access this page.")
-    if st.button("login",use_container_width=True):
-        st.switch_page("pages/login.py")
-    st.stop()
+# Main application
+def main():
+    if st.session_state.page == "main":
+        if not st.session_state.authenticated:
+            st.title("Welcome to Our Shopping Page!")
+            st.write("To access our features, please sign up or log in.")
 
-headers = st.context.headers
-button_container = st.container()
-with button_container:
-    col1, col2, col3 = st.columns([1, 2, 3])
-    with col1:
-        ModelIsClicked=st.button("About us",use_container_width=True)
-    if ModelIsClicked:
-        st.switch_page("pages/about_us.py")
-    with col2:
-        ModelIsClicked=st.button("Login",use_container_width=True)
-    if ModelIsClicked:
-        st.switch_page("pages/login.py")
-    with col3:
-        ModelIsClicked=st.button("Shop", use_container_width=True)
-    if ModelIsClicked:
-        st.switch_page("pages/shop.py")
+            # Sign-up and Login buttons
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("Sign Up"):
+                    st.session_state.page = "signup"
+                    st.rerun()
+            with col2:
+                if st.button("Login"):
+                    st.session_state.page = "login"
+                    st.rerun()
+        else:
+            st.title("Main Page")
+            st.write(f"Welcome, {st.session_state.current_user}! You are logged in.")
+            st.button("Logout", on_click=logout)
+    elif st.session_state.page == "signup":
+        sign_up()
+    elif st.session_state.page == "login":
+        login()
+
+# Run the main application
