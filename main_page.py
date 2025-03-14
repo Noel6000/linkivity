@@ -12,10 +12,6 @@ st.markdown("""
 
 custom_css = """
 <style>
-    /* Set text color to black for the entire app */
-    body, .css-1d391kf, .css-1v3fvcr, .css-1offfwp, .css-1lcbmhc, .css-5rimss, .css-174e0u4, .css-1wa3eu0, .css-1w7vvu6, .css-1w7vvu6 a {
-        color: black !important;
-        }
     /* Hide the sidebar */
     [data-testid="stSidebar"] {
         display: none;
@@ -24,9 +20,6 @@ custom_css = """
     .main > div {
         padding-left: 2rem;
         padding-right: 2rem;
-    }
-    body {
-        background-color: #f5faf5;  
     }
     .stApp {
         background-color: #f5faf5; 
