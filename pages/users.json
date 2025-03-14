@@ -92,6 +92,10 @@
         "houstonlonghorn": {
             "password": "$2b$12$ZtmX9/mGxx0cFXdZh.F06O4eOOIfaV4z0uxxD1qc0T8EQZoPSkK1G",
             "email": "crashbingo@icloud.com"
+        },
+        "lilian": {
+            "password": "$2b$12$lDi8KjGdKFT7LigzwVpADuvJAH1mfX2OXwapxaKY.HHpwvxB31NDe",
+            "email": "me.mail@gmail.com"
         }
     }
 }
