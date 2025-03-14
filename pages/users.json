@@ -84,6 +84,10 @@
         "paco": {
             "password": "$2b$12$rNqVWVarxLoj.R19RHBUDeGC8UI1Twtevc1Z8jT4CQz4uSrwIE/VC",
             "email": "Miami@gmail.com"
+        },
+        "ropo": {
+            "password": "$2b$12$t1VVhY5XuRiehvoJ4NE0I.L01/x2r8cUjbXIDL9ahpCXuqpvcMshG",
+            "email": "RoPo@ropo.com"
         }
     }
 }
