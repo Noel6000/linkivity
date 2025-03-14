@@ -206,3 +206,18 @@ def main():
 
 # Run the main application
 main()
+button_container = st.container()
+with button_container:
+    col1, col2, col3 = st.columns([1, 2, 3])
+    with col1:
+        ModelIsClicked=st.button("About us",use_container_width=True)
+    if ModelIsClicked:
+        st.switch_page("pages/about_us.py")
+    with col2:
+        ModelIsClicked=st.button("login",use_container_width=True)
+    if ModelIsClicked:
+        st.switch_page("pages/login.py")
+    with col3:
+        ModelIsClicked=st.button("Shop", use_container_width=True)
+    if ModelIsClicked:
+        st.switch_page("pages/shop.py")
