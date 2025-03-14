@@ -50,13 +50,13 @@ with cent_co:
     st.image("linkivity.png")
 colT1,colT2 = st.columns([1,3])
 with colT2:
-    st.subheader(":red-background[BUY SUSTAINABLE CLOTHES IN SEVILLE!]")
-import streamlit as st
+    st.subheader("BUY SUSTAINABLE CLOTHES IN SEVILLE!")
 if "authenticated" not in st.session_state or not st.session_state.authenticated:
     colT1,colT2 = st.columns([1,30])
     with colT2:
         st.warning("Please log in to access this page.")
-        with colT1:
+        col1 = st.columns([1])
+        with col1:
             ModelIsClicked=st.button("login",use_container_width=True)
             if ModelIsClicked:
                 st.switch_page("pages/login.py")
