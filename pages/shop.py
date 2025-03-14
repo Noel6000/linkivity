@@ -106,7 +106,7 @@ if st.session_state.cart:
     '''
     st.markdown(paypal_button, unsafe_allow_html=True)
 else:
-st.write("Your cart is empty.")
+    st.write("Your cart is empty.")
 
 button_container = st.container()
 with button_container:
