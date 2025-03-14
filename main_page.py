@@ -61,11 +61,11 @@ def main():
             # Sign-up and Login buttons
             col1, col2 = st.columns(2)
             with col1:
-                if st.button("Sign Up", key="main_signup_button"):
+                if st.button("Sign Up", key="signup_button"):
                     st.session_state.page = "signup"
                     st.rerun()
             with col2:
-                if st.button("Login", key="main_login_button"):
+                if st.button("Login", key="login_button"):
                     st.session_state.page = "login"
                     st.rerun()
         else:
