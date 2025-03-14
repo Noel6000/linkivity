@@ -80,6 +80,10 @@
         "el pepe": {
             "password": "$2b$12$kyv6DxwY8om2p9xsg/R1sOxKZAQ5ttvWeWIAV5G7zDbgxqY7y0EFm",
             "email": "antonioherascartes@gmail.com"
+        },
+        "paco": {
+            "password": "$2b$12$rNqVWVarxLoj.R19RHBUDeGC8UI1Twtevc1Z8jT4CQz4uSrwIE/VC",
+            "email": "Miami@gmail.com"
         }
     }
 }
