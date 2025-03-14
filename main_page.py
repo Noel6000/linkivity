@@ -55,8 +55,7 @@ if "authenticated" not in st.session_state or not st.session_state.authenticated
     colT1,colT2 = st.columns([1,30])
     with colT2:
         st.warning("Please log in to access this page.")
-    ModelIsClicked=st.button("login",use_container_width=True)
-    if ModelIsClicked:
+    if st.button("login",use_container_width=True):
         st.switch_page("pages/login.py")
     st.stop()
 
