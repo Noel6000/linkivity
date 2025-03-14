@@ -81,6 +81,7 @@ if st.session_state.cart:
             remove_from_cart(product['id'])
         st.write("---")
     st.write(f"Total: €{sum(item['price'] for item in st.session_state.cart):.2f}")
+    """
     # PayPal integration
     st.write("---")
     st.write("### Proceed to Payment")
@@ -104,7 +105,7 @@ if st.session_state.cart:
         <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
     </form>
     '''
-    st.markdown(paypal_button, unsafe_allow_html=True)
+    st.markdown(paypal_button, unsafe_allow_html=True)"""
 else:
     st.write("Your cart is empty.")
 
