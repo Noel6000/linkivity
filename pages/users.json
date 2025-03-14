@@ -88,6 +88,10 @@
         "ropo": {
             "password": "$2b$12$t1VVhY5XuRiehvoJ4NE0I.L01/x2r8cUjbXIDL9ahpCXuqpvcMshG",
             "email": "RoPo@ropo.com"
+        },
+        "houstonlonghorn": {
+            "password": "$2b$12$ZtmX9/mGxx0cFXdZh.F06O4eOOIfaV4z0uxxD1qc0T8EQZoPSkK1G",
+            "email": "crashbingo@icloud.com"
         }
     }
 }
