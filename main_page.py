@@ -68,7 +68,7 @@ with button_container:
     if ModelIsClicked:
         st.switch_page("pages/about_us.py")
     with col2:
-        ModelIsClicked=st.button("login",use_container_width=True)
+        ModelIsClicked=st.button("Login",use_container_width=True)
     if ModelIsClicked:
         st.switch_page("pages/login.py")
     with col3:
