@@ -16,11 +16,12 @@ custom_css = """
     [data-testid="stSidebar"] {
         display: none;
     }
-    /* Optional: Adjust the main content area */
+    /* Adjust main content area */
     .main > div {
         padding-left: 2rem;
         padding-right: 2rem;
     }
+    /* Style buttons */
     .stButton>button {
         background-color: #4CAF50;
         color: white;
