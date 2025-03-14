@@ -175,7 +175,6 @@ def login():
                 if verify_password(password, stored_password):  # Compare hashed password
                     st.session_state.authenticated = True
                     st.session_state.current_user = username
-                    st.success(f"Logged in successfully! Welcome, {users_data['users'][username]['full_name']}")
                     st.rerun()
                 else:
                     st.error("Invalid password.")
