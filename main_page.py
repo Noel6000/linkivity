@@ -13,36 +13,40 @@ if 'page' not in st.session_state:
 # Function to handle user sign-up
 def sign_up():
     st.header("Sign Up")
-    username = st.text_input("Username", key="signup_username")
-    password = st.text_input("Password", type="password", key="signup_password")
+    with st.form(key='signup_form'):
+        username = st.text_input("Username", key="signup_username")
+        password = st.text_input("Password", type="password", key="signup_password")
+        submit_button = st.form_submit_button("Sign Up")
 
-    if st.button("Sign Up", key="signup_button"):
-        if username and password:
-            if username not in st.session_state.users:
-                st.session_state.users[username] = password
-                st.success("Signed up successfully! Please log in.")
-                st.session_state.page = "login"
-                st.rerun()
+        if submit_button:
+            if username and password:
+                if username not in st.session_state.users:
+                    st.session_state.users[username] = password
+                    st.success("Signed up successfully! Please log in.")
+                    st.session_state.page = "login"
+                    st.rerun()
+                else:
+                    st.warning("Username already exists.")
             else:
-                st.warning("Username already exists.")
-        else:
-            st.warning("Please fill in all fields.")
+                st.warning("Please fill in all fields.")
 
 # Function to handle user login
 def login():
     st.header("Login")
-    username = st.text_input("Username", key="login_username")
-    password = st.text_input("Password", type="password", key="login_password")
+    with st.form(key='login_form'):
+        username = st.text_input("Username", key="login_username")
+        password = st.text_input("Password", type="password", key="login_password")
+        submit_button = st.form_submit_button("Login")
 
-    if st.button("Login", key="login_button"):
-        if username in st.session_state.users and st.session_state.users[username] == password:
-            st.session_state.authenticated = True
-            st.session_state.current_user = username
-            st.success("Logged in successfully!")
-            st.session_state.page = "main"
-            st.rerun()  # Refresh the app to reflect login state
-        else:
-            st.error("Invalid username or password.")
+        if submit_button:
+            if username in st.session_state.users and st.session_state.users[username] == password:
+                st.session_state.authenticated = True
+                st.session_state.current_user = username
+                st.success("Logged in successfully!")
+                st.session_state.page = "main"
+                st.rerun()  # Refresh the app to reflect login state
+            else:
+                st.error("Invalid username or password.")
 
 # Function to handle user logout
 def logout():
@@ -61,11 +65,11 @@ def main():
             # Sign-up and Login buttons
             col1, col2 = st.columns(2)
             with col1:
-                if st.button("Sign Up", key="signup_button"):
+                if st.button("Sign Up", key="main_signup_button"):
                     st.session_state.page = "signup"
                     st.rerun()
             with col2:
-                if st.button("Login", key="login_button"):
+                if st.button("Login", key="main_login_button"):
                     st.session_state.page = "login"
                     st.rerun()
         else:
