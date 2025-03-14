@@ -21,9 +21,6 @@ custom_css = """
         padding-left: 2rem;
         padding-right: 2rem;
     }
-    .stApp {
-        background-color: #f5faf5; 
-    }
     .stButton>button {
         background-color: #4CAF50;
         color: white;
