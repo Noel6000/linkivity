@@ -81,8 +81,32 @@ if st.session_state.cart:
             remove_from_cart(product['id'])
         st.write("---")
     st.write(f"Total: €{sum(item['price'] for item in st.session_state.cart):.2f}")
+    # PayPal integration
+    st.write("---")
+    st.write("### Proceed to Payment")
+    paypal_button = f'''
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="your-paypal-email@example.com">
+        <input type="hidden" name="lc" value="US">
+        <input type="hidden" name="item_name" value="Shopping Cart">
+        <input type="hidden" name="amount" value="{total:.2f}">
+        <input type="hidden" name="currency_code" value="EUR">
+        <input type="hidden" name="button_subtype" value="products">
+        <input type="hidden" name="no_note" value="0">
+        <input type="hidden" name="cn" value="Add special instructions to the seller">
+        <input type="hidden" name="no_shipping" value="2">
+        <input type="hidden" name="rm" value="1">
+        <input type="hidden" name="return" value="your-return-url.com">
+        <input type="hidden" name="cancel_return" value="your-cancel-url.com">
+        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+    '''
+    st.markdown(paypal_button, unsafe_allow_html=True)
 else:
-    st.write("Your cart is empty.")
+st.write("Your cart is empty.")
 
 button_container = st.container()
 with button_container:
