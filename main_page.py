@@ -117,3 +117,4 @@ def main():
         login()
 
 # Run the main application
+main()
