@@ -83,3 +83,19 @@ if st.session_state.cart:
     st.write(f"Total: €{sum(item['price'] for item in st.session_state.cart):.2f}")
 else:
     st.write("Your cart is empty.")
+
+button_container = st.container()
+with button_container:
+    col1, col2, col3 = st.columns([1, 2, 3])
+    with col1:
+        ModelIsClicked=st.button("About us",use_container_width=True)
+    if ModelIsClicked:
+        st.switch_page("pages/about_us.py")
+    with col2:
+        ModelIsClicked=st.button("Login",use_container_width=True)
+    if ModelIsClicked:
+        st.switch_page("pages/login.py")
+    with col3:
+        ModelIsClicked=st.button("Main Page", use_container_width=True)
+    if ModelIsClicked:
+        st.switch_page("pages/main_page.py")
