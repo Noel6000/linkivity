@@ -76,6 +76,10 @@
         "aasasa": {
             "password": "$2b$12$b.LCkfJ2aaonMH8HiGjZo.cYKPHs1y3klYNFawZAUY43g16Mtb6oi",
             "email": "s"
+        },
+        "el pepe": {
+            "password": "$2b$12$kyv6DxwY8om2p9xsg/R1sOxKZAQ5ttvWeWIAV5G7zDbgxqY7y0EFm",
+            "email": "antonioherascartes@gmail.com"
         }
     }
 }
