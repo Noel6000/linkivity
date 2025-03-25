@@ -16,6 +16,11 @@ def load_users():
     else:
         st.error("Failed to load users.")
         return {}
+
+def save_users(users):
+    """Save users to JSON file."""
+    with open(USER_FILE, "w") as file:
+        json.dump(users, file, indent=4)  # Pretty-print for easier debugging
 # Initialize session state for users and authentication
 if 'users' not in st.session_state:
     st.session_state.users = {}
