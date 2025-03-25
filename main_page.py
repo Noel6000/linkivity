@@ -24,7 +24,7 @@ def sign_up():
                     st.session_state.users[username] = password
                     st.success("Signed up successfully! Please log in.")
                     st.session_state.page = "login"
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.warning("Username already exists.")
             else:
@@ -44,7 +44,7 @@ def login():
                 st.session_state.current_user = username
                 st.success("Logged in successfully!")
                 st.session_state.page = "main"
-                st.experimental_rerun()  # Refresh the app to reflect login state
+                st.rerun()  # Refresh the app to reflect login state
             else:
                 st.error("Invalid username or password.")
 
@@ -67,11 +67,11 @@ def main():
             with col1:
                 if st.button("Sign Up", key="main_signup_button"):
                     st.session_state.page = "signup"
-                    st.experimental_rerun()
+                    st.rerun()
             with col2:
                 if st.button("Login", key="main_login_button"):
                     st.session_state.page = "login"
-                    st.experimental_rerun()
+                    st.rerun()
         else:
             st.title("Main Page")
             st.write(f"Welcome, {st.session_state.current_user}! You are logged in.")
