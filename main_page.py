@@ -122,6 +122,13 @@ def shop():
             st.header(products[i]["name"])
             st.image(products[i]["image"], caption=products[i]["name"], width=300)
             st.write(products[i]["description"])
+            if not products[i]["reserved"]:
+                if st.button(f"Reserve {products[i]['name']}", key=f"reserve_{i}"):
+                    # Handle reserve action
+                    products[i]["reserved"] = True
+                    st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
+            else:
+                st.success(f"{products[i]['name']} is reserved.")
         
         # Check if there is a second product in the current pair (avoid index errors)
         if i + 1 < len(products):
@@ -130,6 +137,13 @@ def shop():
                 st.header(products[i + 1]["name"])
                 st.image(products[i + 1]["image"], caption=products[i + 1]["name"], width=300)
                 st.write(products[i + 1]["description"])
+                if not products[i]["reserved"]:
+                    if st.button(f"Reserve {products[i]['name']}", key=f"reserve_{i}"):
+                        # Handle reserve action
+                        products[i]["reserved"] = True
+                        st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
+                else:
+                    st.success(f"{products[i]['name']} is reserved.")
 
 # Main application
 def logout():
