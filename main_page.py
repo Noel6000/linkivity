@@ -135,9 +135,10 @@ def shop():
         if i + 1 < len(products):
             # Display the second product in the second column
             with col2:
-                st.header(products[i + 1]["name"])
-                st.image(products[i + 1]["image"], caption=products[i + 1]["name"], width=300)
-                st.write(products[i + 1]["description"])
+                i += 1
+                st.header(products[i]["name"])
+                st.image(products[i]["image"], caption=products[i + 1]["name"], width=300)
+                st.write(products[i]["description"])
                 if not products[i]["reserved"]:
                     reserve_key = f"reserve_{i}"  # Make key unique by adding index
                     if st.button(f"Reserve {products[i]['name']}", key=reserve_key):
