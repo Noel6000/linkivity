@@ -57,7 +57,14 @@ def logout():
     st.success("Logged out successfully!")
     st.session_state.page = "main"
 
+def shop():
+    st.title("Shop Page")
+    st.write(f"Welcome to the shop, {st.session_state.current_user}!")
+    st.write("Here you can browse and purchase items.")
+    # Add shop-related content here
+
 # Main application
+
 def main():
     if st.session_state.page == "main":
         if not st.session_state.authenticated:
@@ -75,9 +82,7 @@ def main():
                     st.session_state.page = "login"
                     st.rerun()
         else:
-            st.title("Main Page")
-            st.write(f"Welcome, {st.session_state.current_user}! You are logged in.")
-            st.button("Logout", key="logout_button", on_click=logout)
+            shop()
     elif st.session_state.page == "signup":
         sign_up()
     elif st.session_state.page == "login":
