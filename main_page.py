@@ -16,27 +16,8 @@ def sign_up():
     with st.form(key='signup_form'):
         username = st.text_input("Username", placeholder="Enter your desired username", key="signup_username")
         password = st.text_input("Password", type="password", placeholder="Enter your password", key="signup_password")
-        submit_button = st.form_submit_button("Sign Up")
+        submit_button = st.form_submit_button("Sign Up", key="signup_submit_button")
 
-        if submit_button:
-            if username and password:
-                if username not in st.session_state.users:
-                    st.session_state.users[username] = password
-                    st.success("Signed up successfully! Please log in.")
-                    st.session_state.page = "login"
-                    st.rerun()
-                else:
-                    st.warning("Username already exists.")
-            else:
-                st.warning("Please fill in all fields.")
-
-# Function to handle user login
-def login():
-    st.header("Login")
-    with st.form(key='login_form'):
-        username = st.text_input("Username", placeholder="Enter your username", key="login_username")
-        password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
-        submit_button = st.form_submit_button("Login")
         if submit_button:
             if username and password:
                 if username not in st.session_state.users:
@@ -50,6 +31,24 @@ def login():
                     st.warning("Username already exists.")
             else:
                 st.warning("Please fill in all fields.")
+
+# Function to handle user login
+def login():
+    st.header("Login")
+    with st.form(key='login_form'):
+        username = st.text_input("Username", placeholder="Enter your username", key="login_username")
+        password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
+        submit_button = st.form_submit_button("Login", key="login_submit_button")
+
+        if submit_button:
+            if username in st.session_state.users and st.session_state.users[username] == password:
+                st.session_state.authenticated = True
+                st.session_state.current_user = username
+                st.success("Logged in successfully!")
+                st.session_state.page = "main"
+                st.rerun()  # Refresh the app to reflect login state
+            else:
+                st.error("Invalid username or password.")
 
 # Function to handle user logout
 def logout():
@@ -86,3 +85,4 @@ def main():
 
 # Run the main application
 main()
+
