@@ -14,6 +14,16 @@ if 'current_user' not in st.session_state:
     st.session_state.current_user = None
 if 'page' not in st.session_state:
     st.session_state.page = "main"
+
+
+# Load users from the JSON file
+if os.path.exists(users_file):
+    with open(users_file, "r") as file:
+        st.session_state.users = json.load(file)
+        st.write("Users loaded from JSON file.")
+else:
+    st.write("No existing users.json file found.")
+
     
 products = [
     {"id": 1, "name": "\"Oh yeah Mr. A\" T-shirt", "price": 16.00, "description": "The life meme with Mr. A's typical quotes."},
