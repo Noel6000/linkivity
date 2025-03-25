@@ -16,7 +16,7 @@ def sign_up():
     with st.form(key='signup_form'):
         username = st.text_input("Username", placeholder="Enter your desired username", key="signup_username")
         password = st.text_input("Password", type="password", placeholder="Enter your password", key="signup_password")
-        submit_button = st.form_submit_button("Sign Up", key="signup_submit_button")
+        submit_button = st.form_submit_button(label="Sign Up")
 
         if submit_button:
             if username and password:
@@ -38,7 +38,7 @@ def login():
     with st.form(key='login_form'):
         username = st.text_input("Username", placeholder="Enter your username", key="login_username")
         password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
-        submit_button = st.form_submit_button("Login", key="login_submit_button")
+        submit_button = st.form_submit_button(label="Login")
 
         if submit_button:
             if username in st.session_state.users and st.session_state.users[username] == password:
@@ -85,4 +85,3 @@ def main():
 
 # Run the main application
 main()
-
