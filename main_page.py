@@ -1,4 +1,9 @@
 import streamlit as st
+import json
+import os
+
+# Path to the users.json file
+users_file = "pages/users.json"
 
 # Initialize session state for users and authentication
 if 'users' not in st.session_state:
