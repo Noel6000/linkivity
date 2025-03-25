@@ -11,11 +11,11 @@ if 'page' not in st.session_state:
     st.session_state.page = "main"
     
 products = [
-    {"id": 1, "name": "Laptop", "price": 899.99, "description": "A high-performance laptop with the latest features."},
-    {"id": 2, "name": "Smartphone", "price": 599.99, "description": "A cutting-edge smartphone with a stunning camera."},
-    {"id": 3, "name": "Headphones", "price": 129.99, "description": "Wireless headphones with noise-cancelling technology."},
-    {"id": 4, "name": "Smartwatch", "price": 219.99, "description": "A sleek smartwatch with fitness tracking capabilities."},
-    {"id": 5, "name": "Tablet", "price": 349.99, "description": "A versatile tablet for work and entertainment."}
+    {"id": 1, "name": "\"Oh yeah Mr. A\" T-shirt", "price": 16.00, "description": "The life meme with Mr. A's typical quotes."},
+    {"id": 2, "name": "Life EXCLUSIVE T-shirt", "price": 20.00, "description": "The exclusive (signed by the GOAT, Mr. A) T-shirt."},
+    {"id": 3, "name": "Life keychain", "price": 1.00, "description": "The Mr. A meme keychain."},
+    {"id": 4, "name": "GOAT T-shirt", "price": 219.99, "description": "The Mr. A T-shirt with \"the GOAT\" meme."},
+    {"id": 5, "name": "Original Life MEME T-shirt", "price": 349.99, "description": "The original life t-shirt with the Mr. A life meme."}
 ]
 # Function to handle user sign-up
 def sign_up():
