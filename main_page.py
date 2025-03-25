@@ -6,6 +6,10 @@ import json
 GITHUB_REPO = "Noel6000/linkivity"
 USER_FILE = "pages/users.json"
 
+def verify_password(plain_password, hashed_password):
+    """Verifies a password against its hash."""
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
+
 def load_users():
     """Fetch users.json from GitHub."""
     url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{USER_FILE}"
