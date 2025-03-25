@@ -37,11 +37,11 @@ if 'page' not in st.session_state:
 
     
 products = [
-    {"id": 1, "name": "\"Oh yeah Mr. A\" T-shirt", "price": 16.00, "description": "The life meme with Mr. A's typical quotes."},
-    {"id": 2, "name": "Life EXCLUSIVE T-shirt", "price": 20.00, "description": "The exclusive (signed by the GOAT, Mr. A) T-shirt."},
-    {"id": 3, "name": "Life keychain", "price": 1.00, "description": "The Mr. A meme keychain."},
-    {"id": 4, "name": "GOAT T-shirt", "price": 16.00, "description": "The Mr. A T-shirt with \"the GOAT\" meme."},
-    {"id": 5, "name": "Original Life MEME T-shirt", "price": 16.00, "description": "The original life t-shirt with the Mr. A life meme."}
+    {"id": 1, "name": "\"Oh yeah Mr. A\" T-shirt", "image": "quotes.png", "price": 16.00, "description": "The life meme with Mr. A's typical quotes."},
+    {"id": 2, "name": "Life EXCLUSIVE T-shirt", "image": "exclusive.png", "price": 20.00, "description": "The exclusive (signed by the GOAT, Mr. A) T-shirt."},
+    {"id": 3, "name": "Life keychain", "image": "keychain.jpg", "price": 1.00, "description": "The Mr. A meme keychain."},
+    {"id": 4, "name": "GOAT T-shirt", "image": "goat.jpg", "price": 16.00, "description": "The Mr. A T-shirt with \"the GOAT\" meme."},
+    {"id": 5, "name": "Original Life MEME T-shirt", "image": "original.png", "price": 16.00, "description": "The original life t-shirt with the Mr. A life meme."}
 ]
 # Function to handle user sign-up
 def sign_up():
