@@ -44,6 +44,9 @@ def sign_up():
             if username and password:
                 if username not in st.session_state.users:
                     st.session_state.users[username] = password
+                    with open(users_file, "w") as file:
+                        json.dump(st.session_state.users, file)
+                        st.write("Users saved to JSON file.")
                     st.session_state.authenticated = True
                     st.session_state.current_user = username
                     st.success("Signed up and logged in successfully!")
