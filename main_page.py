@@ -37,16 +37,19 @@ def login():
         username = st.text_input("Username", placeholder="Enter your username", key="login_username")
         password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
         submit_button = st.form_submit_button("Login")
-
         if submit_button:
-            if username in st.session_state.users and st.session_state.users[username] == password:
-                st.session_state.authenticated = True
-                st.session_state.current_user = username
-                st.success("Logged in successfully!")
-                st.session_state.page = "main"
-                st.rerun()  # Refresh the app to reflect login state
+            if username and password:
+                if username not in st.session_state.users:
+                    st.session_state.users[username] = password
+                    st.session_state.authenticated = True
+                    st.session_state.current_user = username
+                    st.success("Signed up and logged in successfully!")
+                    st.session_state.page = "main"
+                    st.rerun()
+                else:
+                    st.warning("Username already exists.")
             else:
-                st.error("Invalid username or password.")
+                st.warning("Please fill in all fields.")
 
 # Function to handle user logout
 def logout():
