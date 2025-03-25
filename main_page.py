@@ -112,12 +112,24 @@ def shop():
     # Add shop-related content here
     # Display available products
     st.header("Available Products")
-    for product in products:
-        st.write(f"**{product['name']}**")
-        st.image(product["image"], caption=f"{product['name']} Image", width=400)
-        st.write(f"Price: €{product['price']:.2f}")
-        st.write(f"Description: {product['description']}")
-        st.write("---")
+    # Loop through the list of products and display them in pairs (two per row)
+    for i in range(0, len(products), 2):
+        # Create two columns for each pair of products
+        col1, col2 = st.columns(2)
+        
+        # Display the first product in the first column
+        with col1:
+            st.header(products[i]["name"])
+            st.image(products[i]["image"], caption=products[i]["name"], width=300)
+            st.write(products[i]["description"])
+        
+        # Check if there is a second product in the current pair (avoid index errors)
+        if i + 1 < len(products):
+            # Display the second product in the second column
+            with col2:
+                st.header(products[i + 1]["name"])
+                st.image(products[i + 1]["image"], caption=products[i + 1]["name"], width=300)
+                st.write(products[i + 1]["description"])
 
 # Main application
 def logout():
