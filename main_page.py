@@ -123,7 +123,8 @@ def shop():
             st.image(products[i]["image"], caption=products[i]["name"], width=300)
             st.write(products[i]["description"])
             if not products[i]["reserved"]:
-                if st.button(f"Reserve {products[i]['name']}", key=f"reserve_{i}"):
+                reserve_key = f"reserve_{i}"  # Make key unique by adding index
+                if st.button(f"Reserve {products[i]['name']}", key=reserve_key):
                     # Handle reserve action
                     products[i]["reserved"] += 1
                     st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
@@ -138,7 +139,8 @@ def shop():
                 st.image(products[i + 1]["image"], caption=products[i + 1]["name"], width=300)
                 st.write(products[i + 1]["description"])
                 if not products[i]["reserved"]:
-                    if st.button(f"Reserve {products[i]['name']}", key=f"reserve_{i}"):
+                    reserve_key = f"reserve_{i}"  # Make key unique by adding index
+                    if st.button(f"Reserve {products[i]['name']}", key=reserve_key):
                         # Handle reserve action
                         products[i]["reserved"] += 1
                         st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
