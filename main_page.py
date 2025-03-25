@@ -103,6 +103,11 @@ def shop():
         st.write("---")
 
 # Main application
+def logout():
+    """Logs out the current user by resetting session state."""
+    st.session_state.authenticated = False
+    st.session_state.current_user = None
+    st.rerun()  # Refresh the app to reflect changes
 
 def main():
     if st.session_state.page == "main":
@@ -129,3 +134,6 @@ def main():
 
 # Run the main application
 main()
+# Display logout button only if user is logged in
+if st.session_state.get("authenticated", False):
+    st.sidebar.button("Logout", on_click=logout)  # Place it in the sidebar
