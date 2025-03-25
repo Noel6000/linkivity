@@ -8,7 +8,7 @@ users_file = "pages/users.json"
 
 def load_users():
     """Fetch users.json from GitHub."""
-    url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{USER_FILE}"
+    url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{users_file}"
     response = requests.get(url)
     
     if response.status_code == 200:
