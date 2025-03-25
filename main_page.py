@@ -4,11 +4,11 @@ import bcrypt
 import json
 
 GITHUB_REPO = "Noel6000/linkivity"
-users_file = "pages/users.json"
+USER_FILE = "pages/users.json"
 
 def load_users():
     """Fetch users.json from GitHub."""
-    url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{users_file}"
+    url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{USER_FILE}"
     response = requests.get(url)
     
     if response.status_code == 200:
@@ -46,7 +46,7 @@ def sign_up():
             if username and password:
                 if username not in st.session_state.users:
                     st.session_state.users[username] = password
-                    with open(users_file, "w") as file:
+                    with open(USER_FILE, "w") as file:
                         json.dump(st.session_state.users, file)
                         st.write("Users saved to JSON file.")
                     st.session_state.authenticated = True
