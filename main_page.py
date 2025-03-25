@@ -70,17 +70,23 @@ def login():
 
         if submit_button:
             users = st.session_state.get("users", {})  # Ensure users are loaded
-
-            if username not in users:
+            user_data = users.get(username)  # Get user data
+            if not user_data:
                 st.error("Username not found")
                 return
-
-            stored_hashed_password = users[username]["password"]  # 
-
-            if verify_password(password, stored_hashed_password): 
+            
+            stored_hashed_password = user_data.get("password")  # ✅ Ensure this is a string
+            if not stored_hashed_password:
+                st.error("No password found for this user")
+                return
+            
+            if bcrypt.checkpw(password.encode(), stored_hashed_password.encode()):  # ✅ Ensure hashing
                 st.session_state.authenticated = True
                 st.session_state.current_user = username
-                st.success(f"Logged in successfully! Welcome, {users[username]['full_name']}")
+                st.session_state.page = "main"
+                st.rerun()
+            else:
+                st.error("Invalid username or password.")
 
 def shop():
     st.title("Shop Page")
