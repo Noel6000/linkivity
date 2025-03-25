@@ -9,7 +9,14 @@ if 'current_user' not in st.session_state:
     st.session_state.current_user = None
 if 'page' not in st.session_state:
     st.session_state.page = "main"
-
+    
+products = [
+    {"id": 1, "name": "Laptop", "price": 899.99, "description": "A high-performance laptop with the latest features."},
+    {"id": 2, "name": "Smartphone", "price": 599.99, "description": "A cutting-edge smartphone with a stunning camera."},
+    {"id": 3, "name": "Headphones", "price": 129.99, "description": "Wireless headphones with noise-cancelling technology."},
+    {"id": 4, "name": "Smartwatch", "price": 219.99, "description": "A sleek smartwatch with fitness tracking capabilities."},
+    {"id": 5, "name": "Tablet", "price": 349.99, "description": "A versatile tablet for work and entertainment."}
+]
 # Function to handle user sign-up
 def sign_up():
     st.header("Sign Up")
@@ -62,6 +69,13 @@ def shop():
     st.write(f"Welcome to the shop, {st.session_state.current_user}!")
     st.write("Here you can browse and purchase items.")
     # Add shop-related content here
+    # Display available products
+    st.header("Available Products")
+    for product in products:
+        st.write(f"**{product['name']}**")
+        st.write(f"Price: €{product['price']:.2f}")
+        st.write(f"Description: {product['description']}")
+        st.write("---")
 
 # Main application
 
