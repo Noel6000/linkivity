@@ -14,8 +14,8 @@ if 'page' not in st.session_state:
 def sign_up():
     st.header("Sign Up")
     with st.form(key='signup_form'):
-        username = st.text_input("Username", key="signup_username")
-        password = st.text_input("Password", type="password", key="signup_password")
+        username = st.text_input("Username", placeholder="Enter your desired username", key="signup_username")
+        password = st.text_input("Password", type="password", placeholder="Enter your password", key="signup_password")
         submit_button = st.form_submit_button("Sign Up", key="signup_submit_button")
 
         if submit_button:
@@ -34,8 +34,8 @@ def sign_up():
 def login():
     st.header("Login")
     with st.form(key='login_form'):
-        username = st.text_input("Username", key="login_username")
-        password = st.text_input("Password", type="password", key="login_password")
+        username = st.text_input("Username", placeholder="Enter your username", key="login_username")
+        password = st.text_input("Password", type="password", placeholder="Enter your password", key="login_password")
         submit_button = st.form_submit_button("Login", key="login_submit_button")
 
         if submit_button:
