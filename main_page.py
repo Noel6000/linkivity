@@ -69,14 +69,16 @@ def login():
         submit_button = st.form_submit_button(label="Login")
 
         if submit_button:
-            users = st.session_state.get("users", {})  # Ensure users are loaded properly
+            users = st.session_state.get("users", {})  # Load users safely
             
-            user_data = users.get(username)  # ✅ Ensure we get a dictionary
+            user_data = users.get(username)
+            
+            # ✅ Check if user_data is actually a dictionary
             if not isinstance(user_data, dict):
-                st.error("Invalid user data format.")
-                st.stop()  # Prevent further execution
+                st.error("Invalid user data format. Try signing up again.")
+                st.stop()
             
-            stored_hashed_password = user_data.get("password")  # ✅ Now safely extract password
+            stored_hashed_password = user_data.get("password")  # Now safe to access password
             
             if verify_password(password, stored_hashed_password):
                 st.session_state.authenticated = True
@@ -84,8 +86,7 @@ def login():
                 st.session_state.page = "main"
                 st.rerun()
             else:
-                st.error("Invalid username or password.")
-    
+                st.error("Invalid username or password.")    
 def shop():
     st.title("Shop Page")
     st.write(f"Welcome to the shop, {st.session_state.current_user}!")
