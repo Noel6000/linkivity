@@ -2,6 +2,40 @@ import requests
 import streamlit as st
 import bcrypt
 import json
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+# Function to send email notification
+def send_email(product_name, recipient_email):
+    sender_email = "your_email@gmail.com"
+    sender_password = "your_app_password"  # Use an app-specific password (for Gmail)
+
+    subject = f"Product Reservation: {product_name}"
+    body = f"A user has reserved the {product_name}. Please ensure they pick it up."
+
+    # Create the message
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        # Connect to Gmail's SMTP server
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+
+        # Send the email
+        text = msg.as_string()
+        server.sendmail(sender_email, recipient_email, text)
+
+        server.quit()
+
+        st.success(f"Email sent to {recipient_email}")
+    except Exception as e:
+        st.error(f"Failed to send email: {str(e)}")
 
 GITHUB_REPO = "Noel6000/linkivity"
 USER_FILE = "pages/users.json"
