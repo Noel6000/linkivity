@@ -4,7 +4,7 @@ import bcrypt
 import json
 
 GITHUB_REPO = "Noel6000/linkivity"
-USER_FILE = "pages/users.json"
+users_file = "pages/users.json"
 
 def load_users():
     """Fetch users.json from GitHub."""
