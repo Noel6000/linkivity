@@ -36,31 +36,40 @@ products = [
 ]
 # Function to handle user sign-up
 def sign_up():
+    """Handles user sign-up."""
     st.header("Sign Up")
+    
     with st.form(key='signup_form'):
         username = st.text_input("Username", placeholder="Enter your desired username", key="signup_username")
         password = st.text_input("Password", type="password", placeholder="Enter your password", key="signup_password")
         submit_button = st.form_submit_button(label="Sign Up")
 
-        if submit_button:
-            if username and password:
-                if username not in st.session_state.users:
-                    st.session_state.users[username] = password
-                    with open(USER_FILE, "w") as file:
-                        json.dump(st.session_state.users, file)
-                        st.write("Users saved to JSON file.")
-                    st.session_state.authenticated = True
-                    st.session_state.current_user = username
-                    st.success("Signed up and logged in successfully!")
-                    st.session_state.page = "main"
-                    st.rerun()
-                else:
-                    st.warning("Username already exists.")
-            else:
-                st.warning("Please fill in all fields.")
+    if submit_button:
+        if username and password:
+            users = load_users()  # Load existing users
 
-                
-# Function to handle user login
+            if username in users:
+                st.warning("Username already exists. Try another one.")
+            else:
+                # ✅ Hash password before saving
+                hashed_password = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+                # ✅ Store user details as a dictionary
+                users[username] = {"password": hashed_password}
+
+                save_users(users)  # Save updated users
+
+                # ✅ Update session state
+                st.session_state.authenticated = True
+                st.session_state.current_user = username
+                st.session_state.users = users  # Keep session updated
+
+                st.success("Signed up and logged in successfully!")
+                st.session_state.page = "main"
+                st.rerun()  # Refresh the page to reflect login state
+        else:
+            st.warning("Please fill in all fields.")
+            
 def login():
     st.header("Login")
     with st.form(key='login_form'):
