@@ -37,11 +37,11 @@ if 'page' not in st.session_state:
 
     
 products = [
-    {"id": 1, "name": "\"Oh yeah Mr. A\" T-shirt", "image": "quotes.png", "price": 16.00, "description": "The life meme with Mr. A's typical quotes", "reserved": False},
-    {"id": 2, "name": "Life EXCLUSIVE T-shirt", "image": "exclusive.png", "price": 20.00, "description": "The exclusive (signed by the GOAT, Mr. A) T-shirt.", "reserved": False},
-    {"id": 3, "name": "Life keychain", "image": "keychain.jpg", "price": 1.00, "description": "The Mr. A meme keychain.", "reserved": False},
-    {"id": 4, "name": "GOAT T-shirt", "image": "goat.jpg", "price": 16.00, "description": "The Mr. A T-shirt with \"the GOAT\" meme.", "reserved": False},
-    {"id": 5, "name": "Original Life MEME T-shirt", "image": "original.png", "price": 16.00, "description": "The original life t-shirt with the Mr. A life meme.", "reserved": False}
+    {"id": 1, "name": "\"Oh yeah Mr. A\" T-shirt", "image": "quotes.png", "price": 16.00, "description": "The life meme with Mr. A's typical quotes", "reserved": 0},
+    {"id": 2, "name": "Life EXCLUSIVE T-shirt", "image": "exclusive.png", "price": 20.00, "description": "The exclusive (signed by the GOAT, Mr. A) T-shirt.", "reserved": 0},
+    {"id": 3, "name": "Life keychain", "image": "keychain.jpg", "price": 1.00, "description": "The Mr. A meme keychain.", "reserved": 0},
+    {"id": 4, "name": "GOAT T-shirt", "image": "goat.jpg", "price": 16.00, "description": "The Mr. A T-shirt with \"the GOAT\" meme.", "reserved": 0},
+    {"id": 5, "name": "Original Life MEME T-shirt", "image": "original.png", "price": 16.00, "description": "The original life t-shirt with the Mr. A life meme.", "reserved": 0}
 ]
 # Function to handle user sign-up
 def sign_up():
@@ -125,7 +125,7 @@ def shop():
             if not products[i]["reserved"]:
                 if st.button(f"Reserve {products[i]['name']}", key=f"reserve_{i}"):
                     # Handle reserve action
-                    products[i]["reserved"] = True
+                    products[i]["reserved"] += 1
                     st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
             else:
                 st.success(f"{products[i]['name']} is reserved.")
@@ -140,7 +140,7 @@ def shop():
                 if not products[i]["reserved"]:
                     if st.button(f"Reserve {products[i]['name']}", key=f"reserve_{i}"):
                         # Handle reserve action
-                        products[i]["reserved"] = True
+                        products[i]["reserved"] += 1
                         st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
                 else:
                     st.success(f"{products[i]['name']} is reserved.")
