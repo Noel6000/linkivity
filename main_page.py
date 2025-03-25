@@ -114,7 +114,7 @@ def shop():
     st.header("Available Products")
     for product in products:
         st.write(f"**{product['name']}**")
-        st.image(product["image"], caption=f"{product['name']} Image", use_column_width=True)
+        st.image(product["image"], caption=f"{product['name']} Image", width=400)
         st.write(f"Price: €{product['price']:.2f}")
         st.write(f"Description: {product['description']}")
         st.write("---")
