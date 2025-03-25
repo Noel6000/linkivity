@@ -7,10 +7,6 @@ from openai import OpenAI
 
 custom_css = """
 <style>
-    /* Hide the sidebar */
-    [data-testid="stSidebar"] {
-        display: none;
-    }
     /* Adjust main content area */
     .main > div {
         padding-left: 2rem;
