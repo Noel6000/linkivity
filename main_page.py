@@ -1,10 +1,21 @@
+import requests
 import streamlit as st
+import bcrypt
 import json
-import os
 
-# Path to the users.json file
-users_file = "pages/users.json"
+GITHUB_REPO = "Noel6000/linkivity"
+USER_FILE = "pages/users.json"
 
+def load_users():
+    """Fetch users.json from GitHub."""
+    url = f"https://raw.githubusercontent.com/{GITHUB_REPO}/main/{USER_FILE}"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        return response.json()
+    else:
+        st.error("Failed to load users.")
+        return {}
 # Initialize session state for users and authentication
 if 'users' not in st.session_state:
     st.session_state.users = {}
