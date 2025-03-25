@@ -12,36 +12,34 @@ password = st.secrets["general"]["password"]
 smtp_server = st.secrets["email_service"]["smtp_server"]
 smtp_port = st.secrets["email_service"]["smtp_port"]
 token = st.secrets["GITHUB_TOKEN"]
-# Function to send email notification
-def send_email(product_name, recipient_email):
-    sender_email = "noelsantiago.briand@gmail.com"
-    sender_password = "your_app_password"  # Use an app-specific password (for Gmail)
 
+def send_email(product_name, recipient_email):
     subject = f"Product Reservation: {product_name}"
     body = f"A user has reserved the {product_name}. Please ensure they pick it up."
 
     # Create the message
     msg = MIMEMultipart()
-    msg['From'] = sender_email
+    msg['From'] = email
     msg['To'] = recipient_email
     msg['Subject'] = subject
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        # Connect to Gmail's SMTP server
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        # Connect to the SMTP server using the secrets
+        server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
-        server.login(sender_email, sender_password)
+        server.login(email, password)
 
         # Send the email
         text = msg.as_string()
-        server.sendmail(sender_email, recipient_email, text)
+        server.sendmail(email, recipient_email, text)
 
         server.quit()
 
         st.success(f"Email sent to {recipient_email}")
     except Exception as e:
         st.error(f"Failed to send email: {str(e)}")
+
 
 GITHUB_REPO = "Noel6000/linkivity"
 USER_FILE = "pages/users.json"
@@ -168,7 +166,7 @@ def shop():
                     # Handle reserve action
                     products[i]["reserved"] += 1
                     st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
-                    send_email(products[i + 1]["name"], "your_email@example.com")
+                    send_email(products[i + 1]["name"], "noelsantiago.briand@gmail.com")
             else:
                 st.success(f"{products[i + 1]['name']} is reserved.")
         
@@ -186,7 +184,7 @@ def shop():
                         # Handle reserve action
                         products[i]["reserved"] += 1
                         st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
-                        send_email(products[i + 1]["name"], "your_email@example.com")
+                        send_email(products[i + 1]["name"], "noelsantiago.briand@gmail.com")
                 else:
                     st.success(f"{products[i + 1]['name']} is reserved.")
 
