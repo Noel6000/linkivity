@@ -69,25 +69,18 @@ def login():
         submit_button = st.form_submit_button(label="Login")
 
         if submit_button:
-            users = load_users()  # Load users from GitHub
-            if username in users:
-                stored_hashed_password = users[username]["password"]
-                
-                # Verify password
-                if bcrypt.checkpw(password.encode(), stored_hashed_password.encode()):
-                    st.session_state.authenticated = True
-                    st.session_state.current_user = username
-                    st.session_state.page = "main"
-                    st.rerun()  # Refresh the app to reflect login state
-            else:
-                st.error("Invalid username or password.")
+            users = st.session_state.get("users", {})  # Ensure users are loaded
 
-# Function to handle user logout
-def logout():
-    st.session_state.authenticated = False
-    st.session_state.current_user = None
-    st.success("Logged out successfully!")
-    st.session_state.page = "main"
+            if username not in users:
+                st.error("Username not found")
+                return
+
+            stored_hashed_password = users[username]["password"]  # 
+
+            if verify_password(password, stored_hashed_password): 
+                st.session_state.authenticated = True
+                st.session_state.current_user = username
+                st.success(f"Logged in successfully! Welcome, {users[username]['full_name']}")
 
 def shop():
     st.title("Shop Page")
