@@ -6,9 +6,15 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+# Accessing secrets from the secrets file
+email = st.secrets["general"]["email"]
+password = st.secrets["general"]["password"]
+smtp_server = st.secrets["email_service"]["smtp_server"]
+smtp_port = st.secrets["email_service"]["smtp_port"]
+token = st.secrets["GITHUB_TOKEN"]
 # Function to send email notification
 def send_email(product_name, recipient_email):
-    sender_email = "your_email@gmail.com"
+    sender_email = "noelsantiago.briand@gmail.com"
     sender_password = "your_app_password"  # Use an app-specific password (for Gmail)
 
     subject = f"Product Reservation: {product_name}"
@@ -162,8 +168,9 @@ def shop():
                     # Handle reserve action
                     products[i]["reserved"] += 1
                     st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
+                    send_email(products[i + 1]["name"], "your_email@example.com")
             else:
-                st.success(f"{products[i]['name']} is reserved.")
+                st.success(f"{products[i + 1]['name']} is reserved.")
         
         # Check if there is a second product in the current pair (avoid index errors)
         if i + 1 < len(products):
@@ -179,8 +186,9 @@ def shop():
                         # Handle reserve action
                         products[i]["reserved"] += 1
                         st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
+                        send_email(products[i + 1]["name"], "your_email@example.com")
                 else:
-                    st.success(f"{products[i]['name']} is reserved.")
+                    st.success(f"{products[i + 1]['name']} is reserved.")
 
 # Main application
 def logout():
