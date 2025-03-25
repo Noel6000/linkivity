@@ -69,25 +69,23 @@ def login():
         submit_button = st.form_submit_button(label="Login")
 
         if submit_button:
-            users = st.session_state.get("users", {})  # Ensure users are loaded
-            user_data = users.get(username)  # Get user data
-            if not user_data:
-                st.error("Username not found")
-                return
+            users = st.session_state.get("users", {})  # Ensure users are loaded properly
             
-            stored_hashed_password = user_data.get("password")  # ✅ Ensure this is a string
-            if not stored_hashed_password:
-                st.error("No password found for this user")
-                return
+            user_data = users.get(username)  # ✅ Ensure we get a dictionary
+            if not isinstance(user_data, dict):
+                st.error("Invalid user data format.")
+                st.stop()  # Prevent further execution
             
-            if bcrypt.checkpw(password.encode(), stored_hashed_password.encode()):  # ✅ Ensure hashing
+            stored_hashed_password = user_data.get("password")  # ✅ Now safely extract password
+            
+            if verify_password(password, stored_hashed_password):
                 st.session_state.authenticated = True
                 st.session_state.current_user = username
                 st.session_state.page = "main"
                 st.rerun()
             else:
                 st.error("Invalid username or password.")
-
+    
 def shop():
     st.title("Shop Page")
     st.write(f"Welcome to the shop, {st.session_state.current_user}!")
