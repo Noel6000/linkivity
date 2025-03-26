@@ -99,6 +99,12 @@ products = [
     {"id": 5, "name": "Original Life MEME T-shirt", "image": "original.png", "price": 16.00, "description": "The original life t-shirt with the Mr. A life meme.", "available_quantity": 0, "reserved": []}
 ]
 
+# Initialize session state if not set
+if "products" not in st.session_state:
+    st.session_state.products = products  # Load products into session state
+
+if "current_user" not in st.session_state:
+    st.session_state.current_user = None  # Ensure current_user exists
 def shop():
     st.title("Shop")
     
