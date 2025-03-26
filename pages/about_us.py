@@ -39,7 +39,7 @@ st.write("Our clothing brand consists of one product, which is a LIFE shirt. It 
 st.write("There is a special limited edition, the official Mr. A shirt with Mr. A's signature!")
 st.image("exclusive.png")
 st.subheader("Why are we sustainable?")
-st.write("We offer some handcrafted and local t-shirts to avoid sub-human conditions for workers, as “Wituka” collaborates with the Eden project, which helps give good conditions to the workers. Additionally, all our products are made with 100% recycled materials, from old, discarded t-shirts. All our textiles are locally produced, and our dyes are safe. With our T-Shirts for Everyone program, for every €30 we earn at the end of the months, we give five euros to Save the Children. With LIFE Products, choose to defend the worker's right and escape the lie of fast fashion.")
+st.write("We offer some handcrafted and local T-shirts to avoid sub-human conditions for workers, as “Wituka” collaborates with the Eden project, which helps give good conditions to the workers. Additionally, all our products are made with 100% recycled materials, from old, discarded T-shirts. All our textiles are locally produced, and our dyes are safe. With our T-shirts for Everyone program, for every €30 we earn at the end of the months, we give five euros to Save the Children. With LIFE Products, choose to defend the worker's right and escape the lie of fast fashion.")
 
 
 isClicked = st.button("Go back to the main page", use_container_width=True)
