@@ -4,4 +4,4 @@ numpy
 openai
 streamlit_book 
 bcrypt
-email/__init__.py
+email
