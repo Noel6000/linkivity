@@ -117,7 +117,7 @@ def shop():
                 if st.button(f"Pre-Reserve", key=f"prereserve_{product['id']}"):
                     pre_reserve_product(product["id"])
     
-            st.write("---")  # Separator
+            st.write("--------------------------------------------")  # Separator
     
 # Main application
 def logout():
