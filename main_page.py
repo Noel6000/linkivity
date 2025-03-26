@@ -30,34 +30,28 @@ def pre_reserve_product(product_id):
             product["reserved"].append(st.session_state.current_user)
             st.success(f"You have pre-reserved a {product['name']}. We will notify you when it's available.")
 
-def send_email(product_name, recipient_email):
-    subject = f"Product Reservation: {product_name}"
-    body = f"A user has reserved the {product_name}. Please ensure they pick it up."
+def send_email_notification(user, product_name):
+    sender_email = st.secrets["mail"]["email"]
+    sender_password = st.secrets["mail"]["password"]
+    receiver_email = "your-notification-email@example.com"
 
-    # Create the message
+    subject = "New Product Reservation"
+    body = f"User {user} has reserved or pre-reserved: {product_name}."
+
     msg = MIMEMultipart()
-    msg['From'] = email
-    msg['To'] = recipient_email
-    msg['Subject'] = subject
-    msg.attach(MIMEText(body, 'plain'))
+    msg["From"] = sender_email
+    msg["To"] = receiver_email
+    msg["Subject"] = subject
+    msg.attach(MIMEText(body, "plain"))
 
     try:
-        # Connect to the SMTP server using the secrets
-        server = smtplib.SMTP(smtp_server, smtp_port)
-        server.starttls()
-        server.login(email, password)
-
-        # Send the email
-        text = msg.as_string()
-        server.sendmail(email, recipient_email, text)
-
-        server.quit()
-
-        st.success(f"Email sent to {recipient_email}")
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, receiver_email, msg.as_string())
+        st.success(f"Notification sent: {product_name} reserved by {user}.")
     except Exception as e:
-        st.error(f"Failed to send email: {str(e)}")
-
-
+        st.error(f"Failed to send notification: {e}")
+        
 GITHUB_REPO = "Noel6000/linkivity"
 USER_FILE = "pages/users.json"
 
