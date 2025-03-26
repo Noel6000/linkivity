@@ -3,8 +3,6 @@ import streamlit as st
 import bcrypt
 import json
 import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 # Accessing secrets from the secrets file
 email = st.secrets["general"]["email"]
@@ -13,34 +11,11 @@ smtp_server = st.secrets["email_service"]["smtp_server"]
 smtp_port = st.secrets["email_service"]["smtp_port"]
 token = st.secrets["GITHUB_TOKEN"]
 
-def send_email_notification(user, product_name):
-    sender_email = st.secrets["mail"]["email"]
-    sender_password = st.secrets["mail"]["password"]
-    receiver_email = "your-notification-email@example.com"
-
-    subject = "New Product Reservation"
-    body = f"User {user} has reserved or pre-reserved: {product_name}."
-
-    msg = MIMEMultipart()
-    msg["From"] = sender_email
-    msg["To"] = receiver_email
-    msg["Subject"] = subject
-    msg.attach(MIMEText(body, "plain"))
-
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(sender_email, sender_password)
-            server.sendmail(sender_email, receiver_email, msg.as_string())
-        st.success(f"Notification sent: {product_name} reserved by {user}.")
-    except Exception as e:
-        st.error(f"Failed to send notification: {e}")
-
 def reserve_product(product_id):
     for product in st.session_state.products:
         if product["id"] == product_id:
             user = st.session_state.current_user or "Guest"
             product["reserved"].append(st.session_state.current_user)
-            send_email_notification(st.secrets["mail"]["email"], product["name"])
             st.success(f"You reserved {product['name']}.")
             return
             
@@ -48,7 +23,6 @@ def pre_reserve_product(product_id):
     for product in st.session_state.products:
         if product["id"] == product_id:
             product["reserved"].append(st.session_state.current_user)
-            send_email_notification(st.secrets["mail"]["email"], product["name"])
             st.success(f"You have pre-reserved a {product['name']}. We will notify you when it's available.")
         
 GITHUB_REPO = "Noel6000/linkivity"
@@ -117,7 +91,7 @@ def shop():
                 if st.button(f"Pre-Reserve", key=f"prereserve_{product['id']}"):
                     pre_reserve_product(product["id"])
     
-            st.write("--------------------------------------------")  # Separator
+            st.write("-----------------------")  # Separator
     
 # Main application
 def logout():
