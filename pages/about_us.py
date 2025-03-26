@@ -42,7 +42,7 @@ st.subheader("Why are we sustainable?")
 st.write("We offer some handcrafted and local t-shirts to avoid sub-human conditions for workers, as “Wituka” collaborates with the Eden project, which helps give good conditions to the workers. Additionally, all our products are made with 100% recycled materials, from old, discarded t-shirts. All our textiles are locally produced, and our dyes are safe. With our T-Shirts for Everyone program, for every €30 we earn at the end of the months, we give five euros to Save the Children. With LIFE Products, choose to defend the worker's right and escape the lie of fast fashion.")
 
 
-isClicked = st.button("Go back to the Main Page", use_container_width=True)
+isClicked = st.button("Go back to the main page", use_container_width=True)
 
 if isClicked :
     st.switch_page("main_page.py")
