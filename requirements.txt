@@ -1,8 +1,6 @@
-cython==0.29.37
 streamlit
 pandas
 numpy
 openai
 streamlit_book 
 bcrypt
-email
