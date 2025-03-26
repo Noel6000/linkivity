@@ -5,3 +5,4 @@ openai
 streamlit_book 
 bcrypt
 streamlit-authenticator
+email.mime.text
