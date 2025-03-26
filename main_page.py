@@ -89,7 +89,7 @@ products = [
     {"id": 2, "name": "Life EXCLUSIVE T-shirt", "image": "exclusive.png", "price": 20.00, "description": "The exclusive (signed by the GOAT, Mr. A) T-shirt.", "available_quantity": 0, "reserved": []},
     {"id": 3, "name": "Life keychain", "image": "keychain.jpg", "price": 1.00, "description": "The Mr. A meme keychain.", "available_quantity": 0, "reserved": []},
     {"id": 4, "name": "GOAT T-shirt", "image": "goat.jpg", "price": 16.00, "description": "The Mr. A T-shirt with \"the GOAT\" meme.", "available_quantity": 0, "reserved": []},
-    {"id": 5, "name": "Original Life MEME T-shirt", "image": "original.png", "price": 16.00, "description": "The original life t-shirt with the Mr. A life meme.", "available_quantity": 0, "reserved": []}
+    {"id": 5, "name": "Original Life MEME T-shirt", "image": "original.png", "price": 16.00, "description": "The original life T-shirt with the Mr. A life meme.", "available_quantity": 0, "reserved": []}
 ]
 
 # Initialize session state if not set
