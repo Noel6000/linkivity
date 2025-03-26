@@ -4,13 +4,6 @@ import bcrypt
 import json
 import smtplib
 
-# Accessing secrets from the secrets file
-email = st.secrets["general"]["email"]
-password = st.secrets["general"]["password"]
-smtp_server = st.secrets["email_service"]["smtp_server"]
-smtp_port = st.secrets["email_service"]["smtp_port"]
-token = st.secrets["GITHUB_TOKEN"]
-
 def reserve_product(product_id):
     for product in st.session_state.products:
         if product["id"] == product_id:
