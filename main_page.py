@@ -127,8 +127,7 @@ def logout():
     st.rerun()  # Refresh the app to reflect changes
 
 def main():
-    if st.session_state.page == "main":
-shop()
+    shop()
 
 
 # Run the main application
