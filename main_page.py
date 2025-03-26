@@ -136,18 +136,6 @@ def main():
     if st.session_state.page == "main":
         if not st.session_state.authenticated:
             st.title("Welcome to Our Shopping Page!")
-            st.write("To access our features, please sign up or log in.")
-
-            # Sign-up and Login buttons
-            col1, col2 = st.columns(2)
-            with col1:
-                if st.button("Sign Up", key="main_signup_button"):
-                    st.session_state.page = "signup"
-                    st.rerun()
-            with col2:
-                if st.button("Login", key="main_login_button"):
-                    st.session_state.page = "login"
-                    st.rerun()
 shop()
 
 
