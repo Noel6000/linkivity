@@ -13,6 +13,23 @@ smtp_server = st.secrets["email_service"]["smtp_server"]
 smtp_port = st.secrets["email_service"]["smtp_port"]
 token = st.secrets["GITHUB_TOKEN"]
 
+
+def reserve_product(product_id):
+    for product in st.session_state.products:
+        if product["id"] == product_id:
+            if product["available_quantity"] > 0:
+                product["available_quantity"] -= 1
+                product["reserved"].append(st.session_state.current_user)
+                st.success(f"You reserved a {product['name']}. Pick it up soon!")
+            else:
+                st.warning(f"No stock available. You can pre-reserve a {product['name']}.")
+
+def pre_reserve_product(product_id):
+    for product in st.session_state.products:
+        if product["id"] == product_id:
+            product["reserved"].append(st.session_state.current_user)
+            st.success(f"You have pre-reserved a {product['name']}. We will notify you when it's available.")
+
 def send_email(product_name, recipient_email):
     subject = f"Product Reservation: {product_name}"
     body = f"A user has reserved the {product_name}. Please ensure they pick it up."
