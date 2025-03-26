@@ -83,7 +83,6 @@ products = [
 ]
 def shop():
     st.title("Shop Page")
-    st.write(f"Welcome to the shop, {st.session_state.current_user}!")
     st.write("Here you can browse and purchase items.")
     # Add shop-related content here
     # Display available products
