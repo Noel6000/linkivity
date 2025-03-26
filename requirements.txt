@@ -4,3 +4,4 @@ numpy
 openai
 streamlit_book 
 bcrypt
+streamlit-authenticator
