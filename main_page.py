@@ -128,8 +128,6 @@ def logout():
 
 def main():
     if st.session_state.page == "main":
-        if not st.session_state.authenticated:
-            st.title("Welcome to Our Shopping Page!")
 shop()
 
 
