@@ -5,7 +5,6 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import streamlit_authenticator as stauth
 
 # Accessing secrets from the secrets file
 email = st.secrets["general"]["email"]
