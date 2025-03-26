@@ -106,7 +106,7 @@ def shop():
     for index, product in enumerate(st.session_state.products):
         with columns[index % 2]:  # Alternate between columns
             st.image(product["image"], caption=product["name"], width=200)
-            st.write(f"**{product['name']}** - ${product['price']}")
+            st.write(f"**{product['name']}** - €{product['price']}")
             st.write(product["description"])
             st.write(f"**Available:** {product['available_quantity']}")
     
