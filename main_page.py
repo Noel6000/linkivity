@@ -72,7 +72,7 @@ def shop():
     columns = st.columns(2)  # Create two columns
     
     for index, product in enumerate(st.session_state.products):
-        with columns[index % 3]:  # Alternate between columns
+        with columns[index % 2]:  # Alternate between columns
             st.image(product["image"], caption=product["name"], width=100)
             st.write(f"**{product['name']}** - €{product['price']}")
             st.write(product["description"])
@@ -85,7 +85,7 @@ def shop():
                 if st.button(f"Pre-Reserve", key=f"prereserve_{product['id']}"):
                     pre_reserve_product(product["id"])
     
-            st.write("-----------------------")  # Separator
+            st.write("--------")  # Separator
     
 # Main application
 def logout():
