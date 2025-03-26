@@ -13,23 +13,6 @@ smtp_server = st.secrets["email_service"]["smtp_server"]
 smtp_port = st.secrets["email_service"]["smtp_port"]
 token = st.secrets["GITHUB_TOKEN"]
 
-
-def reserve_product(product_id):
-    for product in st.session_state.products:
-        if product["id"] == product_id:
-            if product["available_quantity"] > 0:
-                product["available_quantity"] -= 1
-                product["reserved"].append(st.session_state.current_user)
-                st.success(f"You reserved a {product['name']}. Pick it up soon!")
-            else:
-                st.warning(f"No stock available. You can pre-reserve a {product['name']}.")
-
-def pre_reserve_product(product_id):
-    for product in st.session_state.products:
-        if product["id"] == product_id:
-            product["reserved"].append(st.session_state.current_user)
-            st.success(f"You have pre-reserved a {product['name']}. We will notify you when it's available.")
-
 def send_email_notification(user, product_name):
     sender_email = st.secrets["mail"]["email"]
     sender_password = st.secrets["mail"]["password"]
@@ -51,6 +34,22 @@ def send_email_notification(user, product_name):
         st.success(f"Notification sent: {product_name} reserved by {user}.")
     except Exception as e:
         st.error(f"Failed to send notification: {e}")
+
+def reserve_product(product_id):
+    for product in st.session_state.products:
+        if product["id"] == product_id:
+            user = st.session_state.current_user or "Guest"
+            product["reserved"].append(st.session_state.current_user)
+            send_email_notification(st.secrets["mail"]["email"], product["name"])
+            st.success(f"You reserved {product['name']}.")
+            return
+            
+def pre_reserve_product(product_id):
+    for product in st.session_state.products:
+        if product["id"] == product_id:
+            product["reserved"].append(st.session_state.current_user)
+            send_email_notification(st.secrets["mail"]["email"], product["name"])
+            st.success(f"You have pre-reserved a {product['name']}. We will notify you when it's available.")
         
 GITHUB_REPO = "Noel6000/linkivity"
 USER_FILE = "pages/users.json"
