@@ -1,3 +1,4 @@
+Cython==2.9
 streamlit
 pandas
 numpy
