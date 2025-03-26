@@ -100,26 +100,26 @@ products = [
 ]
 
 def shop():
-st.title("Shop")
-
-columns = st.columns(2)  # Create two columns
-
-for index, product in enumerate(st.session_state.products):
-    with columns[index % 2]:  # Alternate between columns
-        st.image(product["image"], caption=product["name"], width=200)
-        st.write(f"**{product['name']}** - ${product['price']}")
-        st.write(product["description"])
-        st.write(f"**Available:** {product['available_quantity']}")
-
-        if product["available_quantity"] > 0:
-            if st.button(f"Reserve", key=f"reserve_{product['id']}"):
-                reserve_product(product["id"])
-        else:
-            if st.button(f"Pre-Reserve", key=f"prereserve_{product['id']}"):
-                pre_reserve_product(product["id"])
-
-        st.write("---")  # Separator
-
+    st.title("Shop")
+    
+    columns = st.columns(2)  # Create two columns
+    
+    for index, product in enumerate(st.session_state.products):
+        with columns[index % 2]:  # Alternate between columns
+            st.image(product["image"], caption=product["name"], width=200)
+            st.write(f"**{product['name']}** - ${product['price']}")
+            st.write(product["description"])
+            st.write(f"**Available:** {product['available_quantity']}")
+    
+            if product["available_quantity"] > 0:
+                if st.button(f"Reserve", key=f"reserve_{product['id']}"):
+                    reserve_product(product["id"])
+            else:
+                if st.button(f"Pre-Reserve", key=f"prereserve_{product['id']}"):
+                    pre_reserve_product(product["id"])
+    
+            st.write("---")  # Separator
+    
 # Main application
 def logout():
     """Logs out the current user by resetting session state."""
