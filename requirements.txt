@@ -1,4 +1,4 @@
-Cython==2.9
+cython==2.9
 streamlit
 pandas
 numpy
