@@ -4,6 +4,9 @@ import bcrypt
 import json
 import smtplib
 
+GITHUB_REPO = "Noel6000/linkivity"
+USER_FILE = "pages/users.json"
+
 def reserve_product(product_id):
     for product in st.session_state.products:
         if product["id"] == product_id:
@@ -17,9 +20,7 @@ def pre_reserve_product(product_id):
         if product["id"] == product_id:
             product["reserved"].append(st.session_state.current_user)
             st.success(f"You have pre-reserved a {product['name']}. We will notify you when it's available.")
-        
-GITHUB_REPO = "Noel6000/linkivity"
-USER_FILE = "pages/users.json"
+    
 
 def verify_password(plain_password, hashed_password):
     """Verifies a password against its hash."""
@@ -66,13 +67,13 @@ if "products" not in st.session_state:
 if "current_user" not in st.session_state:
     st.session_state.current_user = None  # Ensure current_user exists
 def shop():
-    st.title("Shop")
+    st.title("Visit our catalog:")
     
     columns = st.columns(2)  # Create two columns
     
     for index, product in enumerate(st.session_state.products):
-        with columns[index % 2]:  # Alternate between columns
-            st.image(product["image"], caption=product["name"], width=200)
+        with columns[index % 3]:  # Alternate between columns
+            st.image(product["image"], caption=product["name"], width=100)
             st.write(f"**{product['name']}** - €{product['price']}")
             st.write(product["description"])
             st.write(f"**Available:** {product['available_quantity']}")
