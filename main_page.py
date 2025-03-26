@@ -100,48 +100,25 @@ products = [
 ]
 
 def shop():
-    st.title("Shop Page")
-    st.write("Here you can browse and purchase items.")
-    # Add shop-related content here
-    # Display available products
-    st.header("Available Products")
-    # Loop through the list of products and display them in pairs (two per row)
-    for i in range(0, len(products), 2):
-        # Create two columns for each pair of products
-        col1, col2 = st.columns(2)
-        
-        # Display the first product in the first column
-        with col1:
-            st.header(products[i]["name"])
-            st.image(products[i]["image"], caption=products[i]["name"], width=300)
-            st.write(products[i]["description"])
-            if not products[i]["reserved"]:
-                reserve_key = f"reserve_{i}"  # Make key unique by adding index
-                if st.button(f"Reserve {products[i]['name']}", key=reserve_key):
-                    # Handle reserve action
-                    products[i]["reserved"] += 1
-                    st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
-                    send_email(products[i + 1]["name"], "noelsantiago.briand@gmail.com")
-            else:
-                st.success(f"{products[i + 1]['name']} is reserved.")
-        
-        # Check if there is a second product in the current pair (avoid index errors)
-        if i + 1 < len(products):
-            # Display the second product in the second column
-            with col2:
-                i += 1
-                st.header(products[i]["name"])
-                st.image(products[i]["image"], caption=products[i + 1]["name"], width=300)
-                st.write(products[i]["description"])
-                if not products[i]["reserved"]:
-                    reserve_key = f"reserve_{i}"  # Make key unique by adding index
-                    if st.button(f"Reserve {products[i]['name']}", key=reserve_key):
-                        # Handle reserve action
-                        products[i]["reserved"] += 1
-                        st.success(f"{products[i]['name']} has been reserved! Please pick it up.")
-                        send_email(products[i + 1]["name"], "noelsantiago.briand@gmail.com")
-                else:
-                    st.success(f"{products[i + 1]['name']} is reserved.")
+st.title("Shop")
+
+columns = st.columns(2)  # Create two columns
+
+for index, product in enumerate(st.session_state.products):
+    with columns[index % 2]:  # Alternate between columns
+        st.image(product["image"], caption=product["name"], width=200)
+        st.write(f"**{product['name']}** - ${product['price']}")
+        st.write(product["description"])
+        st.write(f"**Available:** {product['available_quantity']}")
+
+        if product["available_quantity"] > 0:
+            if st.button(f"Reserve", key=f"reserve_{product['id']}"):
+                reserve_product(product["id"])
+        else:
+            if st.button(f"Pre-Reserve", key=f"prereserve_{product['id']}"):
+                pre_reserve_product(product["id"])
+
+        st.write("---")  # Separator
 
 # Main application
 def logout():
