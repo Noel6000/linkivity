@@ -68,7 +68,7 @@ if "current_user" not in st.session_state:
     st.session_state.current_user = None  # Ensure current_user exists
 def shop():
     st.title("Visit our catalog:")
-    st.write("T-shirts are made to order: please write at lilian.tillie@sfpaula.com to ask for a T-shirt.")
+    st.write("T-shirts are made to order: please send a message at lilian.tillie@sfpaula.com to reserve a T-shirt or Keychain.")
     
     columns = st.columns(2)  # Create two columns
     
