@@ -78,12 +78,7 @@ def shop():
             st.write(product["description"])
             st.write(f"**Available:** {product['available_quantity']}")
     
-            if product["available_quantity"] > 0:
-                if st.button(f"Reserve", key=f"reserve_{product['id']}"):
-                    reserve_product(product["id"])
-            else:
-                if st.button(f"Pre-Reserve", key=f"prereserve_{product['id']}"):
-                    pre_reserve_product(product["id"])
+ 
     
             st.write("--------")  # Separator
     
