@@ -36,7 +36,7 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 st.header("About us")
 st.subheader("Why are we sustainable?")
-st.write("We offer some handcrafted and local T-shirts to avoid sub-human conditions for workers, as “Wituka” collaborates with the Eden project, which helps give good conditions to the workers. Additionally, all our products are made with 100% recycled materials, from old, discarded T-shirts. All our textiles are locally produced, and our dyes are safe. With our T-shirts for Everyone program. We will give 10% of profits at the end of the month to Save The Children. With LIFE Products, choose to defend the worker's right and escape the lie of fast fashion.")
+st.write("We offer some handcrafted and local T-shirts to avoid sub-human conditions for workers by choosing a sustainable provider, Wituka.  Wituka collaborates with the Eden project, which helps give good conditions to the workers. All of the T-shirt we buy from Wituka are made with 100% organic cotton, which reduces the water used in the production of the T-shirt by 91%. At  the ed of each month, we give 10% of our remaining profits to Save The Children. With LIFE Products, choose to defend the worker's right and escape the lie of fast fashion.")
 st.write("There is a special limited edition, the official Mr. A shirt with Mr. A's signature!")
 st.image("exclusive.png")
 
